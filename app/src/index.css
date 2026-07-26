@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-roboto: Roboto, sans-serif;
+
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  /* mist */
+  --color-gray-50: oklch(98.7% 0.002 197.1);
+  --color-gray-100: oklch(96.3% 0.002 197.1);
+  --color-gray-200: oklch(92.5% 0.005 214.3);
+  --color-gray-300: oklch(87.2% 0.007 219.6);
+  --color-gray-400: oklch(72.3% 0.014 214.4);
+  --color-gray-500: oklch(56% 0.021 213.5);
+  --color-gray-600: oklch(45% 0.017 213.2);
+  --color-gray-700: oklch(37.8% 0.015 216);
+  --color-gray-800: oklch(27.5% 0.011 216.9);
+  --color-gray-900: oklch(21.8% 0.008 223.9);
+  --color-gray-950: oklch(14.8% 0.004 228.8);
+}
+
+body {
+  font-family: var(--font-roboto);
+  @apply text-gray-800 dark:bg-gray-600 dark:text-white;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  @apply dark:bg-gray-800;
+}
+
+#songs-settings-group > button:last-of-type {
+  @apply rounded-e-lg;
+}
+
+[data-testid="dark-theme-toggle"] svg {
+  @apply scale-120;
+}
+
+[data-testid="flowbite-tooltip"],
+[data-testid="flowbite-tooltip-arrow"] {
+  @apply bg-gray-900;
+}
+
+.gradient,
+.rhap_progress-filled {
+  @apply bg-linear-to-r from-pink-500 via-red-500 to-orange-500;
+}
+
+.rhap_progress-bar,
+.rhap_volume-bar {
+  @apply dark:bg-gray-600!;
+}
+
+.rhap_time {
+  @apply dark:text-white!;
+}
+
+.section-btn {
+  @apply flex-1 gap-2 px-2 capitalize first:rounded-s-full last:rounded-e-full;
+}
+
+.dropdown {
+  @apply max-h-[calc(100dvh-5rem)] max-w-60 overflow-auto dark:bg-gray-900;
+}
+
+.song-table-row {
+  @apply flex border-b border-b-gray-200 px-2 dark:border-b-gray-700;
+}
+
+.song-table-cell {
+  @apply flex items-center rounded-none! px-2 py-1;
+}

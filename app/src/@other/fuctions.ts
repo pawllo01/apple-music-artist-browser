@@ -1,0 +1,42 @@
+import type { Market } from "../@types/market";
+
+export function changeUrlMarket(url: string, market: Market) {
+  return url.replace(/\/[a-zA-Z]{2}\//, `/${market}/`);
+}
+
+export function convertMillisecondsToMMSS(milliseconds: number) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+export function hideKeyboard(e: React.KeyboardEvent<HTMLInputElement>) {
+  if (e.key === "Enter") e.currentTarget.blur();
+}
+
+export async function apiFetch<T>(
+  url: string,
+  errorMessage: string,
+  signal?: AbortSignal | null | undefined,
+): Promise<T> {
+  const res = await fetch(url, { signal });
+
+  let data: unknown = null;
+
+  try {
+    data = await res.json();
+  } catch (error) {
+    console.error("Failed to parse response:", error);
+    throw new Error(errorMessage);
+  }
+
+  if (!res.ok) {
+    console.error("API error:", data);
+    throw new Error(errorMessage);
+  }
+
+  return data as T;
+}

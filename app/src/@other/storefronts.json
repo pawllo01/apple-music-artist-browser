@@ -1,0 +1,1171 @@
+{
+  "ca": {
+    "code": "ca",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/can.png",
+    "name": "Canada",
+    "storefront": "143455-6,32",
+    "info": "CA CAD (en-ca / 6: Canada, fr-ca / 5: Canada)"
+  },
+  "us": {
+    "code": "us",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/usa.png",
+    "name": "United States",
+    "storefront": "143441-1,32",
+    "info": "US USD (en-us / 1: United States, es-mx / 28: Estados Unidos, ar-sa / 34: الولايات المتحدة, ru-ru / 16: США, zh-cn / 19: 美国, fr-fr / 3: États-Unis, ko-kr / 13: 미국, pt-br / 15: Estados Unidos, vi-vi / 43: Hoa Kỳ, zh-tw / 18: 美國)"
+  },
+  "by": {
+    "code": "by",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/blr.png",
+    "name": "Belarus",
+    "storefront": "143565-2,32",
+    "info": "BY USD (en-gb / 2: Belarus)"
+  },
+  "be": {
+    "code": "be",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bel.png",
+    "name": "Belgium",
+    "storefront": "143446-2,32",
+    "info": "BE EUR (en-gb / 2: Belgium, fr-fr / 3: Belgique, nl-nl / 10: België)"
+  },
+  "ba": {
+    "code": "ba",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bih.png",
+    "name": "Bosnia and Herzegovina",
+    "storefront": "143612-2,32",
+    "info": "BA EUR (en-gb / 2: Bosnia and Herzegovina, hr-hr / 41: Bosna i Hercegovina)"
+  },
+  "bg": {
+    "code": "bg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bgr.png",
+    "name": "Bulgaria",
+    "storefront": "143526-2,32",
+    "info": "BG EUR (en-gb / 2: Bulgaria)"
+  },
+  "hr": {
+    "code": "hr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/hrv.png",
+    "name": "Croatia",
+    "storefront": "143494-2,32",
+    "info": "HR EUR (en-gb / 2: Croatia, hr-hr / 41: Hrvatska)"
+  },
+  "cy": {
+    "code": "cy",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cyp.png",
+    "name": "Cyprus",
+    "storefront": "143557-2,32",
+    "info": "CY EUR (en-gb / 2: Cyprus, el-gr / 23: Κύπρος, tr-tr / 25: Kıbrıs Rum Kesimi)"
+  },
+  "cz": {
+    "code": "cz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cze.png",
+    "name": "Czech Republic",
+    "storefront": "143489-2,32",
+    "info": "CZ CZK (en-gb / 2: Czech Republic, cs-cz / 22: Česká republika)"
+  },
+  "dk": {
+    "code": "dk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/dnk.png",
+    "name": "Denmark",
+    "storefront": "143458-2,32",
+    "info": "DK DKK (en-gb / 2: Denmark, da-dk / 11: Danmark)"
+  },
+  "de": {
+    "code": "de",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/deu.png",
+    "name": "Deutschland",
+    "storefront": "143443-4,32",
+    "info": "DE EUR (de-de / 4: Deutschland, en-gb / 2: Germany)"
+  },
+  "es": {
+    "code": "es",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/esp.png",
+    "name": "España",
+    "storefront": "143454-8,32",
+    "info": "ES EUR (es-es / 8: España, en-gb / 2: Spain, ca-es / 42: Espanya)"
+  },
+  "ee": {
+    "code": "ee",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/est.png",
+    "name": "Estonia",
+    "storefront": "143518-2,32",
+    "info": "EE EUR (en-gb / 2: Estonia)"
+  },
+  "fi": {
+    "code": "fi",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/fin.png",
+    "name": "Finland",
+    "storefront": "143447-2,32",
+    "info": "FI EUR (en-gb / 2: Finland, fi-fi / 12: Suomi)"
+  },
+  "fr": {
+    "code": "fr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/fra.png",
+    "name": "France",
+    "storefront": "143442-3,32",
+    "info": "FR EUR (fr-fr / 3: France, en-gb / 2: France)"
+  },
+  "gr": {
+    "code": "gr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/grc.png",
+    "name": "Greece",
+    "storefront": "143448-2,32",
+    "info": "GR EUR (en-gb / 2: Greece, el-gr / 23: Ελλάδα)"
+  },
+  "hu": {
+    "code": "hu",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/hun.png",
+    "name": "Hungary",
+    "storefront": "143482-2,32",
+    "info": "HU HUF (en-gb / 2: Hungary, hu-hu / 21: Magyarország)"
+  },
+  "is": {
+    "code": "is",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/isl.png",
+    "name": "Iceland",
+    "storefront": "143558-2,32",
+    "info": "IS USD (en-gb / 2: Iceland)"
+  },
+  "ie": {
+    "code": "ie",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/irl.png",
+    "name": "Ireland",
+    "storefront": "143449-2,32",
+    "info": "IE EUR (en-gb / 2: Ireland)"
+  },
+  "it": {
+    "code": "it",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ita.png",
+    "name": "Italia",
+    "storefront": "143450-7,32",
+    "info": "IT EUR (it-it / 7: Italia, en-gb / 2: Italy)"
+  },
+  "xk": {
+    "code": "xk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/xks.png",
+    "name": "Kosovo",
+    "storefront": "143624-2,32",
+    "info": "XK EUR (en-gb / 2: Kosovo)"
+  },
+  "lv": {
+    "code": "lv",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lva.png",
+    "name": "Latvia",
+    "storefront": "143519-2,32",
+    "info": "LV EUR (en-gb / 2: Latvia)"
+  },
+  "lt": {
+    "code": "lt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ltu.png",
+    "name": "Lithuania",
+    "storefront": "143520-2,32",
+    "info": "LT EUR (en-gb / 2: Lithuania)"
+  },
+  "lu": {
+    "code": "lu",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lux.png",
+    "name": "Luxembourg",
+    "storefront": "143451-2,32",
+    "info": "LU EUR (en-gb / 2: Luxembourg, fr-fr / 3: Luxembourg, de-de / 4: Luxemburg)"
+  },
+  "mt": {
+    "code": "mt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mlt.png",
+    "name": "Malta",
+    "storefront": "143521-2,32",
+    "info": "MT EUR (en-gb / 2: Malta)"
+  },
+  "md": {
+    "code": "md",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mda.png",
+    "name": "Moldova",
+    "storefront": "143523-2,32",
+    "info": "MD USD (en-gb / 2: Moldova)"
+  },
+  "me": {
+    "code": "me",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mne.png",
+    "name": "Montenegro",
+    "storefront": "143619-2,32",
+    "info": "ME EUR (en-gb / 2: Montenegro, hr-hr / 41: Crna Gora)"
+  },
+  "nl": {
+    "code": "nl",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nld.png",
+    "name": "Nederland",
+    "storefront": "143452-10,32",
+    "info": "NL EUR (nl-nl / 10: Nederland, en-gb / 2: Netherlands)"
+  },
+  "mk": {
+    "code": "mk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mkd.png",
+    "name": "North Macedonia",
+    "storefront": "143530-2,32",
+    "info": "MK USD (en-gb / 2: North Macedonia)"
+  },
+  "no": {
+    "code": "no",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nor.png",
+    "name": "Norway",
+    "storefront": "143457-2,32",
+    "info": "NO NOK (en-gb / 2: Norway, no-no / 14: Norge)"
+  },
+  "at": {
+    "code": "at",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/aut.png",
+    "name": "Österreich",
+    "storefront": "143445-4,32",
+    "info": "AT EUR (de-de / 4: Österreich, en-gb / 2: Austria)"
+  },
+  "pl": {
+    "code": "pl",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/pol.png",
+    "name": "Polska",
+    "storefront": "143478-20,32",
+    "info": "PL PLN (en-gb / 2: Poland, pl-pl / 20: Polska)"
+  },
+  "pt": {
+    "code": "pt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/prt.png",
+    "name": "Portugal",
+    "storefront": "143453-24,32",
+    "info": "PT EUR (pt-pt / 24: Portugal, en-gb / 2: Portugal)"
+  },
+  "ro": {
+    "code": "ro",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/rou.png",
+    "name": "Romania",
+    "storefront": "143487-2,32",
+    "info": "RO RON (en-gb / 2: Romania, ro-ro / 39: România)"
+  },
+  "ch": {
+    "code": "ch",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/che.png",
+    "name": "Schweiz",
+    "storefront": "143459-57,32",
+    "info": "CH CHF (de-ch / 57: Schweiz, de-de / 4: Schweiz, en-gb / 2: Switzerland, fr-fr / 3: Suisse, it-it / 7: Svizzera)"
+  },
+  "rs": {
+    "code": "rs",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/srb.png",
+    "name": "Serbia",
+    "storefront": "143500-2,32",
+    "info": "RS EUR (en-gb / 2: Serbia, hr-hr / 41: Srbija)"
+  },
+  "sk": {
+    "code": "sk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/svk.png",
+    "name": "Slovakia",
+    "storefront": "143496-2,32",
+    "info": "SK EUR (en-gb / 2: Slovakia, sk-sk / 40: Slovensko)"
+  },
+  "si": {
+    "code": "si",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/svn.png",
+    "name": "Slovenia",
+    "storefront": "143499-2,32",
+    "info": "SI EUR (en-gb / 2: Slovenia, sl-si / 52: Slovenija)"
+  },
+  "se": {
+    "code": "se",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/swe.png",
+    "name": "Sverige",
+    "storefront": "143456-17,32",
+    "info": "SE SEK (sv-se / 17: Sverige, en-gb / 2: Sweden)"
+  },
+  "tr": {
+    "code": "tr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tur.png",
+    "name": "Türkiye",
+    "storefront": "143480-2,32",
+    "info": "TR TRY (en-gb / 2: Türkiye, tr-tr / 25: Türkiye)"
+  },
+  "ua": {
+    "code": "ua",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ukr.png",
+    "name": "Ukraine",
+    "storefront": "143492-2,32",
+    "info": "UA USD (en-gb / 2: Ukraine, uk-ua / 29: Україна, ru-ru / 16: Украина)"
+  },
+  "gb": {
+    "code": "gb",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gbr.png",
+    "name": "United Kingdom",
+    "storefront": "143444-2,32",
+    "info": "GB GBP (en-gb / 2: United Kingdom)"
+  },
+  "ru": {
+    "code": "ru",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/rus.png",
+    "name": "Россия",
+    "storefront": "143469-16,32",
+    "info": "RU RUB (ru-ru / 16: Россия, en-gb / 2: Russia, uk-ua / 29: Росія)"
+  },
+  "dz": {
+    "code": "dz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/dza.png",
+    "name": "Algeria",
+    "storefront": "143563-2,32",
+    "info": "DZ USD (en-gb / 2: Algeria, fr-fr / 3: Algérie, ar-sa / 34: الجزائر)"
+  },
+  "ao": {
+    "code": "ao",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ago.png",
+    "name": "Angola",
+    "storefront": "143564-2,32",
+    "info": "AO USD (en-gb / 2: Angola)"
+  },
+  "am": {
+    "code": "am",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/arm.png",
+    "name": "Armenia",
+    "storefront": "143524-2,32",
+    "info": "AM USD (en-gb / 2: Armenia)"
+  },
+  "az": {
+    "code": "az",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/aze.png",
+    "name": "Azerbaijan",
+    "storefront": "143568-2,32",
+    "info": "AZ USD (en-gb / 2: Azerbaijan)"
+  },
+  "bh": {
+    "code": "bh",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bhr.png",
+    "name": "Bahrain",
+    "storefront": "143559-2,32",
+    "info": "BH USD (en-gb / 2: Bahrain, ar-sa / 34: البحرين)"
+  },
+  "bj": {
+    "code": "bj",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ben.png",
+    "name": "Benin",
+    "storefront": "143576-2,32",
+    "info": "BJ USD (en-gb / 2: Benin, fr-fr / 3: Bénin)"
+  },
+  "bw": {
+    "code": "bw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bwa.png",
+    "name": "Botswana",
+    "storefront": "143525-2,32",
+    "info": "BW USD (en-gb / 2: Botswana)"
+  },
+  "cm": {
+    "code": "cm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cmr.png",
+    "name": "Cameroun",
+    "storefront": "143574-3,32",
+    "info": "CM USD (fr-fr / 3: Cameroun, en-gb / 2: Cameroon)"
+  },
+  "cv": {
+    "code": "cv",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cpv.png",
+    "name": "Cape Verde",
+    "storefront": "143580-2,32",
+    "info": "CV USD (en-gb / 2: Cape Verde)"
+  },
+  "td": {
+    "code": "td",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tcd.png",
+    "name": "Chad",
+    "storefront": "143581-2,32",
+    "info": "TD USD (en-gb / 2: Chad, fr-fr / 3: Tchad)"
+  },
+  "ci": {
+    "code": "ci",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/civ.png",
+    "name": "Côte d’Ivoire",
+    "storefront": "143527-3,32",
+    "info": "CI USD (fr-fr / 3: Côte d’Ivoire, en-gb / 2: Côte d’Ivoire)"
+  },
+  "cd": {
+    "code": "cd",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cod.png",
+    "name": "Democratic Republic of the Congo",
+    "storefront": "143613-2,32",
+    "info": "CD USD (en-gb / 2: Democratic Republic of the Congo, fr-fr / 3: République démocratique du Congo)"
+  },
+  "eg": {
+    "code": "eg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/egy.png",
+    "name": "Egypt",
+    "storefront": "143516-2,32",
+    "info": "EG EGP (en-gb / 2: Egypt, fr-fr / 3: Égypte, ar-sa / 34: مصر)"
+  },
+  "sz": {
+    "code": "sz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/swz.png",
+    "name": "Eswatini",
+    "storefront": "143602-2,32",
+    "info": "SZ USD (en-gb / 2: Eswatini)"
+  },
+  "ga": {
+    "code": "ga",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gab.png",
+    "name": "Gabon",
+    "storefront": "143614-3,32",
+    "info": "GA USD (fr-fr / 3: Gabon, en-gb / 2: Gabon)"
+  },
+  "gm": {
+    "code": "gm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gmb.png",
+    "name": "Gambia",
+    "storefront": "143584-2,32",
+    "info": "GM USD (en-gb / 2: Gambia)"
+  },
+  "ge": {
+    "code": "ge",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/geo.png",
+    "name": "Georgia",
+    "storefront": "143615-2,32",
+    "info": "GE USD (en-gb / 2: Georgia)"
+  },
+  "gh": {
+    "code": "gh",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gha.png",
+    "name": "Ghana",
+    "storefront": "143573-2,32",
+    "info": "GH USD (en-gb / 2: Ghana)"
+  },
+  "gw": {
+    "code": "gw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gnb.png",
+    "name": "Guinea-Bissau",
+    "storefront": "143585-2,32",
+    "info": "GW USD (en-gb / 2: Guinea-Bissau, fr-fr / 3: Guinée-Bissau)"
+  },
+  "in": {
+    "code": "in",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ind.png",
+    "name": "India",
+    "storefront": "143467-2,32",
+    "info": "IN INR (en-gb / 2: India, hi-in / 50: भारत, pa-in / 63: ਭਾਰਤ, mr-in / 66: भारत, bn-bd / 58: ভারত, or-in / 69: ଭାରତ, ur-pk / 55: بھارت, te-in / 54: భారతీయ, ta-in / 53: இந்தியா, gu-in / 67: ભારત, kn-in / 68: ಭಾರತ, ml-in / 70: ഇന്ത്യ)"
+  },
+  "iq": {
+    "code": "iq",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/irq.png",
+    "name": "Iraq",
+    "storefront": "143617-2,32",
+    "info": "IQ USD (en-gb / 2: Iraq, ar-sa / 34: العراق)"
+  },
+  "il": {
+    "code": "il",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/isr.png",
+    "name": "Israel",
+    "storefront": "143491-2,32",
+    "info": "IL ILS (en-gb / 2: Israel, iw-il / 36: ישראל)"
+  },
+  "jo": {
+    "code": "jo",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/jor.png",
+    "name": "Jordan",
+    "storefront": "143528-2,32",
+    "info": "JO USD (en-gb / 2: Jordan, ar-sa / 34: الأردن)"
+  },
+  "ke": {
+    "code": "ke",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ken.png",
+    "name": "Kenya",
+    "storefront": "143529-2,32",
+    "info": "KE USD (en-gb / 2: Kenya)"
+  },
+  "kw": {
+    "code": "kw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/kwt.png",
+    "name": "Kuwait",
+    "storefront": "143493-2,32",
+    "info": "KW USD (en-gb / 2: Kuwait, ar-sa / 34: الكويت)"
+  },
+  "lb": {
+    "code": "lb",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lbn.png",
+    "name": "Lebanon",
+    "storefront": "143497-2,32",
+    "info": "LB USD (en-gb / 2: Lebanon, fr-fr / 3: Liban, ar-sa / 34: لبنان)"
+  },
+  "lr": {
+    "code": "lr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lbr.png",
+    "name": "Liberia",
+    "storefront": "143588-2,32",
+    "info": "LR USD (en-gb / 2: Liberia)"
+  },
+  "ly": {
+    "code": "ly",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lby.png",
+    "name": "Libya",
+    "storefront": "143567-2,32",
+    "info": "LY USD (en-gb / 2: Libya, ar-sa / 34: ليبيا)"
+  },
+  "mg": {
+    "code": "mg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mdg.png",
+    "name": "Madagascar",
+    "storefront": "143531-2,32",
+    "info": "MG USD (en-gb / 2: Madagascar, fr-fr / 3: Madagascar)"
+  },
+  "mw": {
+    "code": "mw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mwi.png",
+    "name": "Malawi",
+    "storefront": "143589-2,32",
+    "info": "MW USD (en-gb / 2: Malawi)"
+  },
+  "mv": {
+    "code": "mv",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mdv.png",
+    "name": "Maldives",
+    "storefront": "143488-2,32",
+    "info": "MV USD (en-gb / 2: Maldives)"
+  },
+  "ml": {
+    "code": "ml",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mli.png",
+    "name": "Mali",
+    "storefront": "143532-2,32",
+    "info": "ML USD (en-gb / 2: Mali, fr-fr / 3: Mali)"
+  },
+  "mr": {
+    "code": "mr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mrt.png",
+    "name": "Mauritania",
+    "storefront": "143590-2,32",
+    "info": "MR USD (en-gb / 2: Mauritania, fr-fr / 3: Mauritanie, ar-sa / 34: موريتانيا)"
+  },
+  "mu": {
+    "code": "mu",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mus.png",
+    "name": "Mauritius",
+    "storefront": "143533-2,32",
+    "info": "MU USD (en-gb / 2: Mauritius, fr-fr / 3: Maurice)"
+  },
+  "ma": {
+    "code": "ma",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mar.png",
+    "name": "Morocco",
+    "storefront": "143620-2,32",
+    "info": "MA USD (en-gb / 2: Morocco, fr-fr / 3: Maroc, ar-sa / 34: المغرب)"
+  },
+  "mz": {
+    "code": "mz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/moz.png",
+    "name": "Mozambique",
+    "storefront": "143593-2,32",
+    "info": "MZ USD (en-gb / 2: Mozambique)"
+  },
+  "na": {
+    "code": "na",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nam.png",
+    "name": "Namibia",
+    "storefront": "143594-2,32",
+    "info": "NA USD (en-gb / 2: Namibia)"
+  },
+  "ne": {
+    "code": "ne",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ner.png",
+    "name": "Niger",
+    "storefront": "143534-2,32",
+    "info": "NE USD (en-gb / 2: Niger, fr-fr / 3: Niger)"
+  },
+  "ng": {
+    "code": "ng",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nga.png",
+    "name": "Nigeria",
+    "storefront": "143561-2,32",
+    "info": "NG NGN (en-gb / 2: Nigeria)"
+  },
+  "om": {
+    "code": "om",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/omn.png",
+    "name": "Oman",
+    "storefront": "143562-2,32",
+    "info": "OM USD (en-gb / 2: Oman, ar-sa / 34: عمان)"
+  },
+  "qa": {
+    "code": "qa",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/qat.png",
+    "name": "Qatar",
+    "storefront": "143498-2,32",
+    "info": "QA QAR (en-gb / 2: Qatar, ar-sa / 34: قطر)"
+  },
+  "cg": {
+    "code": "cg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cog.png",
+    "name": "Republic of the Congo",
+    "storefront": "143582-2,32",
+    "info": "CG USD (en-gb / 2: Republic of the Congo, fr-fr / 3: République du Congo)"
+  },
+  "rw": {
+    "code": "rw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/rwa.png",
+    "name": "Rwanda",
+    "storefront": "143621-2,32",
+    "info": "RW USD (en-gb / 2: Rwanda, fr-fr / 3: Rwanda)"
+  },
+  "sa": {
+    "code": "sa",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/sau.png",
+    "name": "Saudi Arabia",
+    "storefront": "143479-2,32",
+    "info": "SA SAR (en-gb / 2: Saudi Arabia, ar-sa / 34: السعودية)"
+  },
+  "sn": {
+    "code": "sn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/sen.png",
+    "name": "Senegal",
+    "storefront": "143535-2,32",
+    "info": "SN USD (en-gb / 2: Senegal, fr-fr / 3: Sénégal)"
+  },
+  "sc": {
+    "code": "sc",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/syc.png",
+    "name": "Seychelles",
+    "storefront": "143599-2,32",
+    "info": "SC USD (en-gb / 2: Seychelles, fr-fr / 3: Seychelles)"
+  },
+  "sl": {
+    "code": "sl",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/sle.png",
+    "name": "Sierra Leone",
+    "storefront": "143600-2,32",
+    "info": "SL USD (en-gb / 2: Sierra Leone)"
+  },
+  "za": {
+    "code": "za",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/zaf.png",
+    "name": "South Africa",
+    "storefront": "143472-2,32",
+    "info": "ZA ZAR (en-gb / 2: South Africa)"
+  },
+  "tz": {
+    "code": "tz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tza.png",
+    "name": "Tanzania",
+    "storefront": "143572-2,32",
+    "info": "TZ TZS (en-gb / 2: Tanzania)"
+  },
+  "tn": {
+    "code": "tn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tun.png",
+    "name": "Tunisia",
+    "storefront": "143536-2,32",
+    "info": "TN USD (en-gb / 2: Tunisia, fr-fr / 3: Tunisie, ar-sa / 34: تونس)"
+  },
+  "ae": {
+    "code": "ae",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/are.png",
+    "name": "UAE",
+    "storefront": "143481-2,32",
+    "info": "AE AED (en-gb / 2: UAE, ar-sa / 34: الإمارات العربية المتحدة)"
+  },
+  "ug": {
+    "code": "ug",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/uga.png",
+    "name": "Uganda",
+    "storefront": "143537-2,32",
+    "info": "UG USD (en-gb / 2: Uganda)"
+  },
+  "ye": {
+    "code": "ye",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/yem.png",
+    "name": "Yemen",
+    "storefront": "143571-2,32",
+    "info": "YE USD (en-gb / 2: Yemen, ar-sa / 34: اليمن)"
+  },
+  "zm": {
+    "code": "zm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/zmb.png",
+    "name": "Zambia",
+    "storefront": "143622-2,32",
+    "info": "ZM USD (en-gb / 2: Zambia)"
+  },
+  "zw": {
+    "code": "zw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/zwe.png",
+    "name": "Zimbabwe",
+    "storefront": "143605-2,32",
+    "info": "ZW USD (en-gb / 2: Zimbabwe)"
+  },
+  "au": {
+    "code": "au",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/aus.png",
+    "name": "Australia",
+    "storefront": "143460-27,32",
+    "info": "AU AUD (en-au / 27: Australia, en-gb / 2: Australia)"
+  },
+  "bt": {
+    "code": "bt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/btn.png",
+    "name": "Bhutan",
+    "storefront": "143577-2,32",
+    "info": "BT USD (en-gb / 2: Bhutan)"
+  },
+  "kh": {
+    "code": "kh",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/khm.png",
+    "name": "Cambodia",
+    "storefront": "143579-2,32",
+    "info": "KH USD (en-gb / 2: Cambodia, fr-fr / 3: Cambodge)"
+  },
+  "fj": {
+    "code": "fj",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/fji.png",
+    "name": "Fiji",
+    "storefront": "143583-2,32",
+    "info": "FJ USD (en-gb / 2: Fiji)"
+  },
+  "id": {
+    "code": "id",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/idn.png",
+    "name": "Indonesia",
+    "storefront": "143476-2,32",
+    "info": "ID IDR (en-gb / 2: Indonesia, id-id / 37: Indonesia)"
+  },
+  "kz": {
+    "code": "kz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/kaz.png",
+    "name": "Kazakhstan",
+    "storefront": "143517-2,32",
+    "info": "KZ KZT (en-gb / 2: Kazakhstan)"
+  },
+  "kg": {
+    "code": "kg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/kgz.png",
+    "name": "Kyrgyzstan",
+    "storefront": "143586-2,32",
+    "info": "KG USD (en-gb / 2: Kyrgyzstan)"
+  },
+  "la": {
+    "code": "la",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lao.png",
+    "name": "Lao People’s Democratic Republic",
+    "storefront": "143587-2,32",
+    "info": "LA USD (en-gb / 2: Lao People’s Democratic Republic, fr-fr / 3: République démocratique populaire du Laos)"
+  },
+  "my": {
+    "code": "my",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mys.png",
+    "name": "Malaysia",
+    "storefront": "143473-2,32",
+    "info": "MY MYR (en-gb / 2: Malaysia, ms-my / 38: Malaysia)"
+  },
+  "fm": {
+    "code": "fm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/fsm.png",
+    "name": "Micronesia, Federated States of",
+    "storefront": "143591-2,32",
+    "info": "FM USD (en-gb / 2: Micronesia, Federated States of)"
+  },
+  "mn": {
+    "code": "mn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mng.png",
+    "name": "Mongolia",
+    "storefront": "143592-2,32",
+    "info": "MN USD (en-gb / 2: Mongolia)"
+  },
+  "mm": {
+    "code": "mm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mmr.png",
+    "name": "Myanmar",
+    "storefront": "143570-2,32",
+    "info": "MM USD (en-gb / 2: Myanmar)"
+  },
+  "np": {
+    "code": "np",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/npl.png",
+    "name": "Nepal",
+    "storefront": "143484-2,32",
+    "info": "NP USD (en-gb / 2: Nepal)"
+  },
+  "nz": {
+    "code": "nz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nzl.png",
+    "name": "New Zealand",
+    "storefront": "143461-27,32",
+    "info": "NZ NZD (en-au / 27: New Zealand, en-gb / 2: New Zealand)"
+  },
+  "pg": {
+    "code": "pg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/png.png",
+    "name": "Papua New Guinea",
+    "storefront": "143597-2,32",
+    "info": "PG USD (en-gb / 2: Papua New Guinea)"
+  },
+  "ph": {
+    "code": "ph",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/phl.png",
+    "name": "Philippines",
+    "storefront": "143474-2,32",
+    "info": "PH PHP (en-gb / 2: Philippines)"
+  },
+  "sg": {
+    "code": "sg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/sgp.png",
+    "name": "Singapore",
+    "storefront": "143464-2,32",
+    "info": "SG SGD (en-gb / 2: Singapore, zh-cn / 19: 新加坡)"
+  },
+  "sb": {
+    "code": "sb",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/slb.png",
+    "name": "Solomon Islands",
+    "storefront": "143601-2,32",
+    "info": "SB USD (en-gb / 2: Solomon Islands)"
+  },
+  "lk": {
+    "code": "lk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lka.png",
+    "name": "Sri Lanka",
+    "storefront": "143486-2,32",
+    "info": "LK USD (en-gb / 2: Sri Lanka)"
+  },
+  "tj": {
+    "code": "tj",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tjk.png",
+    "name": "Tajikistan",
+    "storefront": "143603-2,32",
+    "info": "TJ USD (en-gb / 2: Tajikistan)"
+  },
+  "th": {
+    "code": "th",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tha.png",
+    "name": "Thailand",
+    "storefront": "143475-2,32",
+    "info": "TH THB (en-gb / 2: Thailand, th-th / 35: ไทย)"
+  },
+  "to": {
+    "code": "to",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ton.png",
+    "name": "Tonga",
+    "storefront": "143608-2,32",
+    "info": "TO USD (en-gb / 2: Tonga)"
+  },
+  "tm": {
+    "code": "tm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tkm.png",
+    "name": "Turkmenistan",
+    "storefront": "143604-2,32",
+    "info": "TM USD (en-gb / 2: Turkmenistan)"
+  },
+  "uz": {
+    "code": "uz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/uzb.png",
+    "name": "Uzbekistan",
+    "storefront": "143566-2,32",
+    "info": "UZ USD (en-gb / 2: Uzbekistan)"
+  },
+  "vu": {
+    "code": "vu",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/vut.png",
+    "name": "Vanuatu",
+    "storefront": "143609-2,32",
+    "info": "VU USD (en-gb / 2: Vanuatu, fr-fr / 3: Vanuatu)"
+  },
+  "vn": {
+    "code": "vn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/vnm.png",
+    "name": "Vietnam",
+    "storefront": "143471-2,32",
+    "info": "VN VND (en-gb / 2: Vietnam, vi-vi / 43: Việt Nam)"
+  },
+  "kr": {
+    "code": "kr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/kor.png",
+    "name": "대한민국",
+    "storefront": "143466-13,32",
+    "info": "KR KRW (ko-kr / 13: 대한민국, en-gb / 2: Korea, Republic of)"
+  },
+  "cn": {
+    "code": "cn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/chn.png",
+    "name": "中国大陆",
+    "storefront": "143465-19,32",
+    "info": "CN CNY (zh-cn / 19: 中国大陆, en-gb / 2: China mainland)"
+  },
+  "tw": {
+    "code": "tw",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/twn.png",
+    "name": "台灣",
+    "storefront": "143470-18,32",
+    "info": "TW TWD (zh-tw / 18: 台灣, en-gb / 2: Taiwan)"
+  },
+  "jp": {
+    "code": "jp",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/jpn.png",
+    "name": "日本",
+    "storefront": "143462-9,32",
+    "info": "JP JPY (ja-jp / 9: 日本, en-us / 1: Japan)"
+  },
+  "mo": {
+    "code": "mo",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mac.png",
+    "name": "澳門",
+    "storefront": "143515-45,32",
+    "info": "MO USD (zh-hk / 45: 澳門, en-gb / 2: Macao, zh-tw / 18: 澳門)"
+  },
+  "hk": {
+    "code": "hk",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/hkg.png",
+    "name": "香港",
+    "storefront": "143463-45,32",
+    "info": "HK HKD (zh-hk / 45: 香港, en-gb / 2: Hong Kong, zh-tw / 18: 香港)"
+  },
+  "ai": {
+    "code": "ai",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/aia.png",
+    "name": "Anguilla",
+    "storefront": "143538-2,32",
+    "info": "AI USD (en-gb / 2: Anguilla)"
+  },
+  "ag": {
+    "code": "ag",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/atg.png",
+    "name": "Antigua and Barbuda",
+    "storefront": "143540-2,32",
+    "info": "AG USD (en-gb / 2: Antigua and Barbuda)"
+  },
+  "ar": {
+    "code": "ar",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/arg.png",
+    "name": "Argentina",
+    "storefront": "143505-28,32",
+    "info": "AR USD (es-mx / 28: Argentina, en-gb / 2: Argentina)"
+  },
+  "bs": {
+    "code": "bs",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bhs.png",
+    "name": "Bahamas",
+    "storefront": "143539-2,32",
+    "info": "BS USD (en-gb / 2: Bahamas)"
+  },
+  "bb": {
+    "code": "bb",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/brb.png",
+    "name": "Barbados",
+    "storefront": "143541-2,32",
+    "info": "BB USD (en-gb / 2: Barbados)"
+  },
+  "bz": {
+    "code": "bz",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/blz.png",
+    "name": "Belize",
+    "storefront": "143555-2,32",
+    "info": "BZ USD (en-gb / 2: Belize, es-mx / 28: Belice)"
+  },
+  "bm": {
+    "code": "bm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bmu.png",
+    "name": "Bermuda",
+    "storefront": "143542-2,32",
+    "info": "BM USD (en-gb / 2: Bermuda)"
+  },
+  "bo": {
+    "code": "bo",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bol.png",
+    "name": "Bolivia",
+    "storefront": "143556-28,32",
+    "info": "BO USD (es-mx / 28: Bolivia, en-gb / 2: Bolivia)"
+  },
+  "br": {
+    "code": "br",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/bra.png",
+    "name": "Brasil",
+    "storefront": "143503-15,32",
+    "info": "BR BRL (pt-br / 15: Brasil, en-gb / 2: Brazil)"
+  },
+  "vg": {
+    "code": "vg",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/vgb.png",
+    "name": "British Virgin Islands",
+    "storefront": "143543-2,32",
+    "info": "VG USD (en-gb / 2: British Virgin Islands)"
+  },
+  "ky": {
+    "code": "ky",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cym.png",
+    "name": "Cayman Islands",
+    "storefront": "143544-2,32",
+    "info": "KY USD (en-gb / 2: Cayman Islands)"
+  },
+  "cl": {
+    "code": "cl",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/chl.png",
+    "name": "Chile",
+    "storefront": "143483-28,32",
+    "info": "CL CLP (es-mx / 28: Chile, en-gb / 2: Chile)"
+  },
+  "co": {
+    "code": "co",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/col.png",
+    "name": "Colombia",
+    "storefront": "143501-28,32",
+    "info": "CO COP (es-mx / 28: Colombia, en-gb / 2: Colombia)"
+  },
+  "cr": {
+    "code": "cr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/cri.png",
+    "name": "Costa Rica",
+    "storefront": "143495-28,32",
+    "info": "CR USD (es-mx / 28: Costa Rica, en-gb / 2: Costa Rica)"
+  },
+  "dm": {
+    "code": "dm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/dma.png",
+    "name": "Dominica",
+    "storefront": "143545-2,32",
+    "info": "DM USD (en-gb / 2: Dominica)"
+  },
+  "ec": {
+    "code": "ec",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ecu.png",
+    "name": "Ecuador",
+    "storefront": "143509-28,32",
+    "info": "EC USD (es-mx / 28: Ecuador, en-gb / 2: Ecuador)"
+  },
+  "sv": {
+    "code": "sv",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/slv.png",
+    "name": "El Salvador",
+    "storefront": "143506-28,32",
+    "info": "SV USD (es-mx / 28: El Salvador, en-gb / 2: El Salvador)"
+  },
+  "gd": {
+    "code": "gd",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/grd.png",
+    "name": "Grenada",
+    "storefront": "143546-2,32",
+    "info": "GD USD (en-gb / 2: Grenada)"
+  },
+  "gt": {
+    "code": "gt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/gtm.png",
+    "name": "Guatemala",
+    "storefront": "143504-28,32",
+    "info": "GT USD (es-mx / 28: Guatemala, en-gb / 2: Guatemala)"
+  },
+  "gy": {
+    "code": "gy",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/guy.png",
+    "name": "Guyana",
+    "storefront": "143553-2,32",
+    "info": "GY USD (en-gb / 2: Guyana, fr-fr / 3: Guyana)"
+  },
+  "hn": {
+    "code": "hn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/hnd.png",
+    "name": "Honduras",
+    "storefront": "143510-28,32",
+    "info": "HN USD (es-mx / 28: Honduras, en-gb / 2: Honduras)"
+  },
+  "jm": {
+    "code": "jm",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/jam.png",
+    "name": "Jamaica",
+    "storefront": "143511-2,32",
+    "info": "JM USD (en-gb / 2: Jamaica)"
+  },
+  "mx": {
+    "code": "mx",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/mex.png",
+    "name": "México",
+    "storefront": "143468-28,32",
+    "info": "MX MXN (es-mx / 28: México, en-gb / 2: Mexico)"
+  },
+  "ms": {
+    "code": "ms",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/msr.png",
+    "name": "Montserrat",
+    "storefront": "143547-2,32",
+    "info": "MS USD (en-gb / 2: Montserrat)"
+  },
+  "ni": {
+    "code": "ni",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/nic.png",
+    "name": "Nicaragua",
+    "storefront": "143512-28,32",
+    "info": "NI USD (es-mx / 28: Nicaragua, en-gb / 2: Nicaragua)"
+  },
+  "pa": {
+    "code": "pa",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/pan.png",
+    "name": "Panamá",
+    "storefront": "143485-28,32",
+    "info": "PA USD (es-mx / 28: Panamá, en-gb / 2: Panama)"
+  },
+  "py": {
+    "code": "py",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/pry.png",
+    "name": "Paraguay",
+    "storefront": "143513-28,32",
+    "info": "PY USD (es-mx / 28: Paraguay, en-gb / 2: Paraguay)"
+  },
+  "pe": {
+    "code": "pe",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/per.png",
+    "name": "Perú",
+    "storefront": "143507-28,32",
+    "info": "PE PEN (es-mx / 28: Perú, en-gb / 2: Peru)"
+  },
+  "do": {
+    "code": "do",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/dom.png",
+    "name": "República Dominicana",
+    "storefront": "143508-28,32",
+    "info": "DO USD (es-mx / 28: República Dominicana, en-gb / 2: Dominican Republic)"
+  },
+  "kn": {
+    "code": "kn",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/kna.png",
+    "name": "St. Kitts and Nevis",
+    "storefront": "143548-2,32",
+    "info": "KN USD (en-gb / 2: St. Kitts and Nevis)"
+  },
+  "lc": {
+    "code": "lc",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/lca.png",
+    "name": "St. Lucia",
+    "storefront": "143549-2,32",
+    "info": "LC USD (en-gb / 2: St. Lucia)"
+  },
+  "vc": {
+    "code": "vc",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/vct.png",
+    "name": "St. Vincent and The Grenadines",
+    "storefront": "143550-2,32",
+    "info": "VC USD (en-gb / 2: St. Vincent and The Grenadines)"
+  },
+  "sr": {
+    "code": "sr",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/sur.png",
+    "name": "Suriname",
+    "storefront": "143554-2,32",
+    "info": "SR USD (en-gb / 2: Suriname, nl-nl / 10: Suriname)"
+  },
+  "tt": {
+    "code": "tt",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tto.png",
+    "name": "Trinidad and Tobago",
+    "storefront": "143551-2,32",
+    "info": "TT USD (en-gb / 2: Trinidad and Tobago, fr-fr / 3: Trinité-et-Tobago)"
+  },
+  "tc": {
+    "code": "tc",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/tca.png",
+    "name": "Turks and Caicos",
+    "storefront": "143552-2,32",
+    "info": "TC USD (en-gb / 2: Turks and Caicos)"
+  },
+  "uy": {
+    "code": "uy",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ury.png",
+    "name": "Uruguay",
+    "storefront": "143514-2,32",
+    "info": "UY USD (en-gb / 2: Uruguay, es-mx / 28: Uruguay)"
+  },
+  "ve": {
+    "code": "ve",
+    "flag": "https://s.mzstatic.com/images/flags/-dsi-50/ven.png",
+    "name": "Venezuela",
+    "storefront": "143502-28,32",
+    "info": "VE USD (es-mx / 28: Venezuela, en-gb / 2: Venezuela)"
+  }
+}
