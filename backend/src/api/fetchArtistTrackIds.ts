@@ -85,8 +85,8 @@ const fetchSongIdsFromAlbums = async (albumIds: number[], storefrontHeader: stri
 
   if (data.results) {
     // get only song ids
-    for (const album of Object.values(data.results)) {
-      for (const song of Object.values(album.children)) {
+    for (const album of Object.values(data.results) as any) {
+      for (const song of Object.values(album.children) as any) {
         if (song.kind === 'song') {
           songIds.push(Number(song.id));
         }
