@@ -7,7 +7,7 @@ import { MarketContext } from "../../context/MarketContext";
 import { INFO_BADGES, VA } from "./constants";
 
 type InfoBadgesProps = {
-  item: Song | Album;
+  item: Song | Omit<Album, "relationships">;
   showDolbyAtmos?: boolean;
 };
 

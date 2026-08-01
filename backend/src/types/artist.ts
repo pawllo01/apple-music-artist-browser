@@ -1,50 +1,24 @@
+import type { Artwork } from './artwork.js';
+import type { EditorialNotes } from './editorial-notes.js';
+
+// https://developer.apple.com/documentation/applemusicapi/artists
 export type Artist = {
   id: string;
-  type: string;
+  type: 'artists';
   href: string;
   attributes: Attributes;
-  relationships: Relationships;
 };
 
-interface Relationships {
-  albums: Albums;
-}
-
-interface Albums {
-  href: string;
-  next?: string;
-  data: Datum[];
-}
-
-interface Datum {
-  id: string;
-  type: string;
-  href: string;
-}
-
+// https://developer.apple.com/documentation/applemusicapi/artists/attributes-data.dictionary
 interface Attributes {
-  artistBio?: string;
   artwork?: Artwork;
-  bornOrFormed?: string;
   editorialNotes?: EditorialNotes;
   genreNames: string[];
-  isGroup: boolean;
   name: string;
+  url: string;
+  // amp
+  artistBio?: string;
+  bornOrFormed?: string;
+  isGroup?: boolean;
   origin?: string;
-  url: string;
-}
-
-interface EditorialNotes {
-  short: string;
-}
-
-interface Artwork {
-  width: number;
-  height: number;
-  url: string;
-  bgColor: string;
-  textColor1: string;
-  textColor2: string;
-  textColor3: string;
-  textColor4: string;
 }

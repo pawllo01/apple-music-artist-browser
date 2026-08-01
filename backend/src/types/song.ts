@@ -1,94 +1,54 @@
 import type { Album } from './album.js';
+import type { Artist } from './artist.js';
+import type { Artwork } from './artwork.js';
+import type { EditorialNotes } from './editorial-notes.js';
+import type { Offer } from './offer.js';
+import type { PlayParams } from './play-params.js';
 
+// https://developer.apple.com/documentation/applemusicapi/songs
 export type Song = {
   id: string;
-  type: string;
+  type: 'songs';
   href: string;
   attributes: Attributes;
   relationships: Relationships;
-  meta?: Meta;
 };
 
-interface Meta {
-  formerIds: string[];
-}
-
+// https://developer.apple.com/documentation/applemusicapi/songs/relationships-data.dictionary
 interface Relationships {
   albums: Albums;
   artists: Artists;
 }
 
+// https://developer.apple.com/documentation/applemusicapi/songs/relationships-data.dictionary/songsartistsrelationship
 interface Artists {
   href: string;
-  data: ArtistDatum[];
   next?: string;
+  data: Artist[];
 }
 
-interface ArtistDatum {
-  id: string;
-  type: string;
-  href: string;
-  attributes?: ArtistAttributes;
-  relationships?: ArtistRelationships;
-}
-
-interface ArtistRelationships {
-  albums: ArtistAlbums;
-}
-
-interface ArtistAlbums {
-  href: string;
-  next: string;
-  data: Datum[];
-}
-
-interface Datum {
-  id: string;
-  type: string;
-  href: string;
-}
-
-interface ArtistAttributes {
-  artwork: ArtistArtwork;
-  editorialNotes?: EditorialNotes;
-  genreNames: string[];
-  name: string;
-  url: string;
-  classicalUrl?: string;
-}
-
-interface EditorialNotes {
-  short: string;
-}
-
-interface ArtistArtwork {
-  bgColor: string;
-  defaultCropCode: string;
-  hasP3: boolean;
-  height: number;
-  textColor1: string;
-  textColor2: string;
-  textColor3: string;
-  textColor4: string;
-  url: string;
-  width: number;
-}
-
+// https://developer.apple.com/documentation/applemusicapi/songs/relationships-data.dictionary/songsalbumsrelationship
 interface Albums {
   href: string;
-  data: Album[];
+  next?: string;
+  data: Omit<Album, 'relationships'>[];
 }
 
+// https://developer.apple.com/documentation/applemusicapi/songs/attributes-data.dictionary
 interface Attributes {
+  albumArtistName: string;
   albumName: string;
   artistName: string;
   artistUrl: string;
   artwork: Artwork;
+  attribution?: string; // classical
   audioLocale: string;
   audioTraits: string[];
   composerName?: string;
+  contentRating?: 'clean' | 'explicit';
   discNumber: number;
   durationInMillis?: number;
+  editorialNotes?: EditorialNotes;
   genreNames: string[];
   hasLyrics: boolean;
   hasTimeSyncedLyrics: boolean;
@@ -103,39 +63,9 @@ interface Attributes {
   releaseDate?: string;
   trackNumber: number;
   url: string;
-  contentRating?: string;
-  attribution?: string;
-  editorialNotes?: EditorialNotes;
 }
 
-interface EditorialNotes {
-  short: string;
-}
-
+// https://developer.apple.com/documentation/applemusicapi/preview
 interface Preview {
   url: string;
-}
-
-interface PlayParams {
-  id: string;
-  kind: string;
-}
-
-interface Offer {
-  type: string;
-  buyParams?: string;
-  price?: number;
-  priceFormatted?: string;
-}
-
-interface Artwork {
-  width: number;
-  height: number;
-  hasP3: boolean;
-  url: string;
-  bgColor: string;
-  textColor1: string;
-  textColor2: string;
-  textColor3: string;
-  textColor4: string;
 }
