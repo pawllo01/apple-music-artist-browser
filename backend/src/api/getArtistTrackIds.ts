@@ -1,9 +1,9 @@
 import marketsWithoutStore from '../static/markets-without-store.json' with { type: 'json' };
 import storefronts from '../static/storefronts.json' with { type: 'json' };
 import type { Market } from '../types/market.js';
-import { apiFetch } from './apiFetch.js';
+import { loggedFetch } from './loggedFetch.js';
 
-export async function fetchArtistTrackIds(
+export async function getArtistTrackIds(
   artistId: number,
   market: Market,
   fullMode: boolean = false,
@@ -98,7 +98,7 @@ const fetchSongIdsFromAlbums = async (albumIds: number[], storefrontHeader: stri
 };
 
 const fetchAppleJson = async (name: string, url: string, storefrontHeader: string) => {
-  const res = await apiFetch(name, url, {
+  const res = await loggedFetch(name, url, {
     headers: {
       Host: 'itunes.apple.com',
       'User-Agent':

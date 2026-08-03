@@ -1,9 +1,10 @@
 import express from 'express';
 import * as z from 'zod';
+
+import { getArtistTrackIds } from '../api/getArtistTrackIds.js';
+import { getTracksByIds } from '../api/getTracksByIds.js';
 import { cache } from '../cache.js';
 import { MarketSchema } from '../types/market.js';
-import { fetchArtistTrackIds } from '../api/fetchArtistTrackIds.js';
-import { fetchTracksByIds } from '../api/fetchTracksByIds.js';
 import type { Song } from '../types/song.js';
 
 const router = express.Router();
@@ -24,7 +25,7 @@ router.get('/:artistId/songs', async (req, res, next) => {
 
     // get all artist track ids
     const allIds: number[] = await cache.wrap(`artist-track-ids-${artistId}-${market}`, () =>
-      fetchArtistTrackIds(artistId, market),
+      getArtistTrackIds(artistId, market),
     );
 
     const paginatedIds: number[] = allIds.slice(offset, offset + limit);
@@ -44,7 +45,7 @@ router.get('/:artistId/songs', async (req, res, next) => {
 
     // fetch missing tracks
     if (missingIds.length > 0) {
-      const fetchedTracks = await fetchTracksByIds(missingIds, market);
+      const fetchedTracks = await getTracksByIds(missingIds, market);
       tracks.push(...fetchedTracks);
 
       // cache tracks

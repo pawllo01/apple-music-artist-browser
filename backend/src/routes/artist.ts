@@ -1,8 +1,9 @@
 import express from 'express';
 import * as z from 'zod';
+
+import { getArtist } from '../api/getArtist.js';
 import { cache } from '../cache.js';
 import { MarketSchema } from '../types/market.js';
-import { fetchArtist } from '../api/fetchArtist.js';
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.get('/:artistId', async (req, res, next) => {
     });
 
     const artist = await cache.wrap(`artist-${artistId}-${market}`, () =>
-      fetchArtist(artistId, market),
+      getArtist(artistId, market),
     );
 
     res.json(artist);

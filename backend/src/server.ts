@@ -1,13 +1,14 @@
 import 'dotenv/config';
-import express from 'express';
-import type { Request, Response, NextFunction } from 'express';
+
 import cors from 'cors';
+import type { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import morgan from 'morgan';
 import * as z from 'zod';
 
-import searchRoutes from './routes/searchArtists.js';
-import artistRoutes from './routes/getArtist.js';
-import trackRoutes from './routes/getTracks.js';
+import artistRouter from './routes/artist.js';
+import searchRouter from './routes/search.js';
+import trackRouter from './routes/songs.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,9 +17,9 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
-app.use('/search', searchRoutes);
-app.use('/artists', artistRoutes);
-app.use('/artists', trackRoutes);
+app.use('/artists', artistRouter);
+app.use('/artists', trackRouter);
+app.use('/search', searchRouter);
 
 // https://expressjs.com/en/guide/error-handling/#the-default-error-handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

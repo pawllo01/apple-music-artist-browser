@@ -1,10 +1,10 @@
-import type { Market } from '../types/market.js';
 import type { Artist } from '../types/artist.js';
-import { BASE_API_URL, headers } from './API.js';
-import { apiFetch } from './apiFetch.js';
-import { getLanguage } from './getLanguage.js';
+import type { Market } from '../types/market.js';
+import { BASE_API_URL, headers } from './config.js';
+import { getLanguage } from './helpers.js';
+import { loggedFetch } from './loggedFetch.js';
 
-export async function fetchArtists(term: string, market: Market) {
+export async function getArtists(term: string, market: Market) {
   const params = new URLSearchParams({
     types: 'artists,songs',
     with: 'serverBubbles',
@@ -16,7 +16,7 @@ export async function fetchArtists(term: string, market: Market) {
   });
   const url = `${BASE_API_URL}/${market}/search?${params}`;
 
-  const res = await apiFetch('Search', url, { headers });
+  const res = await loggedFetch('Search', url, { headers });
   if (!res.ok) throw new Error(`Failed to fetch artists (${res.status} ${res.statusText})`);
 
   const data = await res.json();

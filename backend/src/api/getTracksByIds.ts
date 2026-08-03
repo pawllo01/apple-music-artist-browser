@@ -1,10 +1,10 @@
 import type { Market } from '../types/market.js';
 import type { Song } from '../types/song.js';
-import { BASE_API_URL, headers } from './API.js';
-import { apiFetch } from './apiFetch.js';
-import { getLanguage } from './getLanguage.js';
+import { BASE_API_URL, headers } from './config.js';
+import { getLanguage } from './helpers.js';
+import { loggedFetch } from './loggedFetch.js';
 
-export async function fetchTracksByIds(trackIds: number[], market: Market) {
+export async function getTracksByIds(trackIds: number[], market: Market) {
   const params = new URLSearchParams({
     ids: trackIds.join(','),
     extend: 'artistUrl,offers',
@@ -14,7 +14,7 @@ export async function fetchTracksByIds(trackIds: number[], market: Market) {
   });
   const url = `${BASE_API_URL}/${market}/songs?${params}`;
 
-  const res = await apiFetch('Tracks', url, { headers });
+  const res = await loggedFetch('Tracks', url, { headers });
   if (!res.ok) throw new Error(`Failed to fetch tracks (${res.status} ${res.statusText})`);
 
   const data = await res.json();

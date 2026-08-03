@@ -6,7 +6,7 @@ const logger = pino({
   },
 });
 
-export async function apiFetch(msg: string, url: string, options?: RequestInit) {
+export async function loggedFetch(msg: string, url: string, options?: RequestInit) {
   const start = Date.now();
 
   const res = await fetch(url, options);
