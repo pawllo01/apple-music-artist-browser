@@ -12,7 +12,7 @@ const SearchSchema = z.object({
   market: MarketSchema,
 });
 
-router.get('', async (req, res, next) => {
+router.get('/artists', async (req, res, next) => {
   try {
     const { term, market } = SearchSchema.parse(req.query);
 

@@ -1,69 +1,58 @@
 import marketsWithoutStore from '../static/markets-without-store.json' with { type: 'json' };
-import storefronts from '../static/storefronts.json' with { type: 'json' };
+import type { Type } from '../types/item-types.js';
 import type { Market } from '../types/market.js';
+import { getStorefronts, normalizeIds } from './helpers.js';
 import { loggedFetch } from './loggedFetch.js';
 
-export async function getArtistTrackIds(
+export async function getArtistItemIds(
+  type: Type,
   artistId: number,
   market: Market,
   fullMode: boolean = false,
 ) {
-  const storefront = storefronts[market];
-  if (!storefront) throw new Error('Invalid market');
+  const { itunes, appleMusic } = getStorefronts(market);
+  const marketWithItunesStore = !marketsWithoutStore.includes(market);
 
-  const itunesStorefront = storefront.storefront;
-  const appleMusicStorefront = `${storefront.storefront} t:music31`;
+  const IDS: number[] = [];
 
-  const ALL_SONG_IDS: number[] = [];
-
-  // fetch all itunes songs (only for markets with iTunes Store)
-  if (!marketsWithoutStore.includes(market)) {
-    const itunesIds = await fetchArtistItemIds('songs', artistId, itunesStorefront);
-    ALL_SONG_IDS.push(...itunesIds);
+  if (marketWithItunesStore) {
+    IDS.push(...(await fetchIdsByStorefront(type, artistId, itunes)));
   }
 
-  if (fullMode) {
-    // fetch all apple music songs
-    const appleMusicIds = await fetchArtistItemIds('songs', artistId, appleMusicStorefront);
-    ALL_SONG_IDS.push(...appleMusicIds);
+  if (type === 'albums' || type === 'videos' || (type === 'songs' && fullMode)) {
+    IDS.push(...(await fetchIdsByStorefront(type, artistId, appleMusic)));
   }
-  // normal mode doesn't fetch thousands of tracks from Various Artists albums (compilations)
-  else {
+
+  // normal mode doesn't fetch thousands of songs from Various Artists albums (compilations)
+  if (type === 'songs' && !fullMode) {
     // check missing albums
     if (!marketsWithoutStore.includes(market)) {
-      const itunesAlbumIds = await fetchArtistItemIds('albums', artistId, itunesStorefront);
-      const appleMusicAlbumIds = await fetchArtistItemIds('albums', artistId, appleMusicStorefront);
+      const itunesAlbumIds = await fetchIdsByStorefront('albums', artistId, itunes);
+      const appleMusicAlbumIds = await fetchIdsByStorefront('albums', artistId, appleMusic);
       const albumIdsOnlyOnAppleMusic = appleMusicAlbumIds.filter(
         (id) => !itunesAlbumIds.includes(id),
       );
 
       if (albumIdsOnlyOnAppleMusic.length > 0) {
-        const songIds = await fetchSongIdsFromAlbums(
-          albumIdsOnlyOnAppleMusic,
-          appleMusicStorefront,
-        );
-        ALL_SONG_IDS.push(...songIds);
+        const songIds = await fetchSongIdsFromAlbums(albumIdsOnlyOnAppleMusic, appleMusic);
+        IDS.push(...songIds);
       }
     }
     // for markets without iTunes Store, fetch only albums from Apple Music
     else {
-      const appleMusicAlbumIds = await fetchArtistItemIds('albums', artistId, appleMusicStorefront);
+      const appleMusicAlbumIds = await fetchIdsByStorefront('albums', artistId, appleMusic);
       if (appleMusicAlbumIds.length > 0) {
-        const songIds = await fetchSongIdsFromAlbums(appleMusicAlbumIds, appleMusicStorefront);
-        ALL_SONG_IDS.push(...songIds);
+        const songIds = await fetchSongIdsFromAlbums(appleMusicAlbumIds, appleMusic);
+        IDS.push(...songIds);
       }
     }
   }
 
-  return [...new Set(ALL_SONG_IDS)].sort((a, b) => b - a).slice(0, 20000); // 20k limit
+  return normalizeIds(IDS);
 }
 
-const fetchArtistItemIds = async (
-  type: 'albums' | 'songs' | 'videos',
-  artistId: number,
-  storefrontHeader: string,
-) => {
-  const dkIds: Record<typeof type, number> = {
+const fetchIdsByStorefront = async (type: Type, artistId: number, storefrontHeader: string) => {
+  const dkIds: Record<Type, number> = {
     albums: 2,
     songs: 1,
     videos: 5,

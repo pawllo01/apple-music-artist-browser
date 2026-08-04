@@ -7,8 +7,8 @@ import morgan from 'morgan';
 import * as z from 'zod';
 
 import artistRouter from './routes/artist.js';
+import artistItemsRouter from './routes/artistItems.js';
 import searchRouter from './routes/search.js';
-import trackRouter from './routes/songs.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 app.use('/artists', artistRouter);
-app.use('/artists', trackRouter);
+app.use('/artists', artistItemsRouter);
 app.use('/search', searchRouter);
 
 // https://expressjs.com/en/guide/error-handling/#the-default-error-handler

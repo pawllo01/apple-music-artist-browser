@@ -43,7 +43,7 @@ export default function HomePage() {
       const params = new URLSearchParams({ term: debouncedInputValue, market });
 
       const data = await apiFetch<Artist[]>(
-        `${import.meta.env.VITE_API_URL}/search?${params}`,
+        `${import.meta.env.VITE_API_URL}/search/artists?${params}`,
         "Failed to fetch artists. The service is temporarily unavailable.",
         signal,
       );
