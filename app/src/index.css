@@ -47,7 +47,7 @@ input {
   @apply dark:bg-gray-800;
 }
 
-#songs-settings-group > button:last-of-type {
+#settings-group > button:last-of-type {
   @apply rounded-e-lg;
 }
 
@@ -75,7 +75,7 @@ input {
 }
 
 .section-btn {
-  @apply flex-1 gap-2 px-2 capitalize first:rounded-s-full last:rounded-e-full;
+  @apply flex-1 gap-1 px-2 capitalize first:rounded-s-full last:rounded-e-full;
 }
 
 .dropdown {

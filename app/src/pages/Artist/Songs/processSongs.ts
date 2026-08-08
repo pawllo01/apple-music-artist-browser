@@ -1,6 +1,6 @@
 import type { Song } from "../../../@types/song";
 import type { SongWithChildren } from "../../../@types/song-with-children";
-import { VA } from "../constants";
+import { VA } from "../../constants";
 
 export function processSongs(
   songs: Song[],

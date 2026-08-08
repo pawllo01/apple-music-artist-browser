@@ -33,7 +33,17 @@ export const INFO_BADGES = {
     <MdOutlineShoppingBag className="size-4" />,
   ),
 
-  various_artists: createInfoBadge("indigo", VA, "VA"),
+  _4K: createInfoBadge(
+    "blue",
+    "4K resolution",
+    <span className="inline-block min-w-7 text-center">4K</span>,
+  ),
+
+  various_artists: createInfoBadge(
+    "indigo",
+    VA,
+    <span className="inline-block min-w-7 text-center">VA</span>,
+  ),
 };
 
 function createInfoBadge(
@@ -44,7 +54,7 @@ function createInfoBadge(
   return (
     <Badge
       color={color}
-      className="inline-grid min-h-5 min-w-5 place-items-center p-0 align-middle select-none"
+      className="inline-grid min-h-5 min-w-5 shrink-0 place-items-center p-0 align-middle leading-none select-none"
       title={title}
     >
       {children}

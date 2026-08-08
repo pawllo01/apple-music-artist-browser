@@ -3,11 +3,12 @@ import { useContext } from "react";
 import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
 import type { Song } from "../../@types/song";
+import { Video } from "../../@types/video";
 import { MarketContext } from "../../context/MarketContext";
-import { INFO_BADGES, VA } from "./constants";
+import { INFO_BADGES, VA } from "../constants";
 
 type InfoBadgesProps = {
-  item: Song | Omit<Album, "relationships">;
+  item: Omit<Album, "relationships"> | Song | Video;
   showDolbyAtmos?: boolean;
 };
 
@@ -22,7 +23,11 @@ export default function InfoBadges({
 
   const isClean = item.attributes.contentRating === "clean";
 
-  const isDolbyAtmos = item.attributes.audioTraits.includes("atmos");
+  const has4K = item.type === "music-videos" && item.attributes.has4K;
+
+  const isDolbyAtmos =
+    item.type !== "music-videos" &&
+    item.attributes.audioTraits.includes("atmos");
 
   const isStreamingOnly =
     item.attributes.offers.length === 1 &&
@@ -38,6 +43,7 @@ export default function InfoBadges({
     <>
       {isExplicit && INFO_BADGES.explicit}
       {isClean && INFO_BADGES.clean}
+      {has4K && INFO_BADGES._4K}
       {showDolbyAtmos && isDolbyAtmos && INFO_BADGES.dolby_atmos}
       {hasItunesStore && isStreamingOnly && INFO_BADGES.streaming_only}
       {hasItunesStore && isPurchaseOnly && INFO_BADGES.purchase_only}

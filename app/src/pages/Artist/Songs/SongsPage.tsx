@@ -1,9 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-
-import { Alert, Button, ButtonGroup, TextInput, Tooltip } from "flowbite-react";
-import { BsPinAngle, BsPinAngleFill } from "react-icons/bs";
-import { HiInformationCircle, HiSearch } from "react-icons/hi";
-
+import { useEffect, useMemo, useState } from "react";
+import { Button, ButtonGroup } from "flowbite-react";
 import {
   type ExpandedState,
   getCoreRowModel,
@@ -15,20 +11,20 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table";
 
-import { hideKeyboard } from "../../../@other/fuctions";
 import type { SongWithChildren } from "../../../@types/song-with-children";
-import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
-import { DEFAULT_COLUMNS } from "../constants";
+import { DEFAULT_COLUMNS } from "../../constants";
+import AsyncState from "../AsyncState";
+import ClearFilter from "../ClearFilter";
+import SearchBar from "../SearchBar";
+import useFetchItems from "../useFetchItems";
 import { createColumns } from "./columns";
-import DrawerSettings from "./DrawerSettings";
 import DropdownColumns from "./DropdownColumns";
-import DropdownSettings from "./DropdownSettings";
 import MusicPlayer from "./MusicPlayer";
 import { processSongs } from "./processSongs";
+import SongsSettings from "./SongsSettings";
 import SongsTable from "./SongsTable";
-import useFetchSongs from "./useFetchSongs";
 import useSongsSettings from "./useSongsSettings";
 
 type SongTab = "main" | "mixed" | "all";
@@ -36,8 +32,6 @@ type SongTab = "main" | "mixed" | "all";
 export default function SongsPage() {
   const settings = useSongsSettings();
   const {
-    pinSearchBar,
-    setPinSearchBar,
     groupSongs,
     showAllVariousArtistsAlbums,
     saveSorting,
@@ -45,16 +39,14 @@ export default function SongsPage() {
     truncateAlbumNames,
     showIdsInCells,
   } = settings;
-  const searchBarRef = useRef<HTMLDivElement | null>(null);
-  const searchBarOffset = pinSearchBar
-    ? (searchBarRef.current?.getBoundingClientRect().height ?? 0)
-    : 0;
+
+  const [searchBarOffset, setSearchBarOffset] = useState<number>(0);
 
   // SONGS
-  const query = useFetchSongs();
+  const query = useFetchItems("songs");
   const {
-    songs,
-    totalSongs,
+    items: songs,
+    totalItems: totalSongs,
     fetchAllPages,
     setFetchAllPages,
     error,
@@ -194,25 +186,13 @@ export default function SongsPage() {
     table.toggleAllRowsExpanded(false);
   }, [songs, table]);
 
-  // RENDER
-  if (isLoading) return <LoadingSpinner />;
-
-  if (error)
-    return (
-      <Alert color="failure" icon={HiInformationCircle} className="mt-4">
-        {error.message}
-      </Alert>
-    );
-
-  if (songs.length === 0)
-    return (
-      <Alert color="warning" icon={HiInformationCircle} className="mt-4">
-        No results found.
-      </Alert>
-    );
-
   return (
-    <>
+    <AsyncState
+      type="songs"
+      isLoading={isLoading}
+      error={error}
+      itemsLength={songs.length}
+    >
       {/* song tabs */}
       {songsByTab.mixed.length > 0 && (
         <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
@@ -230,98 +210,27 @@ export default function SongsPage() {
       )}
 
       {/* search bar + settings */}
-      <div
-        ref={searchBarRef}
-        className="top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-600 dark:bg-gray-600"
-        style={{ position: pinSearchBar ? "sticky" : "relative" }}
+      <SearchBar
+        type="songs"
+        setSearchBarOffset={setSearchBarOffset}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        fetchAllPages={fetchAllPages}
+        setFetchAllPages={setFetchAllPages}
+        resultsLength={rows.length}
+        itemsLength={songs.length}
+        totalLength={totalSongs}
       >
-        <div className="flex h-10.5 gap-2">
-          {/* search input (h-10.5) */}
-          <TextInput
-            type="search"
-            placeholder="Search..."
-            className="flex-1"
-            icon={HiSearch}
-            value={globalFilter}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            onKeyDown={hideKeyboard}
-          />
+        {/* columns */}
+        <DropdownColumns
+          table={table}
+          setColumnOrder={setColumnOrder}
+          groupSongs={groupSongs}
+        />
 
-          {/* pin search bar */}
-          <Button
-            color="alternative"
-            className="aspect-square h-auto p-0 shadow-xs"
-            title="Pin search bar"
-            onClick={() => setPinSearchBar((prevState) => !prevState)}
-          >
-            {pinSearchBar ? (
-              <BsPinAngleFill size={20} />
-            ) : (
-              <BsPinAngle size={20} />
-            )}
-          </Button>
-
-          <ButtonGroup id="songs-settings-group">
-            {/* columns */}
-            <DropdownColumns
-              table={table}
-              setColumnOrder={setColumnOrder}
-              groupSongs={groupSongs}
-            />
-
-            {/* settings */}
-            <DrawerSettings settings={settings} resetColumns={resetColumns} />
-
-            {/* old settings in dropdown */}
-            {/* eslint-disable-next-line no-constant-binary-expression */}
-            {false && (
-              <DropdownSettings
-                settings={settings}
-                resetColumns={resetColumns}
-              />
-            )}
-          </ButtonGroup>
-        </div>
-
-        <div className="ms-1 mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-500 dark:text-gray-400">
-          {/* results */}
-          <Tooltip
-            placement="bottom"
-            content="Number of songs matching current settings"
-          >
-            Results: {rows.length}
-          </Tooltip>
-
-          {/* divider */}
-          <span className="h-4 border-s" />
-
-          {/* loaded songs */}
-          <Tooltip
-            placement="bottom"
-            content="Total number of songs loaded from Apple Music"
-          >
-            Songs: {songs.length}
-            {songs.length !== totalSongs
-              ? ` / ${totalSongs} (${Math.floor((songs.length / totalSongs) * 100)}%)`
-              : ""}
-          </Tooltip>
-
-          {/* load all */}
-          {songs.length !== totalSongs && (
-            <Tooltip
-              placement="bottom"
-              content="Keep scrolling to load more songs automatically, or load all songs now."
-            >
-              <button
-                className={`underline underline-offset-2 ${fetchAllPages ? "text-red-600" : ""}`}
-                onClick={() => setFetchAllPages((prevState) => !prevState)}
-              >
-                {fetchAllPages ? "Stop loading" : "Load all"}
-              </button>
-            </Tooltip>
-          )}
-        </div>
-      </div>
+        {/* settings */}
+        <SongsSettings settings={settings} resetColumns={resetColumns} />
+      </SearchBar>
 
       {/* songs table */}
       {rows.length > 0 && (
@@ -335,18 +244,7 @@ export default function SongsPage() {
       )}
 
       {/* no results */}
-      {rows.length === 0 && (
-        <div className="py-4 text-center text-gray-500">
-          <p>No results found.</p>
-          <Button
-            color="red"
-            className="gradient mx-auto mt-2 rounded-full"
-            onClick={() => setGlobalFilter("")}
-          >
-            Clear filter
-          </Button>
-        </div>
-      )}
+      {rows.length === 0 && <ClearFilter setGlobalFilter={setGlobalFilter} />}
 
       {/* music player offset */}
       <div className="mb-13 md:mb-18 lg:mb-4" />
@@ -363,6 +261,6 @@ export default function SongsPage() {
           rows={rows}
         />
       </div>
-    </>
+    </AsyncState>
   );
 }

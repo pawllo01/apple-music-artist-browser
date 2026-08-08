@@ -16,8 +16,8 @@ import { flexRender, type Table } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { FetchItems as FetchSongs } from "../useFetchItems";
 import SkeletonRow from "./SkeletonRow";
-import type { FetchSongs } from "./useFetchSongs";
 
 type SongsTableProps = {
   table: Table<SongWithChildren>;

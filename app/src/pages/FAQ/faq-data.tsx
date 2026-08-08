@@ -1,7 +1,7 @@
 import { Kbd } from "flowbite-react";
 
 import { crossedShoppingBag } from "../../@other/icons";
-import { GROUP_BY_ISRC, INFO_BADGES, VA } from "../Artist/constants";
+import { GROUP_BY_ISRC, INFO_BADGES, VA } from "../constants";
 
 const githubPage = (
   <a
@@ -68,10 +68,51 @@ export const FAQ_DATA: {
             in the selected country.
           </p>
           <p>
+            {INFO_BADGES._4K} — Indicates that the video is available in 4K
+            resoluttion.
+          </p>
+          <p>
             {INFO_BADGES.various_artists} — {VA}. Indicates that the album is
             credited to {VA} instead of a single primary artist.
           </p>
         </div>
+      ),
+    },
+    {
+      question: "What are ISRC and UPC codes?",
+      answer: (
+        <>
+          <p>
+            <span className="italic">
+              The International Standard Recording Code (ISRC) is an
+              international standard code for uniquely identifying sound
+              recordings and music video recordings.
+            </span>
+            {" — "}
+            <a
+              href="https://en.wikipedia.org/wiki/International_Standard_Recording_Code"
+              target="_blank"
+              className="hover:underline"
+            >
+              Wikipedia
+            </a>
+          </p>
+          <p className="mt-4">
+            <span className="italic">
+              A UPC (Universal Product Code) is a 12-digit identifier used to
+              distinguish a music release—like a single, EP, or album—on digital
+              platforms and in physical stores.
+            </span>
+            {" — "}
+            <a
+              href="https://soundcharts.com/en/blog/what-is-a-upc"
+              target="_blank"
+              className="hover:underline"
+            >
+              Soundcharts
+            </a>
+          </p>
+        </>
       ),
     },
     {
@@ -156,23 +197,20 @@ export const FAQ_DATA: {
       ),
     },
     {
-      question: "What is an ISRC?",
-      answer:
-        "The International Standard Recording Code (ISRC) is an international standard code for uniquely identifying sound recordings and music video recordings.",
-    },
-    {
       question: `What does "${GROUP_BY_ISRC}" do?`,
       answer: (
         <>
-          When enabled, songs with the same ISRC are grouped together, so each
-          recording appears only once. If a song is available on multiple
-          releases (album, deluxe edition, compilation, soundtrack, single,
-          etc.), you can expand the group to view all available releases of that
-          recording.
-          <br />
-          <br />
-          When disabled, every release is displayed separately, so the same song
-          may appear multiple times.
+          <p>
+            When enabled, songs with the same ISRC are grouped together, so each
+            recording appears only once. If a song is available on multiple
+            releases (album, deluxe edition, compilation, soundtrack, single,
+            etc.), you can expand the group to view all available releases of
+            that recording.
+          </p>
+          <p className="mt-4">
+            When disabled, every release is displayed separately, so the same
+            song may appear multiple times.
+          </p>
         </>
       ),
     },
@@ -180,15 +218,17 @@ export const FAQ_DATA: {
       question: "How do I view every song?",
       answer: (
         <>
-          First, load all songs by clicking <b>Load&nbsp;all</b> next to the
-          song count, or scroll to the bottom of the page to load more songs
-          automatically.
-          <br />
-          <br />
-          To see every individual release, either expand all grouped rows or
-          disable <b>{GROUP_BY_ISRC}</b> in Settings&nbsp;(⚙️). The total number
-          of results will then match the number of songs loaded from Apple
-          Music.
+          <p>
+            First, load all songs by clicking <b>Load&nbsp;all</b> next to the
+            song count, or scroll to the bottom of the page to load more songs
+            automatically.
+          </p>
+          <p className="mt-4">
+            To see every individual release, either expand all grouped rows or
+            disable <b>{GROUP_BY_ISRC}</b> in Settings&nbsp;(⚙️). The total
+            number of results will then match the number of songs loaded from
+            Apple Music.
+          </p>
         </>
       ),
     },

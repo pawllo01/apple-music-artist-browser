@@ -1,3 +1,14 @@
+import { IoMdAlbums } from "react-icons/io";
+import type { IconType } from "react-icons/lib";
+import { MdAudiotrack, MdPersonalVideo } from "react-icons/md";
+import type { Type } from "../@types/item-types";
+
+export const itemIcons: Record<Type, IconType> = {
+  albums: IoMdAlbums,
+  songs: MdAudiotrack,
+  videos: MdPersonalVideo,
+};
+
 export const crossedShoppingBag = (
   <img
     title="Without iTunes Store"

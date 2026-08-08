@@ -1,11 +1,6 @@
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 export default function useSongsSettings() {
-  const [pinSearchBar, setPinSearchBar] = useLocalStorage(
-    "songs:pin-search-bar",
-    true,
-  );
-
   const [groupSongs, setGroupSongs] = useLocalStorage(
     "songs:group-songs",
     true,
@@ -35,8 +30,6 @@ export default function useSongsSettings() {
   );
 
   return {
-    pinSearchBar,
-    setPinSearchBar,
     groupSongs,
     setGroupSongs,
     showAllVariousArtistsAlbums,
@@ -52,4 +45,4 @@ export default function useSongsSettings() {
   };
 }
 
-export type SongsSettings = ReturnType<typeof useSongsSettings>;
+export type SongsSettingsType = ReturnType<typeof useSongsSettings>;
