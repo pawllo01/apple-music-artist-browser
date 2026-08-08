@@ -33,7 +33,7 @@ export default function HomePage() {
     data: artists = [],
     error,
     isPending,
-  } = useQuery<Artist[]>({
+  } = useQuery({
     queryKey: ["searchArtist", debouncedInputValue, market],
     enabled: !!debouncedInputValue,
     retry: false,

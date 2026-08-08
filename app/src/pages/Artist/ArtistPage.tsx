@@ -29,7 +29,7 @@ export default function ArtistPage() {
     data: artist,
     error,
     isPending,
-  } = useQuery<Artist>({
+  } = useQuery({
     queryKey: ["artist", artistId, market],
     retry: false,
 
