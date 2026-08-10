@@ -232,26 +232,26 @@ export default function SongsPage() {
         <SongsSettings settings={settings} resetColumns={resetColumns} />
       </SearchBar>
 
-      {/* songs table */}
-      {rows.length > 0 && (
-        <SongsTable
-          table={table}
-          query={query}
-          searchBarOffset={searchBarOffset}
-          currentSong={currentSong}
-          changeCurrentSong={changeCurrentSong}
-        />
-      )}
-
-      {/* no results */}
-      {rows.length === 0 && <ClearFilter setGlobalFilter={setGlobalFilter} />}
-
       {/* music player offset */}
-      <div className="mb-13 md:mb-18 lg:mb-4" />
+      <div className="mb-17 md:mb-22 lg:mb-8">
+        {/* songs table */}
+        {rows.length > 0 && (
+          <SongsTable
+            table={table}
+            query={query}
+            searchBarOffset={searchBarOffset}
+            currentSong={currentSong}
+            changeCurrentSong={changeCurrentSong}
+          />
+        )}
+
+        {/* no results */}
+        {rows.length === 0 && <ClearFilter setGlobalFilter={setGlobalFilter} />}
+      </div>
 
       {/* music player & scroll to top */}
       <div className="fixed bottom-0 left-0 z-30 w-full">
-        <div className="absolute right-4 bottom-full -translate-y-4">
+        <div className="absolute right-6 bottom-full -translate-y-6">
           <ScrollToTop smooth={false} />
         </div>
 

@@ -60,6 +60,15 @@ input {
   @apply bg-gray-900;
 }
 
+/* center modal below the md breakpoint */
+/* https://flowbite-react.com/docs/components/modal#theme */
+[data-testid="modal-overlay"] {
+  @apply inset-0 h-full;
+  & > div {
+    @apply h-auto;
+  }
+}
+
 .gradient,
 .rhap_progress-filled {
   @apply bg-linear-to-r from-pink-500 via-red-500 to-orange-500;
@@ -79,7 +88,7 @@ input {
 }
 
 .dropdown {
-  @apply max-h-[calc(100dvh-5rem)] max-w-60 overflow-auto dark:bg-gray-900;
+  @apply max-h-[calc(100dvh-5rem)] max-w-60 min-w-40! overflow-auto dark:bg-gray-900;
 }
 
 .song-table-row {

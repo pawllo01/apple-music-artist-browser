@@ -53,7 +53,7 @@ export default function SearchBar({
   return (
     <div
       ref={searchBarRef}
-      className="top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-600 dark:bg-gray-600"
+      className="top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-700 dark:bg-gray-600"
       style={{ position: pinSearchBar ? "sticky" : "relative" }}
     >
       <div className="flex h-10.5 gap-2">
@@ -116,7 +116,7 @@ export default function SearchBar({
             content={`Keep scrolling to load more ${type} automatically, or load all ${type} now.`}
           >
             <button
-              className={`underline underline-offset-2 ${fetchAllPages ? "text-red-600" : ""}`}
+              className={`underline underline-offset-2 ${fetchAllPages ? "text-red-500 dark:text-red-400" : ""}`}
               onClick={() => setFetchAllPages((prevState) => !prevState)}
             >
               {fetchAllPages ? "Stop loading" : "Load all"}

@@ -111,7 +111,7 @@ export default function HomePage() {
         {/* Search results & Recent artists */}
         {(isSearching || showRecentArtists) && (
           <div className="relative mt-2 overflow-hidden rounded-2xl bg-white/80 shadow-xl dark:bg-gray-800/80">
-            <div className="max-h-[calc(72px*5)] overflow-y-auto">
+            <div className="max-h-[calc(73px*5)] overflow-y-auto border-t border-t-transparent">
               {error && isSearching && (
                 <Alert
                   color="failure"
@@ -123,7 +123,7 @@ export default function HomePage() {
               )}
 
               {showSkeletons
-                ? Array.from({ length: 6 }).map((_, i) => (
+                ? Array.from({ length: 5 }).map((_, i) => (
                     <ArtistResultSkeleton key={i} />
                   ))
                 : items.map((artist) => (

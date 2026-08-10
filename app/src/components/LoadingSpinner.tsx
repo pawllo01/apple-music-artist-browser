@@ -1,8 +1,12 @@
 import { Spinner } from "flowbite-react";
 
-export default function LoadingSpinner() {
+type Props = {
+  className?: string;
+};
+
+export default function LoadingSpinner({ className = "" }: Props) {
   return (
-    <div className="mt-4 text-center">
+    <div className={className}>
       <Spinner aria-label="Loading..." color="failure" size="lg" />
     </div>
   );

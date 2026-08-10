@@ -88,7 +88,7 @@ export default function ArtistPage() {
   ];
 
   return (
-    <section className="flex-1 p-4 pt-6">
+    <section className="flex-1 px-4 pt-6">
       {/* Artist info */}
       <div className="flex flex-col items-center gap-4 lg:flex-row">
         {/* Avatar */}

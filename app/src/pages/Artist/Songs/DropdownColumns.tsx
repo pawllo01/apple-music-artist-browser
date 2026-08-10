@@ -21,8 +21,8 @@ export default function DropdownColumns({
 }: DropdownColumnsProps) {
   return (
     <Dropdown
-      dismissOnClick={false}
       className="dropdown"
+      dismissOnClick={false}
       renderTrigger={() => (
         <Button color="alternative" className="h-auto px-3" title="Columns">
           <LuColumns4 size={24} />

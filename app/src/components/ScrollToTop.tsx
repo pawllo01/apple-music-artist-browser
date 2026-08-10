@@ -9,7 +9,7 @@ export default function ScrollToTop({ smooth }: { smooth: boolean }) {
   const distanceToBottom =
     document.documentElement.scrollHeight - (y + window.innerHeight);
 
-  const isVisible = y > 300 && distanceToBottom > 200;
+  const isVisible = y > 300 && distanceToBottom > 100;
 
   return (
     <AnimatePresence>

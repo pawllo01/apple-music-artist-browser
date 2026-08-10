@@ -19,7 +19,7 @@ export default function AsyncState({
   itemsLength,
   children,
 }: AsyncStateProps) {
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner className="my-4 text-center" />;
 
   if (error)
     return (
