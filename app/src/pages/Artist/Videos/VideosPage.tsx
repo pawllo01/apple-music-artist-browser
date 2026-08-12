@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "flowbite-react";
 import Fuse from "fuse.js/basic";
 import { useParams } from "react-router";
 
+import { getOfferFlags } from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
@@ -67,13 +68,9 @@ export default function VideosPage() {
   const videosByTab = useMemo(() => {
     return sortedVideos.reduce<Record<VideoTab, Video[]>>(
       (acc, video) => {
-        const isStreamingOnly =
-          video.attributes.offers.length === 1 &&
-          video.attributes.offers[0].type === "subscription";
-
-        const isPurchaseOnly =
-          video.attributes.offers.length === 1 &&
-          video.attributes.offers[0].type === "buy";
+        const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
+          video.attributes.offers,
+        );
 
         acc.all.push(video);
         if (isStreamingOnly) acc.streaming_only.push(video);

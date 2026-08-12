@@ -1,5 +1,6 @@
 import { useContext } from "react";
 
+import { getOfferFlags } from "../../@other/fuctions";
 import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
 import type { Song } from "../../@types/song";
@@ -29,13 +30,9 @@ export default function InfoBadges({
     item.type !== "music-videos" &&
     item.attributes.audioTraits.includes("atmos");
 
-  const isStreamingOnly =
-    item.attributes.offers.length === 1 &&
-    item.attributes.offers[0].type === "subscription";
-
-  const isPurchaseOnly =
-    item.attributes.offers.length === 1 &&
-    item.attributes.offers[0].type === "buy";
+  const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
+    item.attributes.offers,
+  );
 
   const isVA = item.attributes.artistName === VA;
 
