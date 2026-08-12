@@ -1,3 +1,4 @@
+import { ReactVirtualizer } from "@tanstack/react-virtual";
 import type { Market } from "../@types/market";
 
 export function changeUrlMarket(url: string, market: Market) {
@@ -39,4 +40,24 @@ export async function apiFetch<T>(
   }
 
   return data as T;
+}
+
+export function getVirtualSpacerHeights(
+  rowVirtualizer: ReactVirtualizer<Window, Element>,
+) {
+  const virtualRows = rowVirtualizer.getVirtualItems();
+
+  const topSpacerHeight =
+    virtualRows.length > 0
+      ? virtualRows[0].start - rowVirtualizer.options.scrollMargin
+      : 0;
+
+  const bottomSpacerHeight =
+    virtualRows.length > 0
+      ? rowVirtualizer.getTotalSize() -
+        virtualRows[virtualRows.length - 1].end +
+        rowVirtualizer.options.scrollMargin
+      : 0;
+
+  return { topSpacerHeight, bottomSpacerHeight };
 }

@@ -1,9 +1,11 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useResizeObserver } from "use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
+import { getVirtualSpacerHeights } from "../../../@other/fuctions";
 import type { Video } from "../../../@types/video";
 import { FetchItems as FetchVideos } from "../useFetchItems";
+import useInfiniteScroll from "../useInfiniteScroll";
 import useRestoreScrollPosition from "./useRestoreScrollPosition";
 import type { VideosSettingsType } from "./useVideosSettings";
 import VideoCard from "./VideoCard";
@@ -22,8 +24,6 @@ type Props = {
 };
 
 export default function GridVirtualizer({ videos, settings, query }: Props) {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } = query;
-
   const parentRef = useRef<HTMLDivElement | null>(null);
   const parentOffsetRef = useRef(0);
   const { width: parentWidth = 0 } = useResizeObserver<HTMLDivElement>({
@@ -70,26 +70,10 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
 
   const virtualRows = rowVirtualizer.getVirtualItems();
 
-  const topHeight =
-    virtualRows.length > 0
-      ? virtualRows[0].start - rowVirtualizer.options.scrollMargin
-      : 0;
+  const { topSpacerHeight, bottomSpacerHeight } =
+    getVirtualSpacerHeights(rowVirtualizer);
 
-  const bottomHeight =
-    virtualRows.length > 0
-      ? rowVirtualizer.getTotalSize() -
-        virtualRows[virtualRows.length - 1].end +
-        rowVirtualizer.options.scrollMargin
-      : 0;
-
-  // fetch the next page when the last virtual row becomes visible
-  // https://tanstack.com/virtual/latest/docs/framework/react/examples/infinite-scroll
-  useEffect(() => {
-    const [lastRow] = [...virtualRows].reverse();
-    if (!lastRow) return;
-    if (lastRow.index >= rowCount - 1 && hasNextPage && !isFetchingNextPage)
-      fetchNextPage();
-  }, [hasNextPage, fetchNextPage, rowCount, isFetchingNextPage, virtualRows]);
+  useInfiniteScroll(virtualRows, rowCount, query);
 
   // restore scroll position on resize
   useRestoreScrollPosition(parentWidth, columnCount, rowVirtualizer);
@@ -98,7 +82,9 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
     <div ref={parentRef}>
       {parentWidth > 0 && (
         <>
-          {topHeight > 0 && <div style={{ height: `${topHeight}px` }} />}
+          {topSpacerHeight > 0 && (
+            <div style={{ height: `${topSpacerHeight}px` }} />
+          )}
 
           {virtualRows.map((row) => {
             const start = row.index * columnCount;
@@ -128,7 +114,9 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
             );
           })}
 
-          {bottomHeight > 0 && <div style={{ height: `${bottomHeight}px` }} />}
+          {bottomSpacerHeight > 0 && (
+            <div style={{ height: `${bottomSpacerHeight}px` }} />
+          )}
         </>
       )}
     </div>

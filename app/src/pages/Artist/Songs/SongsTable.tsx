@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import {
   Table as FlowbiteTable,
@@ -15,8 +15,10 @@ import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
 import { flexRender, type Table } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
+import { getVirtualSpacerHeights } from "../../../@other/fuctions";
 import type { SongWithChildren } from "../../../@types/song-with-children";
 import type { FetchItems as FetchSongs } from "../useFetchItems";
+import useInfiniteScroll from "../useInfiniteScroll";
 import SkeletonRow from "./SkeletonRow";
 
 type SongsTableProps = {
@@ -35,7 +37,6 @@ export default function SongsTable({
   changeCurrentSong,
 }: SongsTableProps) {
   const { rows } = table.getRowModel();
-  const { isFetching, fetchNextPage, hasNextPage, isFetchingNextPage } = query;
 
   // VIRTUALIZATION
   // https://tanstack.com/virtual/latest/docs/framework/react/examples/window
@@ -49,41 +50,19 @@ export default function SongsTable({
       tbodyOffsetRef.current = tbodyRef.current.getBoundingClientRect().top;
   }, []);
 
-  const virtualizer = useWindowVirtualizer({
+  const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
     estimateSize: () => 57,
     overscan: 20,
     scrollMargin: tbodyOffsetRef.current,
   });
 
-  const virtualRows = virtualizer.getVirtualItems();
+  const virtualRows = rowVirtualizer.getVirtualItems();
 
-  const topVirtualRowHeight =
-    virtualRows.length > 0
-      ? virtualRows[0].start - virtualizer.options.scrollMargin
-      : 0;
+  const { topSpacerHeight, bottomSpacerHeight } =
+    getVirtualSpacerHeights(rowVirtualizer);
 
-  const bottomVirtualRowHeight =
-    virtualRows.length > 0
-      ? virtualizer.getTotalSize() -
-        virtualRows[virtualRows.length - 1].end +
-        virtualizer.options.scrollMargin
-      : 0;
-
-  // fetch the next page when the last virtual row becomes visible
-  // https://tanstack.com/virtual/latest/docs/framework/react/examples/infinite-scroll
-  useEffect(() => {
-    const lastItem = virtualRows[virtualRows.length - 1];
-    if (!lastItem) return;
-    if (lastItem.index >= rows.length - 1 && hasNextPage && !isFetchingNextPage)
-      fetchNextPage();
-  }, [
-    hasNextPage,
-    fetchNextPage,
-    rows.length,
-    isFetchingNextPage,
-    virtualRows,
-  ]);
+  useInfiniteScroll(virtualRows, rows.length, query);
 
   return (
     // https://www.npmjs.com/package/react-scroll-sync
@@ -166,8 +145,8 @@ export default function SongsTable({
             >
               <TableBody ref={tbodyRef}>
                 {/* top virtual row */}
-                {topVirtualRowHeight > 0 && (
-                  <tr style={{ height: `${topVirtualRowHeight}px` }} />
+                {topSpacerHeight > 0 && (
+                  <tr style={{ height: `${topSpacerHeight}px` }} />
                 )}
 
                 {/* visible rows */}
@@ -176,7 +155,7 @@ export default function SongsTable({
                   return (
                     <TableRow
                       data-index={virtualRow.index} //needed for dynamic row height measurement
-                      ref={(node) => virtualizer.measureElement(node)} //measure dynamic row height
+                      ref={(node) => rowVirtualizer.measureElement(node)} //measure dynamic row height
                       key={row.id}
                       className={`song-table-row group ${row.original.id === currentSong?.id ? "gradient text-white" : ""} ${
                         row.depth > 0 ? "bg-gray-100 dark:bg-gray-900" : ""
@@ -199,13 +178,13 @@ export default function SongsTable({
                 })}
 
                 {/* bottom virtual row */}
-                {bottomVirtualRowHeight > 0 && (
-                  <tr style={{ height: `${bottomVirtualRowHeight}px` }} />
+                {bottomSpacerHeight > 0 && (
+                  <tr style={{ height: `${bottomSpacerHeight}px` }} />
                 )}
               </TableBody>
 
               {/* skeleton rows */}
-              {isFetching && (
+              {query.hasNextPage && (
                 <TableBody>
                   {Array.from({ length: 5 }).map((_, index) => (
                     <SkeletonRow
