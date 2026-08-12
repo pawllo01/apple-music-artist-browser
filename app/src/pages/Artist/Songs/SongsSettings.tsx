@@ -1,4 +1,5 @@
-import { Button, HR } from "flowbite-react";
+import { HR } from "flowbite-react";
+import ResetButton from "../../../components/ResetButton";
 import { GROUP_BY_ISRC, VA } from "../../constants";
 import DrawerSettings from "../DrawerSettings";
 import { clearSettingsByType, createToggleSwitch } from "../settings-utils";
@@ -63,27 +64,11 @@ export default function SongsSettings({
         Reset options
       </h5>
 
-      <div className="my-2">
-        <Button
-          color="red"
-          size="sm"
-          className="w-full border-s-0!"
-          onClick={resetColumns}
-        >
-          Reset columns
-        </Button>
-      </div>
+      <ResetButton onClick={resetColumns}>Reset columns</ResetButton>
 
-      <div className="my-2">
-        <Button
-          color="red"
-          size="sm"
-          className="w-full border-s-0!"
-          onClick={() => clearSettingsByType("songs")}
-        >
-          Reset everything
-        </Button>
-      </div>
+      <ResetButton onClick={() => clearSettingsByType("songs")}>
+        Reset everything
+      </ResetButton>
     </DrawerSettings>
   );
 }

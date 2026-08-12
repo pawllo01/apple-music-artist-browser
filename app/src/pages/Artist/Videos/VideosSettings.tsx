@@ -1,4 +1,4 @@
-import { Button } from "flowbite-react";
+import ResetButton from "../../../components/ResetButton";
 import DrawerSettings from "../DrawerSettings";
 import { clearSettingsByType, createToggleSwitch } from "../settings-utils";
 import { VideosSettingsType } from "./useVideosSettings";
@@ -54,16 +54,9 @@ export default function VideosSettings({ settings }: VideosSettingsProps) {
         settings.setShowVideoId,
       )}
 
-      <div className="my-2">
-        <Button
-          color="red"
-          size="sm"
-          className="w-full border-s-0!"
-          onClick={() => clearSettingsByType("videos")}
-        >
-          Reset
-        </Button>
-      </div>
+      <ResetButton onClick={() => clearSettingsByType("videos")}>
+        Reset
+      </ResetButton>
     </DrawerSettings>
   );
 }
