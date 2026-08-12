@@ -1,5 +1,7 @@
-import { Outlet } from "react-router";
+import { Outlet, useOutletContext } from "react-router";
+import { FooterHeightContextType } from "./BaseLayout";
 
 export default function ErrorBoundaryLayout() {
-  return <Outlet />;
+  const context = useOutletContext<FooterHeightContextType>();
+  return <Outlet context={context satisfies FooterHeightContextType} />;
 }

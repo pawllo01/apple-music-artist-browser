@@ -5,7 +5,13 @@ import { FaPlay } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { IoMdAlbums } from "react-icons/io";
 import { MdAudiotrack, MdPersonalVideo } from "react-icons/md";
-import { Link, Outlet, useLocation, useParams } from "react-router";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useOutletContext,
+  useParams,
+} from "react-router";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -15,11 +21,13 @@ import Avatar from "../../components/Avatar";
 import LabeledValue from "../../components/LabeledValue";
 import { MarketContext } from "../../context/MarketContext";
 import { RecentArtistsContext } from "../../context/RecentArtistsContext";
+import { FooterHeightContextType } from "../../layouts/BaseLayout";
 import ArtistBioModal from "./ArtistBioModal";
 
 export default function ArtistPage() {
   const { market } = useContext(MarketContext)!;
   const { addRecentArtist } = useContext(RecentArtistsContext)!;
+  const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
 
   const { artistId } = useParams();
   const { state, pathname } = useLocation();
@@ -148,25 +156,27 @@ export default function ArtistPage() {
         </div>
       </div>
 
-      {/* Sections */}
-      <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
-        {sections.map((section, index) => (
-          <Button
-            key={index}
-            as={Link}
-            to={`/artist/${artistId}${section.pathname}`}
-            replace
-            color="alternative"
-            className={`section-btn ${pathname.includes(section.pathname) ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
-            disabled={section.name !== "Songs"} // temp
-          >
-            <section.Icon size={16} />
-            {section.name}
-          </Button>
-        ))}
-      </ButtonGroup>
+      <div style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}>
+        {/* Sections */}
+        <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
+          {sections.map((section, index) => (
+            <Button
+              key={index}
+              as={Link}
+              to={`/artist/${artistId}${section.pathname}`}
+              replace
+              color="alternative"
+              className={`section-btn ${pathname.includes(section.pathname) ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
+              disabled={section.name !== "Songs"} // temp
+            >
+              <section.Icon size={16} />
+              {section.name}
+            </Button>
+          ))}
+        </ButtonGroup>
 
-      <Outlet />
+        <Outlet />
+      </div>
     </section>
   );
 }
