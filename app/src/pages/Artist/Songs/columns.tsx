@@ -1,9 +1,11 @@
 import { Badge } from "flowbite-react";
 import { FaPlay } from "react-icons/fa";
 import { createColumnHelper } from "@tanstack/react-table";
+
 import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
 import type { SongWithChildren } from "../../../@types/song-with-children";
 import { ExpandButton } from "../../../components/ExpandButton";
+import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 
 // docs - https://tanstack.com/table/latest/docs/guide/column-defs
@@ -116,30 +118,18 @@ export function createColumns(
     }),
 
     // artist
-    columnHelper.accessor(
-      (song) => song.attributes.artistName.replace(" & ", ", "),
-      {
-        id: "artist",
-        meta: { className: sizes.FULL },
-        header: "Artist",
-        cell: ({ row }) => (
-          <span>
-            {row.original.relationships.artists.data.map((artist, i) => (
-              <span key={artist.id}>
-                <a
-                  href={artist.attributes?.url}
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  {artist.attributes?.name}
-                </a>
-                {i < row.original.relationships.artists.data.length - 1 && ", "}
-              </span>
-            ))}
-          </span>
-        ),
-      },
-    ),
+    columnHelper.accessor("attributes.artistName", {
+      id: "artist",
+      meta: { className: sizes.FULL },
+      header: "Artist",
+      cell: ({ row }) => (
+        <ArtistListModal
+          type="songs"
+          artistName={row.original.attributes.artistName}
+          artists={row.original.relationships.artists.data}
+        />
+      ),
+    }),
 
     // album
     columnHelper.accessor("attributes.albumName", {

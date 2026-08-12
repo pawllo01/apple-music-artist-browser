@@ -4,6 +4,7 @@ import type { Row } from "@tanstack/react-table";
 
 import type { SongWithChildren } from "../../../@types/song-with-children";
 import CloseButton from "../../../components/CloseButton";
+import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 
 type MusicPlayerProps = {
@@ -81,13 +82,13 @@ export default function MusicPlayer({
               <InfoBadges item={currentSong} />
             </p>
 
-            {/* artist */}
-            <p
-              className="line-clamp-1 text-sm text-gray-500 dark:text-gray-400"
-              title={currentSong.attributes.artistName.replace(" & ", ", ")}
-            >
-              {currentSong.attributes.artistName.replace(" & ", ", ")}
-            </p>
+            {/* artists */}
+            <ArtistListModal
+              type="songs"
+              artistName={currentSong.attributes.artistName}
+              artists={currentSong.relationships.artists.data}
+              className="line-clamp-1! text-sm text-gray-500 dark:text-gray-400"
+            />
           </div>
         </div>
 

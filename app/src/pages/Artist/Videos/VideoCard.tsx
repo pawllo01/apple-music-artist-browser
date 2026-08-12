@@ -1,6 +1,7 @@
 import { HR } from "flowbite-react";
 import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
+import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 import { VideosSettingsType } from "./useVideosSettings";
 import VideoPreviewModal from "./VideoPreviewModal";
@@ -69,20 +70,12 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
 
       {/* artists */}
       {settings.showArtists && (
-        <p className="text-red-500 dark:text-red-400">
-          {video.relationships.artists.data.map((artist, i) => (
-            <span key={artist.id}>
-              <a
-                href={artist.attributes?.url}
-                target="_blank"
-                className="hover:underline"
-              >
-                {artist.attributes?.name}
-              </a>
-              {i < video.relationships.artists.data.length - 1 && ", "}
-            </span>
-          ))}
-        </p>
+        <ArtistListModal
+          type="videos"
+          artistName={video.attributes.artistName}
+          artists={video.relationships.artists.data}
+          className="text-red-500 dark:text-red-400"
+        />
       )}
 
       <div className="text-gray-500 dark:text-gray-400">
