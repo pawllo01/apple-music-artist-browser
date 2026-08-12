@@ -167,7 +167,7 @@ export default function ArtistPage() {
               replace
               color="alternative"
               className={`section-btn ${pathname.includes(section.pathname) ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
-              disabled={section.name !== "Songs"} // temp
+              disabled={section.name === "Albums"} // temp
             >
               <section.Icon size={16} />
               {section.name}
