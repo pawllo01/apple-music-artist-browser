@@ -21,28 +21,26 @@ export async function getArtistItemIds(
 
   if (type === 'albums' || type === 'videos' || (type === 'songs' && fullMode)) {
     IDS.push(...(await fetchIdsByStorefront(type, artistId, appleMusic)));
+    // songs
+    // full mode fetches ALL Apple Music song IDs, including every appearance on compilation albums by Various Artists
+    // this can result in fetching thousands of the same songs (same ISRC), as the same song can appear on hundreds of compilation albums
   }
 
-  // normal mode doesn't fetch thousands of songs from Various Artists albums (compilations)
-  if (type === 'songs' && !fullMode) {
-    // check missing albums
-    if (!marketsWithoutStore.includes(market)) {
+  // fetch song ids from Apple Music albums
+  if (type === 'songs') {
+    const appleMusicAlbumIds = await fetchIdsByStorefront('albums', artistId, appleMusic);
+
+    if (marketsWithoutStore.includes(market) && appleMusicAlbumIds.length > 0) {
+      const songIds = await fetchSongIdsFromAlbums(appleMusicAlbumIds, appleMusic);
+      IDS.push(...songIds);
+    } else {
       const itunesAlbumIds = await fetchIdsByStorefront('albums', artistId, itunes);
-      const appleMusicAlbumIds = await fetchIdsByStorefront('albums', artistId, appleMusic);
       const albumIdsOnlyOnAppleMusic = appleMusicAlbumIds.filter(
         (id) => !itunesAlbumIds.includes(id),
       );
 
       if (albumIdsOnlyOnAppleMusic.length > 0) {
         const songIds = await fetchSongIdsFromAlbums(albumIdsOnlyOnAppleMusic, appleMusic);
-        IDS.push(...songIds);
-      }
-    }
-    // for markets without iTunes Store, fetch only albums from Apple Music
-    else {
-      const appleMusicAlbumIds = await fetchIdsByStorefront('albums', artistId, appleMusic);
-      if (appleMusicAlbumIds.length > 0) {
-        const songIds = await fetchSongIdsFromAlbums(appleMusicAlbumIds, appleMusic);
         IDS.push(...songIds);
       }
     }
