@@ -21,3 +21,12 @@ export function getStorefronts(market: Market) {
 export function normalizeIds(ids: number[]) {
   return [...new Set(ids)].sort((a, b) => b - a).slice(0, 20_000); // 20k limit
 }
+
+export function splitArrayIntoChunks<T>(array: T[], chunkSize: number) {
+  const result = [];
+  for (let i = 0; i < array.length; i += chunkSize) {
+    const chunk = array.slice(i, i + chunkSize);
+    result.push(chunk);
+  }
+  return result;
+}

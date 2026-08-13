@@ -1,7 +1,7 @@
 import marketsWithoutStore from '../static/markets-without-store.json' with { type: 'json' };
 import type { Type } from '../types/item-types.js';
 import type { Market } from '../types/market.js';
-import { getStorefronts, normalizeIds } from './helpers.js';
+import { getStorefronts, normalizeIds, splitArrayIntoChunks } from './helpers.js';
 import { loggedFetch } from './loggedFetch.js';
 
 export async function getArtistItemIds(
@@ -66,18 +66,27 @@ const fetchIdsByStorefront = async (type: Type, artistId: number, storefrontHead
 };
 
 const fetchSongIdsFromAlbums = async (albumIds: number[], storefrontHeader: string) => {
-  const url = `https://uclient-api.itunes.apple.com/WebObjects/MZStorePlatform.woa/wa/lookup?id=${albumIds.join(',')}&version=2&caller=DI14&p=product`;
+  const albumIdChunks = splitArrayIntoChunks(albumIds, 100);
 
-  const data = await fetchAppleJson(`Lookup albums`, url, storefrontHeader);
+  const promises = albumIdChunks.map((ids) => {
+    return fetchAppleJson(
+      'Lookup albums',
+      `https://uclient-api.itunes.apple.com/WebObjects/MZStorePlatform.woa/wa/lookup?id=${ids.join(',')}&version=2&caller=DI14&p=product`,
+      storefrontHeader,
+    );
+  });
+
+  const results = await Promise.all(promises);
 
   const songIds: number[] = [];
 
-  if (data.results) {
-    // get only song ids
-    for (const album of Object.values(data.results) as any) {
-      for (const song of Object.values(album.children) as any) {
-        if (song.kind === 'song') {
-          songIds.push(Number(song.id));
+  for (const data of results) {
+    if (data.results) {
+      for (const album of Object.values(data.results) as any) {
+        for (const item of Object.values(album.children) as any) {
+          if (item.kind === 'song') {
+            songIds.push(Number(item.id));
+          }
         }
       }
     }
