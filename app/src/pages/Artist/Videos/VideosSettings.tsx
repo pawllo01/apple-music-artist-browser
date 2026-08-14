@@ -1,6 +1,7 @@
+import { ToggleSwitch } from "flowbite-react";
+import { clearSettingsByType } from "../../../@other/fuctions";
 import ResetButton from "../../../components/ResetButton";
 import DrawerSettings from "../DrawerSettings";
-import { clearSettingsByType, createToggleSwitch } from "../settings-utils";
 import { VideosSettingsType } from "./useVideosSettings";
 
 type VideosSettingsProps = {
@@ -10,49 +11,69 @@ type VideosSettingsProps = {
 export default function VideosSettings({ settings }: VideosSettingsProps) {
   return (
     <DrawerSettings>
-      {createToggleSwitch(
-        "Crop thumbnails (remove black bars)",
-        settings.cropThumbnails,
-        settings.setCropThumbnails,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Crop thumbnails (remove black bars)"
+        checked={settings.cropThumbnails}
+        onChange={() => settings.setCropThumbnails((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show video numbers",
-        settings.showVideoNumbers,
-        settings.setShowVideoNumbers,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show video numbers"
+        checked={settings.showVideoNumbers}
+        onChange={() => settings.setShowVideoNumbers((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        'Show "From: Album"',
-        settings.showFromAlbum,
-        settings.setShowFromAlbum,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label='Show "From: Album"'
+        checked={settings.showFromAlbum}
+        onChange={() => settings.setShowFromAlbum((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show artists",
-        settings.showArtists,
-        settings.setShowArtists,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show artists"
+        checked={settings.showArtists}
+        onChange={() => settings.setShowArtists((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show genre",
-        settings.showGenre,
-        settings.setShowGenre,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show genre"
+        checked={settings.showGenre}
+        onChange={() => settings.setShowGenre((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show full release date",
-        settings.showFullReleaseDate,
-        settings.setShowFullReleaseDate,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show full release date"
+        checked={settings.showFullReleaseDate}
+        onChange={() => settings.setShowFullReleaseDate((prev) => !prev)}
+      />
 
-      {createToggleSwitch("Show ISRC", settings.showIsrc, settings.setShowIsrc)}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show ISRC"
+        checked={settings.showIsrc}
+        onChange={() => settings.setShowIsrc((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show video ID",
-        settings.showVideoId,
-        settings.setShowVideoId,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show video ID"
+        checked={settings.showVideoId}
+        onChange={() => settings.setShowVideoId((prev) => !prev)}
+      />
 
       <ResetButton onClick={() => clearSettingsByType("videos")}>
         Reset

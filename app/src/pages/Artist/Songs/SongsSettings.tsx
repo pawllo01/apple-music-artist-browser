@@ -1,8 +1,8 @@
-import { HR } from "flowbite-react";
+import { HR, ToggleSwitch } from "flowbite-react";
+import { clearSettingsByType } from "../../../@other/fuctions";
 import ResetButton from "../../../components/ResetButton";
 import { GROUP_BY_ISRC, VA } from "../../constants";
 import DrawerSettings from "../DrawerSettings";
-import { clearSettingsByType, createToggleSwitch } from "../settings-utils";
 import { SongsSettingsType } from "./useSongsSettings";
 
 type SongsSettingsProps = {
@@ -16,48 +16,63 @@ export default function SongsSettings({
 }: SongsSettingsProps) {
   return (
     <DrawerSettings>
-      {createToggleSwitch(
-        GROUP_BY_ISRC,
-        settings.groupSongs,
-        settings.setGroupSongs,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label={GROUP_BY_ISRC}
+        checked={settings.groupSongs}
+        onChange={() => settings.setGroupSongs((prev) => !prev)}
+      />
 
       {/* will be useful for full mode */}
-      {import.meta.env.DEV &&
-        createToggleSwitch(
-          `Include all ${VA} albums`,
-          settings.showAllVariousArtistsAlbums,
-          settings.setShowAllVariousArtistsAlbums,
-        )}
-
-      {createToggleSwitch(
-        "Preserve column sorting",
-        settings.saveSorting,
-        settings.setSaveSorting,
+      {import.meta.env.DEV && (
+        <ToggleSwitch
+          sizing="sm"
+          className="my-3"
+          label={`Include all ${VA} albums`}
+          checked={settings.showAllVariousArtistsAlbums}
+          onChange={() =>
+            settings.setShowAllVariousArtistsAlbums((prev) => !prev)
+          }
+        />
       )}
+
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Preserve column sorting"
+        checked={settings.saveSorting}
+        onChange={() => settings.setSaveSorting((prev) => !prev)}
+      />
 
       <HR className="my-4" />
       <h5 className="mb-3 font-semibold text-gray-500 dark:text-gray-400">
         Display options
       </h5>
 
-      {createToggleSwitch(
-        "Show [Dolby Atmos] badge",
-        settings.showDolbyAtmosBadge,
-        settings.setShowDolbyAtmosBadge,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show [Dolby Atmos] badge"
+        checked={settings.showDolbyAtmosBadge}
+        onChange={() => settings.setShowDolbyAtmosBadge((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Hide Single/EP labels in album names",
-        settings.truncateAlbumNames,
-        settings.setTruncateAlbumNames,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Hide Single/EP labels in album names"
+        checked={settings.truncateAlbumNames}
+        onChange={() => settings.setTruncateAlbumNames((prev) => !prev)}
+      />
 
-      {createToggleSwitch(
-        "Show IDs next to song and album names",
-        settings.showIdsInCells,
-        settings.setShowIdsInCells,
-      )}
+      <ToggleSwitch
+        sizing="sm"
+        className="my-3"
+        label="Show IDs next to song and album names"
+        checked={settings.showIdsInCells}
+        onChange={() => settings.setShowIdsInCells((prev) => !prev)}
+      />
 
       <HR className="my-4" />
       <h5 className="mb-3 font-semibold text-gray-500 dark:text-gray-400">

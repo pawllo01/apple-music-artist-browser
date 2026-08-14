@@ -1,4 +1,6 @@
 import { ReactVirtualizer } from "@tanstack/react-virtual";
+
+import type { Type } from "../@types/item-types";
 import type { Market } from "../@types/market";
 import type { Offer } from "../@types/offer";
 
@@ -69,3 +71,10 @@ export function getOfferFlags(offers: Offer[]) {
     isPurchaseOnly: offers.length === 1 && offers[0].type === "buy",
   };
 }
+
+export const clearSettingsByType = (type: Type) => {
+  Object.keys(localStorage).forEach((key) => {
+    if (key.startsWith(`${type}:`)) localStorage.removeItem(key);
+  });
+  window.location.reload();
+};
