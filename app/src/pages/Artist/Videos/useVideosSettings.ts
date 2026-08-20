@@ -1,6 +1,11 @@
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 export default function useVideosSettings() {
+  const [groupByYear, setGroupByYear] = useLocalStorage(
+    "videos:group-by-year",
+    { enabled: false, sortDescFirst: true },
+  );
+
   const [cropThumbnails, setCropThumbnails] = useLocalStorage(
     "videos:crop-thumbnails",
     true,
@@ -36,6 +41,8 @@ export default function useVideosSettings() {
   );
 
   return {
+    groupByYear,
+    setGroupByYear,
     cropThumbnails,
     setCropThumbnails,
     showVideoNumbers,

@@ -1,4 +1,7 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
+
+import { Badge } from "flowbite-react";
+import { groupBy } from "lodash-es";
 import { useResizeObserver } from "use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
@@ -16,6 +19,14 @@ import VideoCard from "./VideoCard";
 const GAP = 16;
 const MIN_CARD_WIDTH = 280;
 const MAX_CARD_WIDTH = 360; // for single-column layout
+
+type Row = {
+  videos: Video[];
+  startVideoIndex: number;
+  hasTitle: boolean;
+  groupTitle: string;
+  groupVideoCount: number;
+};
 
 type Props = {
   videos: Video[];
@@ -40,8 +51,6 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
     Math.floor((parentWidth + GAP) / (MIN_CARD_WIDTH + GAP)),
   );
 
-  const rowCount = Math.ceil(videos.length / columnCount);
-
   const cardWidth =
     columnCount === 1
       ? MAX_CARD_WIDTH
@@ -58,10 +67,37 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
     (settings.showIsrc ? 20 : 0) /* isrc */ +
     (settings.showVideoId ? 20 : 0); /* video id */
 
+  // rows
+  const rows = useMemo(() => {
+    const groupedVideos = settings.groupByYear.enabled
+      ? groupBy(videos, (v) => v.attributes.releaseDate.slice(0, 4))
+      : { all: videos };
+
+    const groupEntries = Object.entries(groupedVideos);
+
+    if (settings.groupByYear.sortDescFirst) groupEntries.reverse();
+
+    const rows: Row[] = [];
+
+    groupEntries.forEach(([year, videos]) => {
+      for (let i = 0; i < videos.length; i += columnCount) {
+        rows.push({
+          videos: videos.slice(i, i + columnCount),
+          startVideoIndex: i,
+          hasTitle: settings.groupByYear.enabled && i === 0,
+          groupTitle: year,
+          groupVideoCount: videos.length,
+        });
+      }
+    });
+
+    return rows;
+  }, [videos, columnCount, settings.groupByYear]);
+
   // virtualizer
   const rowVirtualizer = useWindowVirtualizer({
-    count: rowCount,
-    estimateSize: () => minCardHeight,
+    count: rows.length,
+    estimateSize: (index) => minCardHeight + (rows[index].hasTitle ? 45 : 0),
     overscan: 2,
     scrollMargin: parentOffsetRef.current,
     gap: GAP,
@@ -73,7 +109,7 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
   const { topSpacerHeight, bottomSpacerHeight } =
     getVirtualSpacerHeights(rowVirtualizer);
 
-  useInfiniteScroll(virtualRows, rowCount, query);
+  useInfiniteScroll(virtualRows, rows.length, query);
 
   // restore scroll position on resize
   useRestoreScrollPosition(parentWidth, columnCount, rowVirtualizer);
@@ -86,30 +122,44 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
             <div style={{ height: `${topSpacerHeight}px` }} />
           )}
 
-          {virtualRows.map((row) => {
-            const start = row.index * columnCount;
-            const rowVideos = videos.slice(start, start + columnCount);
-
+          {virtualRows.map((virtualRow) => {
+            const row = rows[virtualRow.index];
             return (
               <div
-                key={row.key}
-                data-index={row.index}
+                key={virtualRow.key}
+                data-index={virtualRow.index}
                 ref={rowVirtualizer.measureElement}
-                className="grid justify-center"
-                style={{
-                  gridTemplateColumns: `repeat(${columnCount}, minmax(0, ${cardWidth}px))`,
-                  columnGap: `${GAP}px`,
-                  marginBottom: `${GAP}px`,
-                }}
               >
-                {rowVideos.map((video, index) => (
-                  <VideoCard
-                    key={video.id}
-                    video={video}
-                    index={start + index}
-                    settings={settings}
-                  />
-                ))}
+                {/* row title */}
+                {row.hasTitle && (
+                  <h3 className="mb-4 flex items-center gap-x-1.5 border-b border-b-gray-200 pb-1 dark:border-b-gray-700">
+                    <span className="text-2xl leading-none font-bold">
+                      {row.groupTitle}
+                    </span>
+                    <Badge size="sm" color="gray" className="bg-gray-200">
+                      {row.groupVideoCount}
+                    </Badge>
+                  </h3>
+                )}
+
+                {/* row videos */}
+                <div
+                  className="grid justify-center"
+                  style={{
+                    gridTemplateColumns: `repeat(${columnCount}, minmax(0, ${cardWidth}px))`,
+                    columnGap: `${GAP}px`,
+                    marginBottom: `${GAP}px`,
+                  }}
+                >
+                  {row.videos.map((video, index) => (
+                    <VideoCard
+                      key={video.id}
+                      video={video}
+                      index={row.startVideoIndex + index}
+                      settings={settings}
+                    />
+                  ))}
+                </div>
               </div>
             );
           })}
