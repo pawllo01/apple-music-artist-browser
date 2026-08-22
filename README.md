@@ -1,4 +1,4 @@
-### https://apple-music-artist-browser.vercel.app
+### https://artist-browser.vercel.app
 
 # <img src="./app/public/logo.svg" width=32 style="vertical-align:sub;" /> Artist Browser
 
