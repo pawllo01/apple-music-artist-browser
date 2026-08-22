@@ -6,7 +6,7 @@ Artist Browser is a web application built for music enthusiasts who want to expl
 
 Unlike the official Apple Music app, which only displays a limited selection of Top Songs, Artist Browser lets you explore **every available track** by an artist. All songs are presented in a customizable table where you can sort and filter tracks to quickly find specific releases or songs. You can also listen to song previews and view detailed release information.
 
-![App preview](app/public/example-light.png)
+![App preview](preview.png)
 
 ## 🧰 Installation (Run locally)
 
