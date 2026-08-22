@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { Alert } from "flowbite-react";
+import { Alert, Carousel, ThemeProvider, useThemeMode } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import { useDebounce } from "use-debounce";
@@ -18,6 +18,7 @@ import ArtistResult, { ArtistResultSkeleton } from "./ArtistResult";
 export default function HomePage() {
   const { market } = useContext(MarketContext)!;
   const { recentArtists } = useContext(RecentArtistsContext)!;
+  const { computedMode } = useThemeMode();
 
   const [inputValue, setInputValue] = useState("");
   const [debouncedInputValue] = useDebounce(
@@ -143,17 +144,35 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Features */}
+        {/* Screenshots & Features */}
         {!isSearching && !showRecentArtists && (
           <>
-            <img
-              src="/example-light.png"
-              className="relative mt-6 w-full rounded-2xl select-none dark:hidden"
-            />
-            <img
-              src="/example-dark.png"
-              className="relative mt-6 hidden w-full rounded-2xl select-none dark:block"
-            />
+            <ThemeProvider
+              theme={{
+                carousel: {
+                  control: {
+                    base: "bg-black/40 group-hover:bg-black/50 group-focus:ring-transparent dark:bg-white/40 dark:group-hover:bg-white/50 dark:group-focus:ring-transparent",
+                    icon: "dark:text-white",
+                  },
+                },
+              }}
+            >
+              <Carousel
+                indicators={false}
+                pauseOnHover={true}
+                slideInterval={4000}
+                className="mt-6 overflow-hidden rounded-2xl"
+              >
+                <img
+                  src={`/screenshots/songs-${computedMode === "dark" ? "dark" : "light"}.png`}
+                  className="relative select-none"
+                />
+                <img
+                  src={`/screenshots/videos-${computedMode === "dark" ? "dark" : "light"}.png`}
+                  className="relative select-none"
+                />
+              </Carousel>
+            </ThemeProvider>
 
             <div className="mt-4 hidden md:flex md:flex-wrap md:items-center md:justify-center md:gap-2">
               {[
