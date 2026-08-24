@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { HR } from "flowbite-react";
+import { FaPlay } from "react-icons/fa";
+
 import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
+import { CurrentVideoContext } from "../../../context/CurrentVideoContext";
 import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 import { VideosSettingsType } from "./useVideosSettings";
-import VideoPreviewModal from "./VideoPreviewModal";
 
 type VideoCardProps = {
   video: Video;
@@ -13,6 +16,8 @@ type VideoCardProps = {
 };
 
 export default function VideoCard({ video, index, settings }: VideoCardProps) {
+  const { setCurrentVideo } = useContext(CurrentVideoContext)!;
+
   const album = video.relationships.albums.data[0];
 
   return (
@@ -31,7 +36,13 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
         </a>
 
         {/* preview */}
-        <VideoPreviewModal video={video} />
+        <button
+          className="absolute bottom-3 left-3 rounded-full bg-black/50 transition hover:scale-110 lg:opacity-0 lg:group-hover:opacity-100"
+          title="Watch Preview"
+          onClick={() => setCurrentVideo(video)}
+        >
+          <FaPlay className="m-3 size-3 text-white" />
+        </button>
 
         {/* duration */}
         {video.attributes.durationInMillis && (

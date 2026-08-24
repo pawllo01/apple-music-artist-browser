@@ -8,6 +8,7 @@ import { getOfferFlags } from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
+import { CurrentVideoContext } from "../../../context/CurrentVideoContext";
 import { MarketContext } from "../../../context/MarketContext";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { INFO_BADGES } from "../../constants";
@@ -19,6 +20,7 @@ import GridVirtualizer from "./GridVirtualizer";
 import { sortVideosByOption } from "./sortVideosByOption";
 import SortVideosDropdown, { type Sort } from "./SortVideosDropdown";
 import useVideosSettings from "./useVideosSettings";
+import VideoPreviewModal from "./VideoPreviewModal";
 import VideosSettings from "./VideosSettings";
 
 type VideoTab = "all" | "streaming_only" | "purchase_only";
@@ -32,6 +34,8 @@ const tabNames: Record<VideoTab, React.ReactNode> = {
 export default function VideosPage() {
   const { artistId } = useParams();
   const { market } = useContext(MarketContext)!;
+
+  const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
 
   const [activeTab, setActiveTab] = useState<VideoTab>("all");
 
@@ -157,14 +161,19 @@ export default function VideosPage() {
       </SearchBar>
 
       <div className="my-4">
-        {/* video cards */}
-        {filteredVideos.length > 0 && (
-          <GridVirtualizer
-            videos={filteredVideos}
-            settings={settings}
-            query={query}
-          />
-        )}
+        <CurrentVideoContext value={{ currentVideo, setCurrentVideo }}>
+          {/* video cards */}
+          {filteredVideos.length > 0 && (
+            <GridVirtualizer
+              videos={filteredVideos}
+              settings={settings}
+              query={query}
+            />
+          )}
+
+          {/* video preview modal */}
+          <VideoPreviewModal />
+        </CurrentVideoContext>
 
         {/* no results */}
         {filteredVideos.length === 0 && (
