@@ -55,8 +55,8 @@ export default function VideosSettings({ settings }: VideosSettingsProps) {
         sizing="sm"
         className="my-3"
         label="Show video numbers"
-        checked={settings.showVideoNumbers}
-        onChange={() => settings.setShowVideoNumbers((prev) => !prev)}
+        checked={settings.showNumbering}
+        onChange={() => settings.setShowNumbering((prev) => !prev)}
       />
 
       <ToggleSwitch

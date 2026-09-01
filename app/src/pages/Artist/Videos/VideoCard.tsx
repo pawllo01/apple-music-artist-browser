@@ -55,7 +55,7 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
       {/* title & info badges */}
       <div className="mt-0.5 flex items-start justify-between gap-1">
         <p className="text-base font-medium">
-          {settings.showVideoNumbers && `${index + 1}. `}
+          {settings.showNumbering && `${index + 1}. `}
           {video.attributes.name}
         </p>
         <p className="mt-0.5 flex shrink-0 gap-1">

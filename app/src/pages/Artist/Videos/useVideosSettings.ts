@@ -11,8 +11,8 @@ export default function useVideosSettings() {
     true,
   );
 
-  const [showVideoNumbers, setShowVideoNumbers] = useLocalStorage(
-    "videos:show-video-numbers",
+  const [showNumbering, setShowNumbering] = useLocalStorage(
+    "videos:show-numbering",
     false,
   );
 
@@ -45,8 +45,8 @@ export default function useVideosSettings() {
     setGroupByYear,
     cropThumbnails,
     setCropThumbnails,
-    showVideoNumbers,
-    setShowVideoNumbers,
+    showNumbering,
+    setShowNumbering,
     showFromAlbum,
     setShowFromAlbum,
     showArtists,
