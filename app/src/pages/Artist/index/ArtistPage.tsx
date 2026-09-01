@@ -15,13 +15,13 @@ import {
 
 import { useQuery } from "@tanstack/react-query";
 
-import { apiFetch } from "../../@other/fuctions";
-import { Artist } from "../../@types/artist";
-import Avatar from "../../components/Avatar";
-import LabeledValue from "../../components/LabeledValue";
-import { MarketContext } from "../../context/MarketContext";
-import { RecentArtistsContext } from "../../context/RecentArtistsContext";
-import { FooterHeightContextType } from "../../layouts/BaseLayout";
+import { apiFetch } from "../../../@other/fuctions";
+import { Artist } from "../../../@types/artist";
+import Avatar from "../../../components/Avatar";
+import LabeledValue from "../../../components/LabeledValue";
+import { MarketContext } from "../../../context/MarketContext";
+import { RecentArtistsContext } from "../../../context/RecentArtistsContext";
+import { FooterHeightContextType } from "../../../layouts/BaseLayout";
 import ArtistBioModal from "./ArtistBioModal";
 
 export default function ArtistPage() {

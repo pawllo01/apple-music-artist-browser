@@ -16,7 +16,7 @@ import RecentArtistsProvider from "./context/RecentArtistsProvider.tsx";
 import BaseLayout from "./layouts/BaseLayout.tsx";
 import ErrorBoundaryLayout from "./layouts/ErrorBoundaryLayout.tsx";
 import AlbumsPage from "./pages/Artist/Albums/AlbumsPage.tsx";
-import ArtistPage from "./pages/Artist/ArtistPage.tsx";
+import ArtistPage from "./pages/Artist/index/ArtistPage.tsx";
 import SongsPage from "./pages/Artist/Songs/SongsPage.tsx";
 import VideosPage from "./pages/Artist/Videos/VideosPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
