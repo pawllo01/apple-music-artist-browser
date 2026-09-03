@@ -78,17 +78,17 @@ export default function VideosSettings({ settings }: VideosSettingsProps) {
       <ToggleSwitch
         sizing="sm"
         className="my-3"
-        label="Show genre"
-        checked={settings.showGenre}
-        onChange={() => settings.setShowGenre((prev) => !prev)}
+        label="Show full release date"
+        checked={settings.showFullReleaseDate}
+        onChange={() => settings.setShowFullReleaseDate((prev) => !prev)}
       />
 
       <ToggleSwitch
         sizing="sm"
         className="my-3"
-        label="Show full release date"
-        checked={settings.showFullReleaseDate}
-        onChange={() => settings.setShowFullReleaseDate((prev) => !prev)}
+        label="Show genre"
+        checked={settings.showGenre}
+        onChange={() => settings.setShowGenre((prev) => !prev)}
       />
 
       <ToggleSwitch

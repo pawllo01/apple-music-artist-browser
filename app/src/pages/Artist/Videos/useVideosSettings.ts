@@ -26,12 +26,12 @@ export default function useVideosSettings() {
     true,
   );
 
-  const [showGenre, setShowGenre] = useLocalStorage("videos:show-genre", true);
-
   const [showFullReleaseDate, setShowFullReleaseDate] = useLocalStorage(
     "videos:show-full-release-date",
     false,
   );
+
+  const [showGenre, setShowGenre] = useLocalStorage("videos:show-genre", true);
 
   const [showIsrc, setShowIsrc] = useLocalStorage("videos:show-isrc", false);
 
@@ -51,10 +51,10 @@ export default function useVideosSettings() {
     setShowFromAlbum,
     showArtists,
     setShowArtists,
-    showGenre,
-    setShowGenre,
     showFullReleaseDate,
     setShowFullReleaseDate,
+    showGenre,
+    setShowGenre,
     showIsrc,
     setShowIsrc,
     showVideoId,
