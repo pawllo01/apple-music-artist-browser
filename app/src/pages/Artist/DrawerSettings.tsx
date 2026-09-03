@@ -29,7 +29,7 @@ export default function DrawerSettings({ children }: DrawerSettingsProps) {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         position="right"
-        className="max-sm:w-70"
+        className="max-sm:w-70 dark:bg-gray-600"
       >
         <DrawerHeader title="Settings" titleIcon={() => <></>} />
 
