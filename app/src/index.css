@@ -83,10 +83,6 @@ input {
   @apply dark:text-white!;
 }
 
-.section-btn {
-  @apply flex-1 gap-1 px-2 capitalize first:rounded-s-full last:rounded-e-full;
-}
-
 .dropdown {
   @apply max-h-[calc(100dvh-5rem)] max-w-60 min-w-40! overflow-auto;
 }

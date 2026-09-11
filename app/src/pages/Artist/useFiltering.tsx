@@ -1,22 +1,31 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
-import { Button, ButtonGroup } from "flowbite-react";
 import Fuse, { type FuseOptionKey } from "fuse.js";
 import { useParams } from "react-router";
 
 import { getOfferFlags } from "../../@other/fuctions";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
+import TabSelector from "../../components/TabSelector";
 import { MarketContext } from "../../context/MarketContext";
 import { INFO_BADGES } from "../constants";
 
-type Tab = "all" | "streaming_only" | "purchase_only";
+const TABS = [
+  {
+    value: "all",
+    label: "All",
+  },
+  {
+    value: "streaming_only",
+    label: <>{INFO_BADGES.streaming_only} Streaming only</>,
+  },
+  {
+    value: "purchase_only",
+    label: <>{INFO_BADGES.purchase_only} Purchase only</>,
+  },
+] as const;
 
-const tabNames: Record<Tab, React.ReactNode> = {
-  all: "All",
-  streaming_only: <>{INFO_BADGES.streaming_only}Streaming only</>,
-  purchase_only: <>{INFO_BADGES.purchase_only}Purchase only</>,
-};
+type Tab = (typeof TABS)[number]["value"];
 
 export default function useFiltering<T extends Album | Video>(
   items: T[],
@@ -66,22 +75,20 @@ export default function useFiltering<T extends Album | Video>(
 
   const tabs = (itemsByTab.streaming_only.length > 0 ||
     itemsByTab.purchase_only.length > 0) && (
-    <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
-      {(Object.keys(itemsByTab) as Tab[]).map((key) => {
-        const count = itemsByTab[key].length;
-        if (count === 0) return;
-        return (
-          <Button
-            key={key}
-            color="alternative"
-            className={`section-btn ${key === activeTab ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
-            onClick={() => setActiveTab(key)}
-          >
-            {tabNames[key]} ({count})
-          </Button>
-        );
-      })}
-    </ButtonGroup>
+    <TabSelector
+      options={TABS.filter(({ value }) => itemsByTab[value].length > 0).map(
+        ({ value, label }) => ({
+          value,
+          label: (
+            <>
+              {label}&nbsp;({itemsByTab[value].length})
+            </>
+          ),
+        }),
+      )}
+      value={activeTab}
+      onChange={(value) => setActiveTab(value)}
+    />
   );
 
   return {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Button, ButtonGroup } from "flowbite-react";
+
 import {
   type ExpandedState,
   getCoreRowModel,
@@ -13,6 +13,7 @@ import {
 
 import type { SongWithChildren } from "../../../@types/song-with-children";
 import ScrollToTop from "../../../components/ScrollToTop";
+import TabSelector from "../../../components/TabSelector";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { DEFAULT_COLUMNS } from "../../constants";
 import AsyncState from "../AsyncState";
@@ -193,20 +194,17 @@ export default function SongsPage() {
       error={error}
       itemsLength={songs.length}
     >
-      {/* song tabs */}
+      {/* tabs */}
       {songsByTab.mixed.length > 0 && (
-        <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
-          {(Object.keys(songsByTab) as SongTab[]).map((key) => (
-            <Button
-              key={key}
-              color="alternative"
-              className={`section-btn ${key === activeTab ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
-              onClick={() => setActiveTab(key)}
-            >
-              {key} ({songsByTab[key].length})
-            </Button>
-          ))}
-        </ButtonGroup>
+        <TabSelector
+          options={[
+            { value: "main", label: `Main (${songsByTab.main.length})` },
+            { value: "mixed", label: `Mixed (${songsByTab.mixed.length})` },
+            { value: "all", label: `All (${songsByTab.all.length})` },
+          ]}
+          value={activeTab}
+          onChange={(value) => setActiveTab(value)}
+        />
       )}
 
       {/* search bar + settings */}

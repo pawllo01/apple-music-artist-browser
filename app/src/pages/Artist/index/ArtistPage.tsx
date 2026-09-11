@@ -1,14 +1,14 @@
 import { useContext, useEffect } from "react";
 
-import { Alert, Button, ButtonGroup } from "flowbite-react";
+import { Alert, Button } from "flowbite-react";
 import { FaPlay } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
 import { IoMdAlbums } from "react-icons/io";
 import { MdAudiotrack, MdPersonalVideo } from "react-icons/md";
 import {
-  Link,
   Outlet,
   useLocation,
+  useNavigate,
   useOutletContext,
   useParams,
 } from "react-router";
@@ -19,16 +19,24 @@ import { apiFetch } from "../../../@other/fuctions";
 import { Artist } from "../../../@types/artist";
 import Avatar from "../../../components/Avatar";
 import LabeledValue from "../../../components/LabeledValue";
+import TabSelector from "../../../components/TabSelector";
 import { MarketContext } from "../../../context/MarketContext";
 import { RecentArtistsContext } from "../../../context/RecentArtistsContext";
 import { FooterHeightContextType } from "../../../layouts/BaseLayout";
 import ArtistBioModal from "./ArtistBioModal";
+
+const sections = [
+  { value: "songs", Icon: MdAudiotrack },
+  { value: "videos", Icon: MdPersonalVideo },
+  { value: "albums", Icon: IoMdAlbums },
+];
 
 export default function ArtistPage() {
   const { market } = useContext(MarketContext)!;
   const { addRecentArtist } = useContext(RecentArtistsContext)!;
   const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
 
+  const navigate = useNavigate();
   const { artistId } = useParams();
   const { state, pathname } = useLocation();
   const stateArtist = state?.artist as Artist | undefined;
@@ -75,26 +83,6 @@ export default function ArtistPage() {
       </section>
     );
 
-  const artistType = artist.attributes.isGroup ? "Group" : "Artist";
-
-  const sections = [
-    {
-      name: "Songs",
-      pathname: "/songs",
-      Icon: MdAudiotrack,
-    },
-    {
-      name: "Videos",
-      pathname: "/videos",
-      Icon: MdPersonalVideo,
-    },
-    {
-      name: "Albums",
-      pathname: "/albums",
-      Icon: IoMdAlbums,
-    },
-  ];
-
   return (
     <section className="flex-1 px-4 pt-6">
       {/* Artist info */}
@@ -120,7 +108,7 @@ export default function ArtistPage() {
           {/* Born or Formed */}
           {artist.attributes.bornOrFormed && (
             <LabeledValue
-              label={artistType === "Artist" ? "Born" : "Formed"}
+              label={artist.attributes.isGroup ? "Formed" : "Born"}
               value={artist.attributes.bornOrFormed}
             />
           )}
@@ -147,7 +135,7 @@ export default function ArtistPage() {
               href={`https://music.apple.com/${market}/artist/${artistId}`}
               target="_blank"
               color="red"
-              className="gradient rounded-full sm:w-fit"
+              className="gradient rounded-full max-sm:h-11 sm:w-fit"
             >
               <FaPlay className="me-2" />
               Listen on Apple Music
@@ -158,23 +146,26 @@ export default function ArtistPage() {
 
       <div style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}>
         {/* Sections */}
-        <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
-          {sections.map((section, index) => (
-            <Button
-              key={index}
-              as={Link}
-              to={`/artist/${artistId}${section.pathname}`}
-              replace
-              color="alternative"
-              className={`section-btn ${pathname.includes(section.pathname) ? "bg-gray-600! text-white! dark:bg-gray-900!" : ""}`}
-              disabled={section.name === "Albums"} // temp
-            >
-              <section.Icon size={16} />
-              {section.name}
-            </Button>
-          ))}
-        </ButtonGroup>
+        <TabSelector
+          options={sections.map(({ value, Icon }) => ({
+            value,
+            label: (
+              <span className="flex items-center gap-1 capitalize">
+                <Icon size={16} />
+                {value}
+              </span>
+            ),
+          }))}
+          value={
+            sections.find((section) => pathname.includes(section.value))
+              ?.value ?? "songs"
+          }
+          onChange={(value) => {
+            navigate(`/artist/${artistId}/${value}`, { replace: true });
+          }}
+        />
 
+        {/* Section */}
         <Outlet />
       </div>
     </section>
