@@ -168,6 +168,10 @@ export default function HomePage() {
                   className="relative select-none"
                 />
                 <img
+                  src={`/screenshots/albums-${computedMode === "dark" ? "dark" : "light"}.png`}
+                  className="relative select-none"
+                />
+                <img
                   src={`/screenshots/videos-${computedMode === "dark" ? "dark" : "light"}.png`}
                   className="relative select-none"
                 />
