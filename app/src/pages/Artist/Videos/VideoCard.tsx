@@ -58,9 +58,10 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
           {settings.showNumbering && `${index + 1}. `}
           {video.attributes.name}
         </p>
-        <p className="mt-0.5 flex shrink-0 gap-1">
+
+        <div className="mt-0.5 flex shrink-0 gap-1">
           <InfoBadges item={video} />
-        </p>
+        </div>
       </div>
 
       {/* from album */}
@@ -99,12 +100,7 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
           </span>
 
           {/* genre */}
-          {settings.showGenre && (
-            <>
-              {video.attributes.releaseDate && " • "}
-              {video.attributes.genreNames.join(", ")}
-            </>
-          )}
+          {settings.showGenre && ` • ${video.attributes.genreNames[0]}`}
         </p>
 
         {/* horizontal line */}

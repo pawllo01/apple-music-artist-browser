@@ -27,8 +27,8 @@ import ArtistBioModal from "./ArtistBioModal";
 
 const sections = [
   { value: "songs", Icon: MdAudiotrack },
-  { value: "videos", Icon: MdPersonalVideo },
   { value: "albums", Icon: IoMdAlbums },
+  { value: "videos", Icon: MdPersonalVideo },
 ];
 
 export default function ArtistPage() {
@@ -117,7 +117,7 @@ export default function ArtistPage() {
           {artist.attributes.genreNames.length > 0 && (
             <LabeledValue
               label="Genre"
-              value={artist.attributes.genreNames.join(", ")}
+              value={artist.attributes.genreNames[0]}
             />
           )}
 

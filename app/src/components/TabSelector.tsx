@@ -17,7 +17,7 @@ export default function TabSelector<T extends string>({
   onChange,
 }: TabSelectorProps<T>) {
   return (
-    <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full">
+    <ButtonGroup className="mt-4 mb-0.5 w-full rounded-full max-md:grid max-md:grid-cols-3 max-md:gap-y-1 max-md:shadow-none">
       {options.map((option) => {
         const active = option.value === value;
         return (

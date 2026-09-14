@@ -4,6 +4,7 @@ import Fuse, { type FuseOptionKey } from "fuse.js";
 import { useParams } from "react-router";
 
 import { getOfferFlags } from "../../@other/fuctions";
+import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
 import TabSelector from "../../components/TabSelector";
@@ -14,6 +15,14 @@ const TABS = [
   {
     value: "all",
     label: "All",
+  },
+  {
+    value: "albums",
+    label: "Albums",
+  },
+  {
+    value: "singles",
+    label: "Singles & EPs",
   },
   {
     value: "streaming_only",
@@ -42,19 +51,35 @@ export default function useFiltering<T extends Album | Video>(
   }, [artistId, market]);
 
   const itemsByTab = useMemo(() => {
+    const hasItunesStore = !marketsWithoutStore.includes(market);
+
     return items.reduce<Record<Tab, T[]>>(
       (acc, item) => {
-        const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
-          item.attributes.offers,
-        );
-
         acc.all.push(item);
-        if (isStreamingOnly) acc.streaming_only.push(item);
-        if (isPurchaseOnly) acc.purchase_only.push(item);
+
+        if (hasItunesStore) {
+          const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
+            item.attributes.offers,
+          );
+          if (isStreamingOnly) acc.streaming_only.push(item);
+          if (isPurchaseOnly) acc.purchase_only.push(item);
+        }
+
+        if (item.type === "albums") {
+          if (/ (Single|EP)$/.test(item.attributes.name))
+            acc.singles.push(item);
+          else acc.albums.push(item);
+        }
 
         return acc;
       },
-      { all: [], streaming_only: [], purchase_only: [] },
+      {
+        all: [],
+        albums: [],
+        singles: [],
+        streaming_only: [],
+        purchase_only: [],
+      },
     );
   }, [items]);
 
@@ -73,8 +98,10 @@ export default function useFiltering<T extends Album | Video>(
     .search(globalFilter.trim())
     .map((fuseResult) => fuseResult.item);
 
-  const tabs = (itemsByTab.streaming_only.length > 0 ||
-    itemsByTab.purchase_only.length > 0) && (
+  const hasMultipleTabs =
+    Object.values(itemsByTab).filter((items) => items.length > 0).length >= 2;
+
+  const tabs = hasMultipleTabs && (
     <TabSelector
       options={TABS.filter(({ value }) => itemsByTab[value].length > 0).map(
         ({ value, label }) => ({
