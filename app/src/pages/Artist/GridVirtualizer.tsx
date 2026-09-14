@@ -5,36 +5,48 @@ import { groupBy } from "lodash-es";
 import { useResizeObserver } from "use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { getVirtualSpacerHeights } from "../../../@other/fuctions";
-import type { Video } from "../../../@types/video";
-import { FetchItems as FetchVideos } from "../useFetchItems";
-import useInfiniteScroll from "../useInfiniteScroll";
-import useRestoreScrollPosition from "./useRestoreScrollPosition";
-import type { VideosSettingsType } from "./useVideosSettings";
-import VideoCard from "./VideoCard";
+import { getVirtualSpacerHeights } from "../../@other/fuctions";
+import type { Album } from "../../@types/album";
+import type { Video } from "../../@types/video";
+import type { FetchItems } from "./useFetchItems";
+import useInfiniteScroll from "./useInfiniteScroll";
+import useRestoreScrollPosition from "./Videos/useRestoreScrollPosition";
 
 // grid virtualization example
 // https://tanstack.com/virtual/latest/docs/framework/react/examples/dynamic
 
 const GAP = 16;
-const MIN_CARD_WIDTH = 280;
-const MAX_CARD_WIDTH = 360; // for single-column layout
 
-type Row = {
-  videos: Video[];
-  startVideoIndex: number;
+type Row<T extends Album | Video> = {
+  items: T[];
+  startItemIndex: number;
   hasTitle: boolean;
   groupTitle: string;
-  groupVideoCount: number;
+  groupItemCount: number;
 };
 
-type Props = {
-  videos: Video[];
-  settings: VideosSettingsType;
-  query: FetchVideos;
+type GridVirtualizerProps<T extends Album | Video> = {
+  items: T[];
+  groupByYear: {
+    enabled: boolean;
+    sortDescFirst: boolean;
+  };
+  query: FetchItems;
+  minCardWidth: number;
+  maxSingleColumnCardWidth: number;
+  getCardHeight: (width: number) => number;
+  renderItem: (item: T, index: number) => React.ReactNode;
 };
 
-export default function GridVirtualizer({ videos, settings, query }: Props) {
+export default function GridVirtualizer<T extends Album | Video>({
+  items,
+  groupByYear,
+  query,
+  minCardWidth,
+  maxSingleColumnCardWidth,
+  getCardHeight,
+  renderItem,
+}: GridVirtualizerProps<T>) {
   const parentRef = useRef<HTMLDivElement | null>(null);
   const parentOffsetRef = useRef(0);
   const { width: parentWidth = 0 } = useResizeObserver<HTMLDivElement>({
@@ -48,56 +60,46 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
   // calculations
   const columnCount = Math.max(
     1,
-    Math.floor((parentWidth + GAP) / (MIN_CARD_WIDTH + GAP)),
+    Math.floor((parentWidth + GAP) / (minCardWidth + GAP)),
   );
 
   const cardWidth =
     columnCount === 1
-      ? MAX_CARD_WIDTH
+      ? maxSingleColumnCardWidth
       : (parentWidth - (columnCount - 1) * GAP) / columnCount;
-
-  const thumbnailHeight = cardWidth * (9 / 16); // aspect-video
-
-  const minCardHeight =
-    thumbnailHeight /* thumbnail */ +
-    26 /* title + margin */ +
-    20 /* release date */ +
-    (settings.showArtists ? 20 : 0) /* artists */ +
-    (settings.showIsrc || settings.showVideoId ? 13 : 0) /* horizontal line */ +
-    (settings.showIsrc ? 20 : 0) /* isrc */ +
-    (settings.showVideoId ? 20 : 0); /* video id */
 
   // rows
   const rows = useMemo(() => {
-    const groupedVideos = settings.groupByYear.enabled
-      ? groupBy(videos, (v) => v.attributes.releaseDate.slice(0, 4))
-      : { all: videos };
+    const groupedItems = groupByYear.enabled
+      ? groupBy(items, (item) => item.attributes.releaseDate.slice(0, 4))
+      : { all: items };
 
-    const groupEntries = Object.entries(groupedVideos);
+    const groupEntries = Object.entries(groupedItems);
 
-    if (settings.groupByYear.sortDescFirst) groupEntries.reverse();
+    if (groupByYear.sortDescFirst) groupEntries.reverse();
 
-    const rows: Row[] = [];
+    const rows: Row<T>[] = [];
 
-    groupEntries.forEach(([year, videos]) => {
-      for (let i = 0; i < videos.length; i += columnCount) {
+    groupEntries.forEach(([year, items]) => {
+      for (let i = 0; i < items.length; i += columnCount) {
         rows.push({
-          videos: videos.slice(i, i + columnCount),
-          startVideoIndex: i,
-          hasTitle: settings.groupByYear.enabled && i === 0,
+          items: items.slice(i, i + columnCount),
+          startItemIndex: i,
+          hasTitle: groupByYear.enabled && i === 0,
           groupTitle: year,
-          groupVideoCount: videos.length,
+          groupItemCount: items.length,
         });
       }
     });
 
     return rows;
-  }, [videos, columnCount, settings.groupByYear]);
+  }, [items, columnCount, groupByYear]);
 
   // virtualizer
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
-    estimateSize: (index) => minCardHeight + (rows[index].hasTitle ? 45 : 0),
+    estimateSize: (index) =>
+      getCardHeight(cardWidth) + (rows[index].hasTitle ? 45 : 0),
     overscan: 2,
     scrollMargin: parentOffsetRef.current,
     gap: GAP,
@@ -137,12 +139,12 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
                       {row.groupTitle}
                     </span>
                     <Badge size="sm" color="gray" className="bg-gray-200">
-                      {row.groupVideoCount}
+                      {row.groupItemCount}
                     </Badge>
                   </h3>
                 )}
 
-                {/* row videos */}
+                {/* row items */}
                 <div
                   className="grid justify-center"
                   style={{
@@ -151,14 +153,9 @@ export default function GridVirtualizer({ videos, settings, query }: Props) {
                     marginBottom: `${GAP}px`,
                   }}
                 >
-                  {row.videos.map((video, index) => (
-                    <VideoCard
-                      key={video.id}
-                      video={video}
-                      index={row.startVideoIndex + index}
-                      settings={settings}
-                    />
-                  ))}
+                  {row.items.map((item, index) =>
+                    renderItem(item, row.startItemIndex + index),
+                  )}
                 </div>
               </div>
             );

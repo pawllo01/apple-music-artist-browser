@@ -1,18 +1,19 @@
 import { useMemo, useState } from "react";
-import { Video } from "../../../@types/video";
+import type { Video } from "../../../@types/video";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
 import { CurrentVideoContext } from "../../../context/CurrentVideoContext";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import AsyncState from "../AsyncState";
 import ClearFilter from "../ClearFilter";
+import GridVirtualizer from "../GridVirtualizer";
 import SearchBar from "../SearchBar";
 import { sortItemsByOption } from "../sortItemsByOption";
 import useFetchItems from "../useFetchItems";
 import useFiltering from "../useFiltering";
-import GridVirtualizer from "./GridVirtualizer";
 import SortVideosDropdown, { type Sort } from "./SortVideosDropdown";
 import useVideosSettings from "./useVideosSettings";
+import VideoCard from "./VideoCard";
 import VideoPreviewModal from "./VideoPreviewModal";
 import VideosSettings from "./VideosSettings";
 
@@ -96,9 +97,30 @@ export default function VideosPage() {
           {/* video cards */}
           {filteredVideos.length > 0 && (
             <GridVirtualizer
-              videos={filteredVideos}
-              settings={settings}
+              items={filteredVideos}
+              groupByYear={settings.groupByYear}
               query={query}
+              minCardWidth={280}
+              maxSingleColumnCardWidth={360}
+              getCardHeight={(width) =>
+                /* thumbnail (16:9) */ width * (9 / 16) +
+                /* title + margin */ 26 +
+                /* release date */ 20 +
+                /* artists */ (settings.showArtists ? 20 : 0) +
+                /* horizontal line */ (settings.showIsrc || settings.showVideoId
+                  ? 13
+                  : 0) +
+                /* isrc */ (settings.showIsrc ? 20 : 0) +
+                /* video id */ (settings.showVideoId ? 20 : 0)
+              }
+              renderItem={(video, index) => (
+                <VideoCard
+                  key={video.id}
+                  video={video}
+                  index={index}
+                  settings={settings}
+                />
+              )}
             />
           )}
 
