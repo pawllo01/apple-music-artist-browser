@@ -20,7 +20,7 @@ type Props = {
   setSort: React.Dispatch<React.SetStateAction<Sort>>;
 };
 
-export default function SortVideosDropdown({ sort, setSort }: Props) {
+export default function SortItemsDropdown({ sort, setSort }: Props) {
   return (
     <Dropdown
       className="dropdown"

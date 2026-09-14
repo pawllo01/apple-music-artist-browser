@@ -9,9 +9,9 @@ import ClearFilter from "../ClearFilter";
 import GridVirtualizer from "../GridVirtualizer";
 import SearchBar from "../SearchBar";
 import { sortItemsByOption } from "../sortItemsByOption";
+import SortItemsDropdown, { type Sort } from "../SortItemsDropdown";
 import useFetchItems from "../useFetchItems";
 import useFiltering from "../useFiltering";
-import SortVideosDropdown, { type Sort } from "./SortVideosDropdown";
 import useVideosSettings from "./useVideosSettings";
 import VideoCard from "./VideoCard";
 import VideoPreviewModal from "./VideoPreviewModal";
@@ -86,7 +86,7 @@ export default function VideosPage() {
         totalLength={totalVideos}
       >
         {/* sort by */}
-        <SortVideosDropdown sort={sort} setSort={setSort} />
+        <SortItemsDropdown sort={sort} setSort={setSort} />
 
         {/* settings */}
         <VideosSettings settings={settings} />

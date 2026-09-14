@@ -1,7 +1,7 @@
 import { orderBy } from "natural-orderby";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
-import type { Sort } from "./Videos/SortVideosDropdown";
+import type { Sort } from "./SortItemsDropdown";
 
 export function sortItemsByOption<T extends Album | Video>(
   items: T[],

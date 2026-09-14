@@ -10,7 +10,7 @@ import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
 import type { FetchItems } from "./useFetchItems";
 import useInfiniteScroll from "./useInfiniteScroll";
-import useRestoreScrollPosition from "./Videos/useRestoreScrollPosition";
+import useRestoreScrollPosition from "./useRestoreScrollPosition";
 
 // grid virtualization example
 // https://tanstack.com/virtual/latest/docs/framework/react/examples/dynamic
