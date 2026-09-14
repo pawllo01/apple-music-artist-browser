@@ -11,11 +11,11 @@ export async function getArtistItemIds(
   fullMode: boolean = false,
 ) {
   const { itunes, appleMusic } = getStorefronts(market);
-  const marketWithItunesStore = !marketsWithoutStore.includes(market);
+  const hasItunesStore = !marketsWithoutStore.includes(market);
 
   const IDS: number[] = [];
 
-  if (marketWithItunesStore) {
+  if (hasItunesStore) {
     IDS.push(...(await fetchIdsByStorefront(type, artistId, itunes)));
   }
 
