@@ -20,7 +20,7 @@ function getSongsWithoutVA(songs: Song[]) {
   const seenISRCs = new Set(
     songs
       .filter(
-        (s) => s.relationships.albums.data[0].attributes.artistName !== VA,
+        (s) => s.relationships.albums.data[0].attributes?.artistName !== VA,
       )
       .map((s) => s.attributes.isrc),
   );
@@ -28,7 +28,7 @@ function getSongsWithoutVA(songs: Song[]) {
   return songs.filter((s) => {
     const isrc = s.attributes.isrc;
     const isVarious =
-      s.relationships.albums.data[0].attributes.artistName === VA;
+      s.relationships.albums.data[0].attributes?.artistName === VA;
 
     return !isVarious || (!seenISRCs.has(isrc) && seenISRCs.add(isrc));
   });
@@ -40,8 +40,8 @@ function getGroupedSongs(songs: Song[], showAllVariousArtistsAlbums: boolean) {
   const preferedSongs = songs.toSorted((a, b) => {
     const aAlbum = a.relationships.albums.data[0];
     const bAlbum = b.relationships.albums.data[0];
-    const aVarious = Number(aAlbum.attributes.artistName === VA);
-    const bVarious = Number(bAlbum.attributes.artistName === VA);
+    const aVarious = Number(aAlbum.attributes?.artistName === VA);
+    const bVarious = Number(bAlbum.attributes?.artistName === VA);
     return aVarious - bVarious;
   });
 
@@ -65,7 +65,7 @@ function getGroupedSongs(songs: Song[], showAllVariousArtistsAlbums: boolean) {
     const filtered = showAllVariousArtistsAlbums
       ? children
       : children.filter(
-          (s) => s.relationships.albums.data[0].attributes.artistName !== VA,
+          (s) => s.relationships.albums.data[0].attributes?.artistName !== VA,
         );
 
     groupedSongs.push({ ...parent, children: filtered });

@@ -31,7 +31,10 @@ interface Artists {
 interface Albums {
   href: string;
   next?: string;
-  data: Omit<Album, 'relationships'>[];
+  data: (Omit<Album, 'relationships' | 'attributes'> & Partial<Pick<Album, 'attributes'>>)[];
+  // very rarely song's album may be unavailable due to SOTW (Single of the Week) removal, so album.attributes might not exist
+  // https://music.apple.com/us/song/time-to-pretend/264720018
+  // https://www.reddit.com/r/AppleMusic/comments/16ky06v/why_are_there_two_copies_of_this_album_what_does/
 }
 
 // https://developer.apple.com/documentation/applemusicapi/songs/attributes-data.dictionary

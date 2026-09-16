@@ -142,7 +142,7 @@ export function createColumns(
           <span className="flex items-center gap-1">
             <span>
               <a
-                href={album.attributes.url}
+                href={album.attributes?.url}
                 target="_blank"
                 className="hover:underline"
               >
@@ -152,7 +152,9 @@ export function createColumns(
                 {showIdsInCells && ` [${album.id}]`}
               </a>
             </span>
-            <InfoBadges item={album} showDolbyAtmos={showDolbyAtmosBadge} />
+            {album.attributes && (
+              <InfoBadges item={album} showDolbyAtmos={showDolbyAtmosBadge} />
+            )}
           </span>
         );
       },
@@ -182,7 +184,7 @@ export function createColumns(
 
     // album date
     columnHelper.accessor(
-      (song) => song.relationships.albums.data[0].attributes.releaseDate || "",
+      (song) => song.relationships.albums.data[0].attributes?.releaseDate || "",
       {
         id: "album_date",
         sortDescFirst: true,
@@ -190,7 +192,7 @@ export function createColumns(
         header: "Album date",
         cell: ({ row }) => (
           <span className="text-nowrap">
-            {row.original.relationships.albums.data[0].attributes.releaseDate}
+            {row.original.relationships.albums.data[0].attributes?.releaseDate}
           </span>
         ),
       },
@@ -237,7 +239,7 @@ export function createColumns(
 
     // upc
     columnHelper.accessor(
-      (song) => song.relationships.albums.data[0].attributes.upc,
+      (song) => song.relationships.albums.data[0].attributes?.upc,
       {
         id: "upc",
         meta: { className: sizes.upc },
