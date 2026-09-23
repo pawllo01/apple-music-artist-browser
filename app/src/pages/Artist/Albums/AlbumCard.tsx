@@ -50,7 +50,7 @@ export default function AlbumCard({ album, index, settings }: AlbumCardProps) {
         />
       )}
 
-      <div className="text-gray-500 dark:text-gray-400">
+      <div className="text-gray-500 dark:text-gray-300">
         <p>
           {/* release date */}
           <span title={album.attributes.releaseDate}>

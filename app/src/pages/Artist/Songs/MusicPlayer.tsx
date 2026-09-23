@@ -87,7 +87,7 @@ export default function MusicPlayer({
               type="songs"
               artistName={currentSong.attributes.artistName}
               artists={currentSong.relationships.artists.data}
-              className="line-clamp-1! text-sm text-gray-500 dark:text-gray-400"
+              className="line-clamp-1! text-sm text-gray-500 dark:text-gray-300"
             />
           </div>
         </div>

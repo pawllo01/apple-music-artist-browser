@@ -134,11 +134,15 @@ export default function GridVirtualizer<T extends Album | Video>({
               >
                 {/* row title */}
                 {row.hasTitle && (
-                  <h3 className="mb-4 flex items-center gap-x-1.5 border-b border-b-gray-200 pb-1 dark:border-b-gray-700">
+                  <h3 className="mb-4 flex items-center gap-x-1.5 border-b border-b-gray-200 pb-1 dark:border-b-gray-500">
                     <span className="text-2xl leading-none font-bold">
                       {row.groupTitle}
                     </span>
-                    <Badge size="sm" color="gray" className="bg-gray-200">
+                    <Badge
+                      size="sm"
+                      color="alternative"
+                      className="bg-gray-200 dark:bg-gray-600"
+                    >
                       {row.groupItemCount}
                     </Badge>
                   </h3>

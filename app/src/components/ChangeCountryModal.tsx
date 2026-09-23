@@ -49,7 +49,7 @@ export default function ChangeCountryModal() {
   const renderCountryItem = (store: Storefront) => (
     <li
       key={store.code}
-      className="flex cursor-pointer items-center gap-x-2 rounded-md p-2 text-sm leading-tight text-gray-800 select-none hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white"
+      className="flex cursor-pointer items-center gap-x-2 rounded-md p-2 text-sm leading-tight text-gray-800 select-none hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
       onClick={() => {
         setMarket(store.code);
         handleClose();
@@ -83,7 +83,7 @@ export default function ChangeCountryModal() {
           ) : (
             <FaRegStar
               size={18}
-              className="text-gray-400 dark:text-gray-500"
+              className="text-gray-400"
               title="Add to favorites"
             />
           )}

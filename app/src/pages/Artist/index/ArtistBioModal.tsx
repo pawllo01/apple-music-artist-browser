@@ -16,7 +16,7 @@ export default function ArtistBioModal({ text }: { text: string }) {
   return (
     <>
       <p
-        className="line-clamp-3 text-gray-500 dark:text-gray-400"
+        className="line-clamp-3 text-gray-500 dark:text-gray-300"
         title="Biography"
         onClick={() => setOpenModal(true)}
       >
@@ -33,7 +33,7 @@ export default function ArtistBioModal({ text }: { text: string }) {
 
         <ModalBody>
           <div className="space-y-6">
-            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-300">
               {parsedText}
             </p>
           </div>

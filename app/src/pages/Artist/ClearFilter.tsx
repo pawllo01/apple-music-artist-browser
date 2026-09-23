@@ -6,7 +6,7 @@ type ClearFilterProps = {
 
 export default function ClearFilter({ setGlobalFilter }: ClearFilterProps) {
   return (
-    <div className="my-8 text-center text-gray-500 dark:text-gray-400">
+    <div className="my-8 text-center text-gray-500 dark:text-gray-300">
       <p>No results found.</p>
 
       <Button

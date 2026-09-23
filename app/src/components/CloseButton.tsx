@@ -14,7 +14,7 @@ export default function CloseButton({ onClick, title }: CloseButtonProps) {
       title={title}
       onClick={onClick}
     >
-      <IoCloseOutline size={24} className="text-gray-400" />
+      <IoCloseOutline size={24} className="text-gray-500 dark:text-gray-300" />
     </Button>
   );
 }

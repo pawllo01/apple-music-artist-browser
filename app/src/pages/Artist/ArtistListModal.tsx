@@ -50,7 +50,7 @@ export default function ArtistListModal({
             Artists
             <Badge
               size="sm"
-              color="gray"
+              color="alternative"
               className="bg-gray-200 dark:bg-gray-600"
             >
               {artists.length}

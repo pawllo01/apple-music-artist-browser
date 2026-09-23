@@ -37,7 +37,7 @@ export default function AsyncState({
 
         <h3 className="mt-4 text-lg font-semibold">No {type} yet</h3>
 
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
           This artist doesn't have any {type} available.
         </p>
       </div>

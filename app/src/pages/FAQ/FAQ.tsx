@@ -30,7 +30,7 @@ export default function FAQ() {
                     {faq.question}
                   </span>
                 </AccordionTitle>
-                <AccordionContent className="text-gray-500 dark:text-gray-400">
+                <AccordionContent className="text-gray-500 dark:text-gray-300">
                   {faq.answer}
                 </AccordionContent>
               </AccordionPanel>

@@ -79,12 +79,12 @@ export default function SongsTable({
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow
                     key={headerGroup.id}
-                    className="song-table-row min-h-12"
+                    className="song-table-row min-h-12 text-gray-600 dark:text-gray-300"
                   >
                     {headerGroup.headers.map((header) => (
                       <TableHeadCell
                         key={header.id}
-                        className={`song-table-cell select-none ${header.column.columnDef.meta?.className} ${header.column.getIsSorted() ? "text-cyan-500" : ""}`}
+                        className={`song-table-cell select-none ${header.column.columnDef.meta?.className} ${header.column.getIsSorted() ? "text-primary-500" : ""}`}
                       >
                         {/* https://tanstack.com/table/latest/docs/framework/react/examples/sorting */}
                         <span
@@ -114,13 +114,13 @@ export default function SongsTable({
                               asc: (
                                 <FaSquareCaretUp
                                   size={16}
-                                  className="shrink-0 text-cyan-500"
+                                  className="shrink-0"
                                 />
                               ),
                               desc: (
                                 <FaSquareCaretDown
                                   size={16}
-                                  className="shrink-0 text-cyan-500"
+                                  className="shrink-0"
                                 />
                               ),
                             }[header.column.getIsSorted() as string] ?? (
@@ -157,7 +157,7 @@ export default function SongsTable({
                       data-index={virtualRow.index} //needed for dynamic row height measurement
                       ref={(node) => rowVirtualizer.measureElement(node)} //measure dynamic row height
                       key={row.id}
-                      className={`song-table-row group ${row.original.id === currentSong?.id ? "gradient text-white" : ""} ${
+                      className={`song-table-row group text-gray-500 dark:text-gray-300 ${row.original.id === currentSong?.id ? "gradient text-white!" : ""} ${
                         row.depth > 0 ? "bg-gray-100 dark:bg-gray-900" : ""
                       }`}
                       onDoubleClick={() => changeCurrentSong(row.original)}

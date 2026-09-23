@@ -90,7 +90,7 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
         />
       )}
 
-      <div className="text-gray-500 dark:text-gray-400">
+      <div className="text-gray-500 dark:text-gray-300">
         <p>
           {/* release date */}
           <span title={video.attributes.releaseDate}>

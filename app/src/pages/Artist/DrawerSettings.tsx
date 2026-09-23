@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import {
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+  useThemeMode,
+} from "flowbite-react";
 import { HiOutlineCog } from "react-icons/hi";
 
 type DrawerSettingsProps = {
@@ -8,11 +14,14 @@ type DrawerSettingsProps = {
 
 export default function DrawerSettings({ children }: DrawerSettingsProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { computedMode } = useThemeMode();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
     document.documentElement.style.scrollbarGutter = isOpen ? "stable" : "auto";
-  }, [isOpen]);
+    if (computedMode === "dark")
+      document.documentElement.style.backgroundColor = isOpen ? "#22292b" : "";
+  }, [isOpen, computedMode]);
 
   return (
     <>
@@ -29,9 +38,13 @@ export default function DrawerSettings({ children }: DrawerSettingsProps) {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         position="right"
-        className="max-sm:w-70 dark:bg-gray-600"
+        className="border-s border-s-white max-sm:w-70 dark:border-s-gray-700"
       >
-        <DrawerHeader title="Settings" titleIcon={() => <></>} />
+        <DrawerHeader
+          titleIcon={() => (
+            <span className="text-gray-800 dark:text-white">Settings</span>
+          )}
+        />
 
         <DrawerItems>{children}</DrawerItems>
       </Drawer>

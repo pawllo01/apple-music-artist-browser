@@ -39,9 +39,7 @@ export default function VideosSettings({ settings }: VideosSettingsProps) {
       />
 
       <HR className="my-4" />
-      <h5 className="mb-3 font-semibold text-gray-500 dark:text-gray-400">
-        Display options
-      </h5>
+      <h5 className="mb-3 font-semibold">Display options</h5>
 
       <ToggleSwitch
         sizing="sm"
@@ -108,9 +106,7 @@ export default function VideosSettings({ settings }: VideosSettingsProps) {
       />
 
       <HR className="my-4" />
-      <h5 className="mb-3 font-semibold text-gray-500 dark:text-gray-400">
-        Reset options
-      </h5>
+      <h5 className="mb-3 font-semibold">Reset options</h5>
 
       <ResetButton onClick={() => clearSettingsByType("videos")}>
         Reset

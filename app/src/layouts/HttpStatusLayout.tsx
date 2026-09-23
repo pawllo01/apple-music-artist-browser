@@ -23,7 +23,7 @@ export default function HttpStatusLayout({
           <p className="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">
             {title}
           </p>
-          <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+          <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-300">
             {description}
           </p>
           {children}
