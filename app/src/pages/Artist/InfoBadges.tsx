@@ -1,15 +1,14 @@
 import { useContext } from "react";
-
 import { getOfferFlags } from "../../@other/fuctions";
 import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
-import type { Song } from "../../@types/song";
-import { Video } from "../../@types/video";
+import type { Song, SongAlbum } from "../../@types/song";
+import type { Video } from "../../@types/video";
 import { MarketContext } from "../../context/MarketContext";
 import { INFO_BADGES, VA } from "../constants";
 
 type InfoBadgesProps = {
-  item: Omit<Album, "relationships"> | Song | Video;
+  item: Album | Song | Required<SongAlbum> | Video;
   showDolbyAtmos?: boolean;
 };
 

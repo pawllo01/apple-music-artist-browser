@@ -153,7 +153,10 @@ export function createColumns(
               </a>
             </span>
             {album.attributes && (
-              <InfoBadges item={album} showDolbyAtmos={showDolbyAtmosBadge} />
+              <InfoBadges
+                item={{ ...album, attributes: album.attributes }}
+                showDolbyAtmos={showDolbyAtmosBadge}
+              />
             )}
           </span>
         );
