@@ -27,7 +27,7 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
         <a
           href={video.attributes.url}
           target="_blank"
-          className="block overflow-hidden rounded-xl"
+          className="block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-600"
         >
           <img
             src={video.attributes.artwork.url.replace("{w}x{h}mv", "640x640bb")}

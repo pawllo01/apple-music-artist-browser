@@ -14,8 +14,12 @@ export default function AlbumCard({ album, index, settings }: AlbumCardProps) {
   return (
     <div className="group w-full text-sm">
       {/* thumbnail */}
-      <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-600">
-        <a href={album.attributes.url} target="_blank" className="block">
+      <div className="relative">
+        <a
+          href={album.attributes.url}
+          target="_blank"
+          className="block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-600"
+        >
           <img
             src={album.attributes.artwork.url.replace("{w}x{h}", "300x300")}
             className={`aspect-square w-full bg-black object-contain`}
