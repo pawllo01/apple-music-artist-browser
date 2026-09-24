@@ -71,7 +71,7 @@ export default function SongsTable({
         {/* Sticky header */}
         <ScrollSyncPane>
           <div
-            className="sticky z-10 -mx-4 overflow-hidden"
+            className="sticky z-10 overflow-hidden"
             style={{ top: searchBarOffset }}
           >
             <FlowbiteTable className="rounded-none bg-gray-50 dark:bg-gray-700">
@@ -138,7 +138,7 @@ export default function SongsTable({
 
         {/* Rows */}
         <ScrollSyncPane>
-          <div className="-mx-4 overflow-x-auto drop-shadow-md">
+          <div className="overflow-x-auto drop-shadow-md">
             <FlowbiteTable
               hoverable
               className="rounded-none bg-white dark:bg-gray-800"

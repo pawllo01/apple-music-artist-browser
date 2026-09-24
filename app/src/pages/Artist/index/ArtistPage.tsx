@@ -12,7 +12,6 @@ import {
   useOutletContext,
   useParams,
 } from "react-router";
-
 import { useQuery } from "@tanstack/react-query";
 
 import { apiFetch } from "../../../@other/fuctions";
@@ -34,7 +33,7 @@ const sections = [
 export default function ArtistPage() {
   const { market } = useContext(MarketContext)!;
   const { addRecentArtist } = useContext(RecentArtistsContext)!;
-  const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
+  const context = useOutletContext<FooterHeightContextType>();
 
   const navigate = useNavigate();
   const { artistId } = useParams();
@@ -144,30 +143,28 @@ export default function ArtistPage() {
         </div>
       </div>
 
-      <div style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}>
-        {/* Sections */}
-        <TabSelector
-          options={sections.map(({ value, Icon }) => ({
-            value,
-            label: (
-              <span className="flex items-center gap-1 capitalize">
-                <Icon size={16} />
-                {value}
-              </span>
-            ),
-          }))}
-          value={
-            sections.find((section) => pathname.includes(section.value))
-              ?.value ?? "songs"
-          }
-          onChange={(value) => {
-            navigate(`/artist/${artistId}/${value}`, { replace: true });
-          }}
-        />
+      {/* Sections */}
+      <TabSelector
+        options={sections.map(({ value, Icon }) => ({
+          value,
+          label: (
+            <span className="flex items-center gap-1 capitalize">
+              <Icon size={16} />
+              {value}
+            </span>
+          ),
+        }))}
+        value={
+          sections.find((section) => pathname.includes(section.value))?.value ??
+          "songs"
+        }
+        onChange={(value) => {
+          navigate(`/artist/${artistId}/${value}`, { replace: true });
+        }}
+      />
 
-        {/* Section */}
-        <Outlet />
-      </div>
+      {/* Section */}
+      <Outlet context={context satisfies FooterHeightContextType} />
     </section>
   );
 }

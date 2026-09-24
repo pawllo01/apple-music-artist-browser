@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useOutletContext } from "react-router";
 
 import {
   type ExpandedState,
@@ -15,6 +16,7 @@ import type { SongWithChildren } from "../../../@types/song-with-children";
 import ScrollToTop from "../../../components/ScrollToTop";
 import TabSelector from "../../../components/TabSelector";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import type { FooterHeightContextType } from "../../../layouts/BaseLayout";
 import { DEFAULT_COLUMNS } from "../../constants";
 import AsyncState from "../AsyncState";
 import ClearFilter from "../ClearFilter";
@@ -31,6 +33,9 @@ import useSongsSettings from "./useSongsSettings";
 type SongTab = "main" | "mixed" | "all";
 
 export default function SongsPage() {
+  const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
+
+  // SETTINGS
   const settings = useSongsSettings();
   const {
     groupSongs,
@@ -207,44 +212,51 @@ export default function SongsPage() {
         />
       )}
 
-      {/* search bar + settings */}
-      <SearchBar
-        type="songs"
-        setSearchBarOffset={setSearchBarOffset}
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-        fetchAllPages={fetchAllPages}
-        setFetchAllPages={setFetchAllPages}
-        resultsLength={rows.length}
-        itemsLength={songs.length}
-        totalLength={totalSongs}
+      <div
+        className="flex flex-col"
+        style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}
       >
-        {/* columns */}
-        <DropdownColumns
-          table={table}
-          setColumnOrder={setColumnOrder}
-          groupSongs={groupSongs}
-        />
-
-        {/* settings */}
-        <SongsSettings settings={settings} resetColumns={resetColumns} />
-      </SearchBar>
-
-      {/* music player offset */}
-      <div className="mb-17 md:mb-22 lg:mb-8">
-        {/* songs table */}
-        {rows.length > 0 && (
-          <SongsTable
+        {/* search bar + settings */}
+        <SearchBar
+          type="songs"
+          setSearchBarOffset={setSearchBarOffset}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          fetchAllPages={fetchAllPages}
+          setFetchAllPages={setFetchAllPages}
+          resultsLength={rows.length}
+          itemsLength={songs.length}
+          totalLength={totalSongs}
+        >
+          {/* columns */}
+          <DropdownColumns
             table={table}
-            query={query}
-            searchBarOffset={searchBarOffset}
-            currentSong={currentSong}
-            changeCurrentSong={changeCurrentSong}
+            setColumnOrder={setColumnOrder}
+            groupSongs={groupSongs}
           />
-        )}
 
-        {/* no results */}
-        {rows.length === 0 && <ClearFilter setGlobalFilter={setGlobalFilter} />}
+          {/* settings */}
+          <SongsSettings settings={settings} resetColumns={resetColumns} />
+        </SearchBar>
+
+        {/* music player offset */}
+        <div className="-mx-4 flex-1 pb-17 md:pb-22 lg:pb-8 dark:bg-gray-700">
+          {/* songs table */}
+          {rows.length > 0 && (
+            <SongsTable
+              table={table}
+              query={query}
+              searchBarOffset={searchBarOffset}
+              currentSong={currentSong}
+              changeCurrentSong={changeCurrentSong}
+            />
+          )}
+
+          {/* no results */}
+          {rows.length === 0 && (
+            <ClearFilter setGlobalFilter={setGlobalFilter} />
+          )}
+        </div>
       </div>
 
       {/* music player & scroll to top */}

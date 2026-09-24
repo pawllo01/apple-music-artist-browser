@@ -1,7 +1,9 @@
 import { useMemo } from "react";
+import { useOutletContext } from "react-router";
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import type { FooterHeightContextType } from "../../../layouts/BaseLayout";
 import AsyncState from "../AsyncState";
 import ClearFilter from "../ClearFilter";
 import GridVirtualizer from "../GridVirtualizer";
@@ -15,6 +17,8 @@ import AlbumsSettings from "./AlbumsSettings";
 import useAlbumsSettings from "./useAlbumsSettings";
 
 export default function AlbumsPage() {
+  const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
+
   // SETTINGS
   const settings = useAlbumsSettings();
 
@@ -68,65 +72,70 @@ export default function AlbumsPage() {
       {/* tabs */}
       {tabs}
 
-      {/* search bar + settings */}
-      <SearchBar
-        type="albums"
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-        fetchAllPages={fetchAllPages}
-        setFetchAllPages={setFetchAllPages}
-        resultsLength={filteredAlbums.length}
-        itemsLength={albums.length}
-        totalLength={totalAlbums}
+      <div
+        className="flex flex-col"
+        style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}
       >
-        {/* sort by */}
-        <SortItemsDropdown sort={sort} setSort={setSort} />
+        {/* search bar + settings */}
+        <SearchBar
+          type="albums"
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          fetchAllPages={fetchAllPages}
+          setFetchAllPages={setFetchAllPages}
+          resultsLength={filteredAlbums.length}
+          itemsLength={albums.length}
+          totalLength={totalAlbums}
+        >
+          {/* sort by */}
+          <SortItemsDropdown sort={sort} setSort={setSort} />
 
-        {/* settings */}
-        <AlbumsSettings settings={settings} />
-      </SearchBar>
+          {/* settings */}
+          <AlbumsSettings settings={settings} />
+        </SearchBar>
 
-      <div className="my-4">
-        {/* album cards */}
-        {filteredAlbums.length > 0 && (
-          <GridVirtualizer
-            items={filteredAlbums}
-            groupByYear={settings.groupByYear}
-            query={query}
-            minCardWidth={220}
-            maxSingleColumnCardWidth={280}
-            getCardHeight={(width) =>
-              /* thumbnail (1:1) */ width +
-              /* title + margin */ 26 +
-              /* release date */ 20 +
-              /* artists */ (settings.showArtists ? 20 : 0) +
-              /* label */ (settings.showLabel ? 20 : 0) +
-              /* horizontal line */ (settings.showUpc || settings.showAlbumId
-                ? 13
-                : 0) +
-              /* upc */ (settings.showUpc ? 20 : 0) +
-              /* album id */ (settings.showAlbumId ? 20 : 0)
-            }
-            renderItem={(album, index) => (
-              <AlbumCard
-                key={album.id}
-                album={album}
-                index={index}
-                settings={settings}
-              />
-            )}
-          />
-        )}
+        <div className="-mx-4 flex-1 p-4 dark:bg-gray-700">
+          {/* album cards */}
+          {filteredAlbums.length > 0 && (
+            <GridVirtualizer
+              items={filteredAlbums}
+              groupByYear={settings.groupByYear}
+              query={query}
+              minCardWidth={220}
+              maxSingleColumnCardWidth={280}
+              getCardHeight={(width) =>
+                /* thumbnail (1:1) */ width +
+                /* title + margin */ 26 +
+                /* release date */ 20 +
+                /* artists */ (settings.showArtists ? 20 : 0) +
+                /* label */ (settings.showLabel ? 20 : 0) +
+                /* horizontal line */ (settings.showUpc || settings.showAlbumId
+                  ? 13
+                  : 0) +
+                /* upc */ (settings.showUpc ? 20 : 0) +
+                /* album id */ (settings.showAlbumId ? 20 : 0)
+              }
+              renderItem={(album, index) => (
+                <AlbumCard
+                  key={album.id}
+                  album={album}
+                  index={index}
+                  settings={settings}
+                />
+              )}
+            />
+          )}
 
-        {/* no results */}
-        {filteredAlbums.length === 0 && (
-          <ClearFilter setGlobalFilter={setGlobalFilter} />
-        )}
+          {/* no results */}
+          {filteredAlbums.length === 0 && (
+            <ClearFilter setGlobalFilter={setGlobalFilter} />
+          )}
 
-        {/* loading spinner */}
-        {hasNextPage && filteredAlbums.length !== 0 && (
-          <LoadingSpinner className="text-center" />
-        )}
+          {/* loading spinner */}
+          {hasNextPage && filteredAlbums.length !== 0 && (
+            <LoadingSpinner className="text-center" />
+          )}
+        </div>
       </div>
 
       {/* scroll to top */}
