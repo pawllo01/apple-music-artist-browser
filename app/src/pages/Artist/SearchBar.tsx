@@ -18,6 +18,7 @@ type SearchBarProps = {
   resultsLength: number;
   itemsLength: number;
   totalLength: number;
+  tagsModal: React.ReactNode;
   children?: React.ReactNode;
 };
 
@@ -31,6 +32,7 @@ export default function SearchBar({
   resultsLength,
   itemsLength,
   totalLength,
+  tagsModal,
   children,
 }: SearchBarProps) {
   const [pinSearchBar, setPinSearchBar] = useLocalStorage(
@@ -86,7 +88,10 @@ export default function SearchBar({
         <ButtonGroup id="settings-group">{children}</ButtonGroup>
       </div>
 
-      <div className="ms-1 mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-500 dark:text-gray-300">
+      {/* tags modal */}
+      {tagsModal}
+
+      <div className="flex flex-wrap items-center gap-x-2 px-1 text-sm text-gray-500 dark:text-gray-300">
         {/* results */}
         <Tooltip
           placement="bottom"

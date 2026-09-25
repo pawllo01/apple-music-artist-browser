@@ -21,7 +21,9 @@ import { DEFAULT_COLUMNS } from "../../constants";
 import AsyncState from "../AsyncState";
 import ClearFilter from "../ClearFilter";
 import SearchBar from "../SearchBar";
+import TagsModal from "../TagsModal";
 import useFetchItems from "../useFetchItems";
+import useTagFilter from "../useTagFilter";
 import { createColumns } from "./columns";
 import DropdownColumns from "./DropdownColumns";
 import MusicPlayer from "./MusicPlayer";
@@ -67,17 +69,12 @@ export default function SongsPage() {
     if (song.attributes.previews[0]?.url) setCurrentSong(song);
   };
 
-  const processedSongs = useMemo(
-    () => processSongs(songs, groupSongs, showAllVariousArtistsAlbums),
-    [songs, groupSongs, showAllVariousArtistsAlbums],
-  );
-
   const songsByTab = useMemo(() => {
-    return processedSongs.reduce<Record<SongTab, SongWithChildren[]>>(
+    return songs.reduce<Record<SongTab, SongWithChildren[]>>(
       (acc, song) => {
         const isMixed =
-          song.attributes.name.endsWith("(Mixed)") ||
-          song.attributes.name.endsWith("[Mixed]");
+          song.attributes.name.includes("(Mixed)") ||
+          song.attributes.name.includes("[Mixed]");
 
         acc.all.push(song);
         acc[isMixed ? "mixed" : "main"].push(song);
@@ -86,7 +83,19 @@ export default function SongsPage() {
       },
       { main: [], mixed: [], all: [] },
     );
-  }, [processedSongs]);
+  }, [songs]);
+
+  const {
+    matchedItems: matchedSongs,
+    tags,
+    selectedTags,
+    setSelectedTags,
+  } = useTagFilter(songsByTab[activeTab]);
+
+  const processedSongs = useMemo(
+    () => processSongs(matchedSongs, groupSongs, showAllVariousArtistsAlbums),
+    [matchedSongs, groupSongs, showAllVariousArtistsAlbums],
+  );
 
   // COLUMNS
   const columns = useMemo(
@@ -152,7 +161,7 @@ export default function SongsPage() {
 
   // TABLE
   const table = useReactTable({
-    data: songsByTab[activeTab],
+    data: processedSongs,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -180,7 +189,7 @@ export default function SongsPage() {
     groupedColumnMode: false,
   });
 
-  const { rows } = table.getRowModel();
+  const { rows, flatRows } = table.getRowModel();
 
   const resetColumns = () => {
     setColumnOrder(table.getAllColumns().map((c) => c.id));
@@ -224,9 +233,16 @@ export default function SongsPage() {
           setGlobalFilter={setGlobalFilter}
           fetchAllPages={fetchAllPages}
           setFetchAllPages={setFetchAllPages}
-          resultsLength={rows.length}
+          resultsLength={flatRows.length}
           itemsLength={songs.length}
           totalLength={totalSongs}
+          tagsModal={
+            <TagsModal
+              tags={tags}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+            />
+          }
         >
           {/* columns */}
           <DropdownColumns
@@ -254,7 +270,10 @@ export default function SongsPage() {
 
           {/* no results */}
           {rows.length === 0 && (
-            <ClearFilter setGlobalFilter={setGlobalFilter} />
+            <ClearFilter
+              setGlobalFilter={setGlobalFilter}
+              setSelectedTags={setSelectedTags}
+            />
           )}
         </div>
       </div>

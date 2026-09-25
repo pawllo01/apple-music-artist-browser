@@ -10,8 +10,9 @@ import GridVirtualizer from "../GridVirtualizer";
 import SearchBar from "../SearchBar";
 import { sortItemsByOption } from "../sortItemsByOption";
 import SortItemsDropdown, { type Sort } from "../SortItemsDropdown";
+import TagsModal from "../TagsModal";
 import useFetchItems from "../useFetchItems";
-import useFiltering from "../useFiltering";
+import useFilter from "../useFilter";
 import AlbumCard from "./AlbumCard";
 import AlbumsSettings from "./AlbumsSettings";
 import useAlbumsSettings from "./useAlbumsSettings";
@@ -51,7 +52,10 @@ export default function AlbumsPage() {
     setGlobalFilter,
     filteredItems: filteredAlbums,
     tabs,
-  } = useFiltering(sortedAlbums, [
+    tags,
+    selectedTags,
+    setSelectedTags,
+  } = useFilter(sortedAlbums, [
     "attributes.name",
     "attributes.contentRating",
     "attributes.artistName",
@@ -86,6 +90,13 @@ export default function AlbumsPage() {
           resultsLength={filteredAlbums.length}
           itemsLength={albums.length}
           totalLength={totalAlbums}
+          tagsModal={
+            <TagsModal
+              tags={tags}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+            />
+          }
         >
           {/* sort by */}
           <SortItemsDropdown sort={sort} setSort={setSort} />
@@ -128,7 +139,10 @@ export default function AlbumsPage() {
 
           {/* no results */}
           {filteredAlbums.length === 0 && (
-            <ClearFilter setGlobalFilter={setGlobalFilter} />
+            <ClearFilter
+              setGlobalFilter={setGlobalFilter}
+              setSelectedTags={setSelectedTags}
+            />
           )}
 
           {/* loading spinner */}

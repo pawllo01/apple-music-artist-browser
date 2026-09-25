@@ -26,7 +26,7 @@ export default function ArtistListModal({
   artists,
   className = "",
 }: ArtistListModalProps) {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   return (
     <>

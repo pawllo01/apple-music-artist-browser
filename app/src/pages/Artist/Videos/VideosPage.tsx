@@ -12,8 +12,9 @@ import GridVirtualizer from "../GridVirtualizer";
 import SearchBar from "../SearchBar";
 import { sortItemsByOption } from "../sortItemsByOption";
 import SortItemsDropdown, { type Sort } from "../SortItemsDropdown";
+import TagsModal from "../TagsModal";
 import useFetchItems from "../useFetchItems";
-import useFiltering from "../useFiltering";
+import useFilter from "../useFilter";
 import useVideosSettings from "./useVideosSettings";
 import VideoCard from "./VideoCard";
 import VideoPreviewModal from "./VideoPreviewModal";
@@ -56,7 +57,10 @@ export default function VideosPage() {
     setGlobalFilter,
     filteredItems: filteredVideos,
     tabs,
-  } = useFiltering(sortedVideos, [
+    tags,
+    selectedTags,
+    setSelectedTags,
+  } = useFilter(sortedVideos, [
     "attributes.name",
     "attributes.contentRating",
     "attributes.videoTraits",
@@ -92,6 +96,13 @@ export default function VideosPage() {
           resultsLength={filteredVideos.length}
           itemsLength={videos.length}
           totalLength={totalVideos}
+          tagsModal={
+            <TagsModal
+              tags={tags}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+            />
+          }
         >
           {/* sort by */}
           <SortItemsDropdown sort={sort} setSort={setSort} />
@@ -139,7 +150,10 @@ export default function VideosPage() {
 
           {/* no results */}
           {filteredVideos.length === 0 && (
-            <ClearFilter setGlobalFilter={setGlobalFilter} />
+            <ClearFilter
+              setGlobalFilter={setGlobalFilter}
+              setSelectedTags={setSelectedTags}
+            />
           )}
 
           {/* loading spinner */}

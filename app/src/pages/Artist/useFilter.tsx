@@ -10,6 +10,7 @@ import type { Video } from "../../@types/video";
 import TabSelector from "../../components/TabSelector";
 import { MarketContext } from "../../context/MarketContext";
 import { INFO_BADGES } from "../constants";
+import useTagFilter from "./useTagFilter";
 
 const TABS = [
   {
@@ -36,7 +37,7 @@ const TABS = [
 
 type Tab = (typeof TABS)[number]["value"];
 
-export default function useFiltering<T extends Album | Video>(
+export default function useFilter<T extends Album | Video>(
   items: T[],
   fuseKeys: FuseOptionKey<T>[],
 ) {
@@ -81,18 +82,22 @@ export default function useFiltering<T extends Album | Video>(
         purchase_only: [],
       },
     );
-  }, [items]);
+  }, [items, market]);
+
+  const { matchedItems, tags, selectedTags, setSelectedTags } = useTagFilter(
+    itemsByTab[activeTab],
+  );
 
   // https://www.fusejs.io/fuzzy-search.html
   const fuse = useMemo(() => {
-    return new Fuse(itemsByTab[activeTab], {
+    return new Fuse(matchedItems, {
       keys: fuseKeys,
       threshold: 0,
       ignoreLocation: true,
       ignoreDiacritics: true,
       shouldSort: false,
     });
-  }, [itemsByTab, activeTab, fuseKeys]);
+  }, [matchedItems, fuseKeys]);
 
   const filteredItems = fuse
     .search(globalFilter.trim())
@@ -123,5 +128,8 @@ export default function useFiltering<T extends Album | Video>(
     setGlobalFilter,
     filteredItems,
     tabs,
+    tags,
+    selectedTags,
+    setSelectedTags,
   };
 }
