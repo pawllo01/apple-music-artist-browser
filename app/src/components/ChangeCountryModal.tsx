@@ -165,7 +165,7 @@ export default function ChangeCountryModal() {
           </ul>
         </ModalBody>
 
-        <ModalFooter className="py-4">
+        <ModalFooter className="p-4">
           <Button color="alternative" className="ms-auto" onClick={handleClose}>
             Close
           </Button>

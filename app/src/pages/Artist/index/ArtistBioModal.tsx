@@ -39,7 +39,7 @@ export default function ArtistBioModal({ text }: { text: string }) {
           </div>
         </ModalBody>
 
-        <ModalFooter className="py-4">
+        <ModalFooter className="p-4">
           <Button
             color="alternative"
             className="ms-auto"
