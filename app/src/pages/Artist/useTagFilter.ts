@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
+
 import { getOfferFlags } from "../../@other/fuctions";
 import type { Album } from "../../@types/album";
 import type { Song } from "../../@types/song";
 import type { Tags } from "../../@types/tags";
 import type { Video } from "../../@types/video";
+import { MarketContext } from "../../context/MarketContext";
 import { VA } from "../constants";
 
 const generalTags = {
@@ -22,6 +24,8 @@ const generalTagsOrder = Object.values(generalTags);
 export default function useTagFilter<T extends Album | Song | Video>(
   items: T[],
 ) {
+  const { hasItunesStore } = useContext(MarketContext)!;
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const { itemsWithTags, tags } = useMemo(() => {
@@ -43,11 +47,13 @@ export default function useTagFilter<T extends Album | Song | Video>(
       };
 
       // streaming only / purchase only
-      const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
-        item.attributes.offers,
-      );
-      if (isStreamingOnly) addTag(generalTags.streamingOnly, "general");
-      if (isPurchaseOnly) addTag(generalTags.purchaseOnly, "general");
+      if (hasItunesStore) {
+        const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
+          item.attributes.offers,
+        );
+        if (isStreamingOnly) addTag(generalTags.streamingOnly, "general");
+        if (isPurchaseOnly) addTag(generalTags.purchaseOnly, "general");
+      }
 
       // content rating
       const contentRating =
@@ -113,7 +119,7 @@ export default function useTagFilter<T extends Album | Song | Video>(
     };
 
     return { itemsWithTags, tags };
-  }, [items]);
+  }, [items, hasItunesStore]);
 
   const matchedItems = useMemo(() => {
     return selectedTags.length > 0

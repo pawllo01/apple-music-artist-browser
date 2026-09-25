@@ -4,7 +4,6 @@ import Fuse, { type FuseOptionKey } from "fuse.js";
 import { useParams } from "react-router";
 
 import { getOfferFlags } from "../../@other/fuctions";
-import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
 import TabSelector from "../../components/TabSelector";
@@ -45,15 +44,13 @@ export default function useFilter<T extends Album | Video>(
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
   const { artistId } = useParams();
-  const { market } = useContext(MarketContext)!;
+  const { market, hasItunesStore } = useContext(MarketContext)!;
 
   useEffect(() => {
     setActiveTab("all");
   }, [artistId, market]);
 
   const itemsByTab = useMemo(() => {
-    const hasItunesStore = !marketsWithoutStore.includes(market);
-
     return items.reduce<Record<Tab, T[]>>(
       (acc, item) => {
         acc.all.push(item);
@@ -82,7 +79,7 @@ export default function useFilter<T extends Album | Video>(
         purchase_only: [],
       },
     );
-  }, [items, market]);
+  }, [items, hasItunesStore]);
 
   const { matchedItems, tags, selectedTags, setSelectedTags } = useTagFilter(
     itemsByTab[activeTab],

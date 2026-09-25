@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { getOfferFlags } from "../../@other/fuctions";
-import marketsWithoutStore from "../../@other/markets-without-store.json";
 import type { Album } from "../../@types/album";
 import type { Song, SongAlbum } from "../../@types/song";
 import type { Video } from "../../@types/video";
@@ -16,8 +15,7 @@ export default function InfoBadges({
   item,
   showDolbyAtmos = false,
 }: InfoBadgesProps) {
-  const { market } = useContext(MarketContext)!;
-  const hasItunesStore = !marketsWithoutStore.includes(market);
+  const { hasItunesStore } = useContext(MarketContext)!;
 
   const isExplicit = item.attributes.contentRating === "explicit";
 
