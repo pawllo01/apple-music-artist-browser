@@ -3,35 +3,20 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import Fuse, { type FuseOptionKey } from "fuse.js";
 import { useParams } from "react-router";
 
-import { getOfferFlags } from "../../@other/fuctions";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
 import TabSelector from "../../components/TabSelector";
 import { MarketContext } from "../../context/MarketContext";
-import { INFO_BADGES } from "../constants";
 import useTagFilter from "./useTagFilter";
 
 const TABS = [
-  {
-    value: "all",
-    label: "All",
-  },
-  {
-    value: "albums",
-    label: "Albums",
-  },
-  {
-    value: "singles",
-    label: "Singles & EPs",
-  },
-  {
-    value: "streaming_only",
-    label: <>{INFO_BADGES.streaming_only} Streaming only</>,
-  },
-  {
-    value: "purchase_only",
-    label: <>{INFO_BADGES.purchase_only} Purchase only</>,
-  },
+  { value: "all", label: "All" },
+  // albums only
+  { value: "albums", label: "Albums" },
+  { value: "singles", label: "Singles & EPs" },
+  // videos only
+  { value: "standalone", label: "Standalone" },
+  { value: "fromAlbum", label: "From album" },
 ] as const;
 
 type Tab = (typeof TABS)[number]["value"];
@@ -44,7 +29,7 @@ export default function useFilter<T extends Album | Video>(
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
   const { artistId } = useParams();
-  const { market, hasItunesStore } = useContext(MarketContext)!;
+  const { market } = useContext(MarketContext)!;
 
   useEffect(() => {
     setActiveTab("all");
@@ -55,31 +40,24 @@ export default function useFilter<T extends Album | Video>(
       (acc, item) => {
         acc.all.push(item);
 
-        if (hasItunesStore) {
-          const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
-            item.attributes.offers,
-          );
-          if (isStreamingOnly) acc.streaming_only.push(item);
-          if (isPurchaseOnly) acc.purchase_only.push(item);
-        }
-
+        // albums
         if (item.type === "albums") {
           if (/ (Single|EP)$/.test(item.attributes.name))
             acc.singles.push(item);
           else acc.albums.push(item);
         }
 
+        // videos
+        if (item.type === "music-videos") {
+          if (item.relationships.albums.data[0]) acc.fromAlbum.push(item);
+          else acc.standalone.push(item);
+        }
+
         return acc;
       },
-      {
-        all: [],
-        albums: [],
-        singles: [],
-        streaming_only: [],
-        purchase_only: [],
-      },
+      { all: [], albums: [], singles: [], standalone: [], fromAlbum: [] },
     );
-  }, [items, hasItunesStore]);
+  }, [items]);
 
   const { matchedItems, tags, selectedTags, setSelectedTags } = useTagFilter(
     itemsByTab[activeTab],
@@ -100,19 +78,15 @@ export default function useFilter<T extends Album | Video>(
     .search(globalFilter.trim())
     .map((fuseResult) => fuseResult.item);
 
-  const hasMultipleTabs =
-    Object.values(itemsByTab).filter((items) => items.length > 0).length >= 2;
+  const showTabs =
+    Object.values(itemsByTab).filter((items) => items.length > 0).length === 3;
 
-  const tabs = hasMultipleTabs && (
+  const tabs = showTabs && (
     <TabSelector
       options={TABS.filter(({ value }) => itemsByTab[value].length > 0).map(
         ({ value, label }) => ({
           value,
-          label: (
-            <>
-              {label}&nbsp;({itemsByTab[value].length})
-            </>
-          ),
+          label: `${label}\u00A0(${itemsByTab[value].length})`,
         }),
       )}
       value={activeTab}
