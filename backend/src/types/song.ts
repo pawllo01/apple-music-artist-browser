@@ -12,6 +12,7 @@ export type Song = {
   href: string;
   attributes: Attributes;
   relationships: Relationships;
+  children?: Omit<Song, 'children'>[];
 };
 
 export type SongAlbum = Omit<Album, 'relationships' | 'attributes'> &

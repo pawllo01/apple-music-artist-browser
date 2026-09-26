@@ -12,7 +12,7 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table";
 
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 import ScrollToTop from "../../../components/ScrollToTop";
 import TabSelector from "../../../components/TabSelector";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
@@ -63,14 +63,14 @@ export default function SongsPage() {
 
   const [activeTab, setActiveTab] = useState<SongTab>("main");
 
-  const [currentSong, setCurrentSong] = useState<SongWithChildren | null>(null);
+  const [currentSong, setCurrentSong] = useState<Song | null>(null);
 
-  const changeCurrentSong = (song: SongWithChildren) => {
+  const changeCurrentSong = (song: Song) => {
     if (song.attributes.previews[0]?.url) setCurrentSong(song);
   };
 
   const songsByTab = useMemo(() => {
-    return songs.reduce<Record<SongTab, SongWithChildren[]>>(
+    return songs.reduce<Record<SongTab, Song[]>>(
       (acc, song) => {
         const isMixed =
           song.attributes.name.includes("(Mixed)") ||

@@ -16,17 +16,17 @@ import { flexRender, type Table } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { getVirtualSpacerHeights } from "../../../@other/fuctions";
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 import type { FetchItems as FetchSongs } from "../useFetchItems";
 import useInfiniteScroll from "../useInfiniteScroll";
 import SkeletonRow from "./SkeletonRow";
 
 type SongsTableProps = {
-  table: Table<SongWithChildren>;
+  table: Table<Song>;
   query: FetchSongs;
   searchBarOffset: number;
-  currentSong: SongWithChildren | null;
-  changeCurrentSong: (song: SongWithChildren) => void;
+  currentSong: Song | null;
+  changeCurrentSong: (song: Song) => void;
 };
 
 export default function SongsTable({

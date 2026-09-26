@@ -1,12 +1,11 @@
 import type { Song } from "../../../@types/song";
-import type { SongWithChildren } from "../../../@types/song-with-children";
 import { VA } from "../../constants";
 
 export function processSongs(
   songs: Song[],
   groupSongs: boolean,
   showAllVariousArtistsAlbums: boolean,
-): Song[] | SongWithChildren[] {
+) {
   if (!groupSongs && showAllVariousArtistsAlbums) return songs; // get ALL songs
 
   if (!groupSongs) return getSongsWithoutVA(songs);
@@ -52,7 +51,7 @@ function getGroupedSongs(songs: Song[], showAllVariousArtistsAlbums: boolean) {
     return acc;
   }, {});
 
-  const groupedSongs: SongWithChildren[] = [];
+  const groupedSongs: Song[] = [];
 
   // iterate over songs to keep original song order
   for (const song of songs) {

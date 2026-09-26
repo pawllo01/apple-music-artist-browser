@@ -3,14 +3,14 @@ import { FaPlay } from "react-icons/fa";
 import { createColumnHelper } from "@tanstack/react-table";
 
 import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 import { ExpandButton } from "../../../components/ExpandButton";
 import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 
 // docs - https://tanstack.com/table/latest/docs/guide/column-defs
 
-const columnHelper = createColumnHelper<SongWithChildren>();
+const columnHelper = createColumnHelper<Song>();
 
 const sizes = {
   FULL: "flex-1 min-w-64",
@@ -31,7 +31,7 @@ export function createColumns(
   showDolbyAtmosBadge: boolean,
   truncateAlbumNames: boolean,
   showIdsInCells: boolean,
-  changeCurrentSong: (song: SongWithChildren) => void,
+  changeCurrentSong: (song: Song) => void,
 ) {
   return [
     // count

@@ -3,10 +3,10 @@ import { Button, Checkbox, DropdownItem, Label } from "flowbite-react";
 import { MdDragIndicator } from "react-icons/md";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { Column } from "@tanstack/react-table";
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 
 type SortableDropdownItemProps = {
-  column: Column<SongWithChildren, unknown>;
+  column: Column<Song, unknown>;
   index: number;
   groupSongs: boolean;
 };

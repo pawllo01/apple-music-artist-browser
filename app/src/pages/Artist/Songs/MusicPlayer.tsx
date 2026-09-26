@@ -2,15 +2,15 @@ import type { Dispatch, SetStateAction } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import type { Row } from "@tanstack/react-table";
 
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 import CloseButton from "../../../components/CloseButton";
 import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 
 type MusicPlayerProps = {
-  currentSong: SongWithChildren | null;
-  setCurrentSong: Dispatch<SetStateAction<SongWithChildren | null>>;
-  rows: Row<SongWithChildren>[];
+  currentSong: Song | null;
+  setCurrentSong: Dispatch<SetStateAction<Song | null>>;
+  rows: Row<Song>[];
 };
 
 export default function MusicPlayer({

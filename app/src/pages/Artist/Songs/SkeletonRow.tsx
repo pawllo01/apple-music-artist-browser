@@ -1,10 +1,10 @@
 import { TableCell, TableRow } from "flowbite-react";
 import Skeleton from "react-loading-skeleton";
 import type { Column } from "@tanstack/react-table";
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 
 type SkeletonRowProps = {
-  columns: Column<SongWithChildren, unknown>[];
+  columns: Column<Song, unknown>[];
 };
 
 export default function SkeletonRow({ columns }: SkeletonRowProps) {

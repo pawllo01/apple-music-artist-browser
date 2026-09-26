@@ -5,11 +5,11 @@ import { move } from "@dnd-kit/helpers";
 import { DragDropProvider } from "@dnd-kit/react";
 import type { Table } from "@tanstack/react-table";
 
-import type { SongWithChildren } from "../../../@types/song-with-children";
+import type { Song } from "../../../@types/song";
 import SortableDropdownItem from "./SortableDropdownItem";
 
 type DropdownColumnsProps = {
-  table: Table<SongWithChildren>;
+  table: Table<Song>;
   setColumnOrder: React.Dispatch<React.SetStateAction<string[]>>;
   groupSongs: boolean;
 };
