@@ -91,42 +91,45 @@ export default function SearchBar({
       {/* tags modal */}
       {tagsModal}
 
-      <div className="flex flex-wrap items-center gap-x-2 px-1 text-sm text-gray-500 dark:text-gray-300">
+      <div className="scrollbar-hide flex items-center gap-1.5 overflow-auto px-1 text-sm text-gray-500 *:shrink-0 dark:text-gray-300">
         {/* results */}
         <Tooltip
           placement="bottom"
-          content={`Number of ${type} matching current settings`}
+          content={`Number of ${type} matching current filters`}
         >
           Results: {resultsLength}
         </Tooltip>
 
-        {/* divider */}
-        <span className="h-4 border-s" />
+        {itemsLength < totalLength && (
+          <>
+            {/* divider */}
+            <div className="h-5 border-s border-gray-300 dark:border-gray-500" />
 
-        {/* loaded items */}
-        <Tooltip
-          placement="bottom"
-          content={`Total number of ${type} loaded from Apple Music`}
-        >
-          <span className="capitalize">{type}</span>: {itemsLength}
-          {itemsLength !== totalLength
-            ? ` / ${totalLength} (${Math.floor((itemsLength / totalLength) * 100)}%)`
-            : ""}
-        </Tooltip>
-
-        {/* load all */}
-        {itemsLength !== totalLength && (
-          <Tooltip
-            placement="bottom"
-            content={`Keep scrolling to load more ${type} automatically, or load all ${type} now.`}
-          >
-            <button
-              className={`underline underline-offset-2 ${fetchAllPages ? "text-red-500 dark:text-red-400" : ""}`}
-              onClick={() => setFetchAllPages((prevState) => !prevState)}
+            {/* loaded items */}
+            <Tooltip
+              placement="bottom"
+              content={`Number of ${type} loaded from Apple Music`}
             >
-              {fetchAllPages ? "Stop loading" : "Load all"}
-            </button>
-          </Tooltip>
+              Loaded: {itemsLength} / {totalLength} (
+              {Math.floor((itemsLength / totalLength) * 100)}%)
+            </Tooltip>
+
+            {/* divider */}
+            <div className="h-5 border-s border-gray-300 dark:border-gray-500" />
+
+            {/* load all */}
+            <Tooltip
+              placement="bottom"
+              content={`Keep scrolling to load more ${type} automatically, or load all ${type} now.`}
+            >
+              <button
+                className={`underline underline-offset-2 ${fetchAllPages ? "text-red-500 dark:text-red-400" : ""}`}
+                onClick={() => setFetchAllPages((prevState) => !prevState)}
+              >
+                {fetchAllPages ? "Stop loading" : "Load all"}
+              </button>
+            </Tooltip>
+          </>
         )}
       </div>
     </div>
