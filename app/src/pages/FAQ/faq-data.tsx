@@ -41,11 +41,6 @@ export const FAQ_DATA: {
       ),
     },
     {
-      question: "I can't open the Videos or Albums tab.",
-      answer:
-        "These sections are not available yet. They will be added in a future update.",
-    },
-    {
       question: "What do the badges mean?",
       answer: (
         <div className="space-y-2">
@@ -224,10 +219,8 @@ export const FAQ_DATA: {
             automatically.
           </p>
           <p className="mt-4">
-            To see every individual release, either expand all grouped rows or
-            disable <b>{GROUP_BY_ISRC}</b> in Settings&nbsp;(⚙️). The total
-            number of results will then match the number of songs loaded from
-            Apple Music.
+            To see every individual song, either expand all grouped rows or
+            disable <b>{GROUP_BY_ISRC}</b> in Settings&nbsp;(⚙️).
           </p>
         </>
       ),
