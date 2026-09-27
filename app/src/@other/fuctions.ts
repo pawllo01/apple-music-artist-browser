@@ -2,7 +2,6 @@ import { ReactVirtualizer } from "@tanstack/react-virtual";
 
 import type { Type } from "../@types/item-types";
 import type { Market } from "../@types/market";
-import type { Offer } from "../@types/offer";
 
 export function changeUrlMarket(url: string, market: Market) {
   return url.replace(/\/[a-zA-Z]{2}\//, `/${market}/`);
@@ -63,13 +62,6 @@ export function getVirtualSpacerHeights(
       : 0;
 
   return { topSpacerHeight, bottomSpacerHeight };
-}
-
-export function getOfferFlags(offers: Offer[]) {
-  return {
-    isStreamingOnly: offers.length === 1 && offers[0].type === "subscription",
-    isPurchaseOnly: offers.length === 1 && offers[0].type === "buy",
-  };
 }
 
 export const clearSettingsByType = (type: Type) => {

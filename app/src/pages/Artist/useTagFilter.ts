@@ -1,12 +1,12 @@
 import { useContext, useMemo, useState } from "react";
 
-import { getOfferFlags } from "../../@other/fuctions";
 import type { Album } from "../../@types/album";
 import type { Song } from "../../@types/song";
 import type { Tags } from "../../@types/tags";
 import type { Video } from "../../@types/video";
 import { MarketContext } from "../../context/MarketContext";
 import { VA } from "../constants";
+import { getItemFlags } from "./getItemFlags";
 
 const generalTags = {
   prerelease: "Pre-release",
@@ -39,6 +39,8 @@ export default function useTagFilter<T extends Album | Song | Video>(
     };
 
     const itemsWithTags = items.map((item) => {
+      const itemFlags = getItemFlags(item);
+
       const itemTags: string[] = [];
 
       const addTag = (tag: string | undefined, group: keyof Tags) => {
@@ -47,48 +49,21 @@ export default function useTagFilter<T extends Album | Song | Video>(
         tagSets[group].add(tag);
       };
 
-      // pre-release
-      const offerTypes = item.attributes.offers.map((offer) => offer.type);
+      // general
+      if (itemFlags.isPrerelease) addTag(generalTags.prerelease, "general");
+      if (hasItunesStore && itemFlags.isStreamingOnly)
+        addTag(generalTags.streamingOnly, "general");
+      if (hasItunesStore && itemFlags.isPurchaseOnly)
+        addTag(generalTags.purchaseOnly, "general");
+      if (itemFlags.hasDolbyAtmos) addTag(generalTags.dolbyAtmos, "general");
+      if (itemFlags.has4K) addTag(generalTags._4K, "general");
+
+      if (itemFlags.isNeutral) addTag(generalTags.neutral, "general");
+      else if (itemFlags.isExplicit) addTag(generalTags.explicit, "general");
+      else if (itemFlags.isClean) addTag(generalTags.clean, "general");
+
       if (
-        (item.type === "albums" && item.attributes.isPrerelease) ||
-        (hasItunesStore &&
-          offerTypes.includes("preorder") &&
-          !offerTypes.includes("buy"))
-      )
-        addTag(generalTags.prerelease, "general");
-
-      // streaming only / purchase only
-      if (hasItunesStore) {
-        const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
-          item.attributes.offers,
-        );
-        if (isStreamingOnly) addTag(generalTags.streamingOnly, "general");
-        if (isPurchaseOnly) addTag(generalTags.purchaseOnly, "general");
-      }
-
-      // content rating
-      const contentRating =
-        item.attributes.contentRating === "explicit"
-          ? generalTags.explicit
-          : item.attributes.contentRating === "clean"
-            ? generalTags.clean
-            : generalTags.neutral;
-      addTag(contentRating, "general");
-
-      // dolby atmos
-      if (
-        item.type !== "music-videos" &&
-        item.attributes.audioTraits.includes("atmos")
-      )
-        addTag(generalTags.dolbyAtmos, "general");
-
-      // 4k
-      if (item.type === "music-videos" && item.attributes.has4K)
-        addTag(generalTags._4K, "general");
-
-      // various artists
-      if (
-        item.attributes.artistName === VA ||
+        itemFlags.isVA ||
         (item.type === "songs" && item.attributes.albumArtistName === VA)
       )
         addTag(generalTags.variousArtists, "general");
