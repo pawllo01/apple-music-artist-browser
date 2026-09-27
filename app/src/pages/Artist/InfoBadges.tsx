@@ -27,6 +27,13 @@ export default function InfoBadges({
     item.type !== "music-videos" &&
     item.attributes.audioTraits.includes("atmos");
 
+  const offerTypes = item.attributes.offers.map((offer) => offer.type);
+  const isPrerelease =
+    (item.type === "albums" && item.attributes.isPrerelease) ||
+    (hasItunesStore &&
+      offerTypes.includes("preorder") &&
+      !offerTypes.includes("buy"));
+
   const { isStreamingOnly, isPurchaseOnly } = getOfferFlags(
     item.attributes.offers,
   );
@@ -35,6 +42,7 @@ export default function InfoBadges({
 
   return (
     <>
+      {isPrerelease && INFO_BADGES.prerelease}
       {isExplicit && INFO_BADGES.explicit}
       {isClean && INFO_BADGES.clean}
       {has4K && INFO_BADGES._4K}

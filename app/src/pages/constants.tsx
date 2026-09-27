@@ -1,4 +1,4 @@
-import { Badge } from "flowbite-react";
+import { Badge, ThemeProvider } from "flowbite-react";
 import { IoMdCloudOutline } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { SiDolby } from "react-icons/si";
@@ -15,6 +15,8 @@ export const DEFAULT_COLUMNS = {
 };
 
 export const INFO_BADGES = {
+  prerelease: createInfoBadge("orange", "Pre-release", "P"),
+
   explicit: createInfoBadge("failure", "Explicit", "E"),
 
   clean: createInfoBadge("light", "Clean / Edited", "C"),
@@ -52,12 +54,24 @@ function createInfoBadge(
   children: React.ReactNode,
 ) {
   return (
-    <Badge
-      color={color}
-      className="inline-grid min-h-5 min-w-5 shrink-0 place-items-center p-0 align-middle leading-none select-none"
-      title={title}
+    <ThemeProvider
+      theme={{
+        badge: {
+          root: {
+            color: {
+              orange: "bg-linear-to-b from-[#ff8f34] to-[#ff7201] text-white",
+            },
+          },
+        },
+      }}
     >
-      {children}
-    </Badge>
+      <Badge
+        color={color}
+        className="inline-grid min-h-5 min-w-5 shrink-0 place-items-center p-0 align-middle leading-none select-none"
+        title={title}
+      >
+        {children}
+      </Badge>
+    </ThemeProvider>
   );
 }

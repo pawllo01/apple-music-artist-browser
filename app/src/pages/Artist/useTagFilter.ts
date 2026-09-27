@@ -9,6 +9,7 @@ import { MarketContext } from "../../context/MarketContext";
 import { VA } from "../constants";
 
 const generalTags = {
+  prerelease: "Pre-release",
   streamingOnly: "Streaming only",
   purchaseOnly: "Purchase only",
   dolbyAtmos: "Dolby Atmos",
@@ -45,6 +46,16 @@ export default function useTagFilter<T extends Album | Song | Video>(
         itemTags.push(tag);
         tagSets[group].add(tag);
       };
+
+      // pre-release
+      const offerTypes = item.attributes.offers.map((offer) => offer.type);
+      if (
+        (item.type === "albums" && item.attributes.isPrerelease) ||
+        (hasItunesStore &&
+          offerTypes.includes("preorder") &&
+          !offerTypes.includes("buy"))
+      )
+        addTag(generalTags.prerelease, "general");
 
       // streaming only / purchase only
       if (hasItunesStore) {

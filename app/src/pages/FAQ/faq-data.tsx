@@ -63,6 +63,10 @@ export const FAQ_DATA: {
             in the selected country.
           </p>
           <p>
+            {INFO_BADGES.prerelease} — Pre-release. This release is available
+            for pre-add on Apple Music or pre-order in the iTunes Store.
+          </p>
+          <p>
             {INFO_BADGES._4K} — Indicates that the video is available in 4K
             resoluttion.
           </p>
