@@ -55,7 +55,7 @@ export default function SearchBar({
   return (
     <div
       ref={searchBarRef}
-      className="top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-500 dark:bg-gray-600"
+      className={`top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-500 dark:bg-gray-600 ${type !== "songs" ? "shadow-sm" : ""}`}
       style={{ position: pinSearchBar ? "sticky" : "relative" }}
     >
       <div className="flex h-10.5 gap-2">
