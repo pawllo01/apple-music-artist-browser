@@ -26,7 +26,11 @@ export default function SortItemsDropdown({ sort, setSort }: Props) {
       className="dropdown"
       dismissOnClick={false}
       renderTrigger={() => (
-        <Button color="alternative" className="h-auto px-3" title="Sort by">
+        <Button
+          color="alternative"
+          className="h-auto w-[48px] p-0"
+          title="Sort by"
+        >
           <TbArrowsSort size={24} />
         </Button>
       )}

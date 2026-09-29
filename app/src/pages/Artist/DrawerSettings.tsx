@@ -27,7 +27,7 @@ export default function DrawerSettings({ children }: DrawerSettingsProps) {
     <>
       <Button
         color="alternative"
-        className="h-auto px-3"
+        className="h-auto w-[48px] p-0"
         title="Settings"
         onClick={() => setIsOpen(true)}
       >

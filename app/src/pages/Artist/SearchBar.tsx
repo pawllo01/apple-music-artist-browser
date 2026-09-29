@@ -59,16 +59,17 @@ export default function SearchBar({
       style={{ position: pinSearchBar ? "sticky" : "relative" }}
     >
       <div className="flex h-10.5 gap-2">
-        {/* search input (h-10.5) */}
-        <TextInput
-          type="search"
-          placeholder="Search..."
-          className="flex-1"
-          icon={HiSearch}
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          onKeyDown={hideKeyboard}
-        />
+        {/* search input */}
+        <div className="flex-1 max-sm:focus-within:absolute max-sm:focus-within:inset-x-4 max-sm:focus-within:z-10">
+          <TextInput
+            type="search"
+            placeholder="Search..."
+            icon={HiSearch}
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            onKeyDown={hideKeyboard}
+          />
+        </div>
 
         {/* pin search bar */}
         <Button
