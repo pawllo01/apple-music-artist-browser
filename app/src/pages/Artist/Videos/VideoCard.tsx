@@ -105,14 +105,22 @@ export default function VideoCard({ video, index, settings }: VideoCardProps) {
 
         {/* horizontal line */}
         {(settings.showIsrc || settings.showVideoId) && (
-          <HR className="mt-1 mb-2 dark:bg-gray-500" />
+          <HR className="mt-0.5 mb-1.5 dark:bg-gray-600" />
         )}
 
         {/* isrc */}
-        {settings.showIsrc && <p>ISRC: {video.attributes.isrc}</p>}
+        {settings.showIsrc && (
+          <p>
+            <strong>ISRC</strong>: {video.attributes.isrc}
+          </p>
+        )}
 
         {/* video id */}
-        {settings.showVideoId && <p>ID: {video.id}</p>}
+        {settings.showVideoId && (
+          <p>
+            <strong>ID</strong>: {video.id}
+          </p>
+        )}
       </div>
     </div>
   );

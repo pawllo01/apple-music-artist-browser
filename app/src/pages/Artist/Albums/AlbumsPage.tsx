@@ -121,7 +121,7 @@ export default function AlbumsPage() {
                 /* artists */ (settings.showArtists ? 20 : 0) +
                 /* label */ (settings.showLabel ? 20 : 0) +
                 /* horizontal line */ (settings.showUpc || settings.showAlbumId
-                  ? 13
+                  ? 9
                   : 0) +
                 /* upc */ (settings.showUpc ? 20 : 0) +
                 /* album id */ (settings.showAlbumId ? 20 : 0)

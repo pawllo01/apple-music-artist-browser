@@ -128,7 +128,7 @@ export default function VideosPage() {
                   /* artists */ (settings.showArtists ? 20 : 0) +
                   /* horizontal line */ (settings.showIsrc ||
                   settings.showVideoId
-                    ? 13
+                    ? 9
                     : 0) +
                   /* isrc */ (settings.showIsrc ? 20 : 0) +
                   /* video id */ (settings.showVideoId ? 20 : 0)

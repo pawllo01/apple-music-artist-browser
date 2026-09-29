@@ -76,14 +76,22 @@ export default function AlbumCard({ album, index, settings }: AlbumCardProps) {
 
         {/* horizontal line */}
         {(settings.showUpc || settings.showAlbumId) && (
-          <HR className="mt-1 mb-2 dark:bg-gray-500" />
+          <HR className="mt-0.5 mb-1.5 dark:bg-gray-600" />
         )}
 
         {/* upc */}
-        {settings.showUpc && <p>UPC: {album.attributes.upc}</p>}
+        {settings.showUpc && (
+          <p>
+            <strong>UPC</strong>: {album.attributes.upc}
+          </p>
+        )}
 
         {/* album id */}
-        {settings.showAlbumId && <p>ID: {album.id}</p>}
+        {settings.showAlbumId && (
+          <p>
+            <strong>ID</strong>: {album.id}
+          </p>
+        )}
       </div>
     </div>
   );
