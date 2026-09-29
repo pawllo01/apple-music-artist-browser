@@ -120,7 +120,6 @@ export default function VideosPage() {
                 groupByYear={settings.groupByYear}
                 query={query}
                 minCardWidth={280}
-                maxSingleColumnCardWidth={360}
                 getCardHeight={(width) =>
                   /* thumbnail (16:9) */ width * (9 / 16) +
                   /* title + margin */ 26 +

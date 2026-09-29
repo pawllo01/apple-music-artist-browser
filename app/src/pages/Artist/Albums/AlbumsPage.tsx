@@ -113,7 +113,6 @@ export default function AlbumsPage() {
               groupByYear={settings.groupByYear}
               query={query}
               minCardWidth={220}
-              maxSingleColumnCardWidth={280}
               getCardHeight={(width) =>
                 /* thumbnail (1:1) */ width +
                 /* title + margin */ 26 +

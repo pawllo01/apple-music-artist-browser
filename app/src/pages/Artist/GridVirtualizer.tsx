@@ -33,7 +33,6 @@ type GridVirtualizerProps<T extends Album | Video> = {
   };
   query: FetchItems;
   minCardWidth: number;
-  maxSingleColumnCardWidth: number;
   getCardHeight: (width: number) => number;
   renderItem: (item: T, index: number) => React.ReactNode;
 };
@@ -43,7 +42,6 @@ export default function GridVirtualizer<T extends Album | Video>({
   groupByYear,
   query,
   minCardWidth,
-  maxSingleColumnCardWidth,
   getCardHeight,
   renderItem,
 }: GridVirtualizerProps<T>) {
@@ -64,8 +62,8 @@ export default function GridVirtualizer<T extends Album | Video>({
   );
 
   const cardWidth =
-    columnCount === 1
-      ? maxSingleColumnCardWidth
+    columnCount <= 2
+      ? minCardWidth
       : (parentWidth - (columnCount - 1) * GAP) / columnCount;
 
   // rows
