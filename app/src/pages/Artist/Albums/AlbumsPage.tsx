@@ -1,12 +1,15 @@
 import { useMemo } from "react";
 import { useOutletContext } from "react-router";
+
 import LoadingSpinner from "../../../components/LoadingSpinner";
 import ScrollToTop from "../../../components/ScrollToTop";
+import ViewAsBtn from "../../../components/ViewAsBtn";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import type { FooterHeightContextType } from "../../../layouts/BaseLayout";
 import AsyncState from "../AsyncState";
 import ClearFilter from "../ClearFilter";
 import GridVirtualizer from "../GridVirtualizer";
+import ListVirtualizer from "../ListVirtualizer";
 import SearchBar from "../SearchBar";
 import { sortItemsByOption } from "../sortItemsByOption";
 import SortItemsDropdown, { type Sort } from "../SortItemsDropdown";
@@ -19,6 +22,11 @@ import useAlbumsSettings from "./useAlbumsSettings";
 
 export default function AlbumsPage() {
   const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
+
+  const [isList, setIsList] = useLocalStorage(
+    "albums:is-list",
+    window.innerWidth <= 768,
+  );
 
   // SETTINGS
   const settings = useAlbumsSettings();
@@ -98,6 +106,9 @@ export default function AlbumsPage() {
             />
           }
         >
+          {/* view as */}
+          <ViewAsBtn isList={isList} setIsList={setIsList} />
+
           {/* sort by */}
           <SortItemsDropdown sort={sort} setSort={setSort} />
 
@@ -107,34 +118,58 @@ export default function AlbumsPage() {
 
         <div className="-mx-4 flex-1 p-4 dark:bg-gray-700">
           {/* album cards */}
-          {filteredAlbums.length > 0 && (
-            <GridVirtualizer
-              items={filteredAlbums}
-              groupByYear={settings.groupByYear}
-              query={query}
-              minCardWidth={220}
-              getCardHeight={(width) =>
-                /* thumbnail (1:1) */ width +
-                /* title + margin */ 26 +
-                /* release date */ 20 +
-                /* artists */ (settings.showArtists ? 20 : 0) +
-                /* label */ (settings.showLabel ? 20 : 0) +
-                /* horizontal line */ (settings.showUpc || settings.showAlbumId
-                  ? 9
-                  : 0) +
-                /* upc */ (settings.showUpc ? 20 : 0) +
-                /* album id */ (settings.showAlbumId ? 20 : 0)
-              }
-              renderItem={(album, index) => (
-                <AlbumCard
-                  key={album.id}
-                  album={album}
-                  index={index}
-                  settings={settings}
-                />
-              )}
-            />
-          )}
+          {filteredAlbums.length > 0 &&
+            (isList ? (
+              <ListVirtualizer
+                items={filteredAlbums}
+                groupByYear={settings.groupByYear}
+                query={query}
+                estimatedSize={
+                  Math.min(
+                    140,
+                    Math.max(115, (window.innerWidth - 32) * 0.33),
+                  ) + 17
+                }
+                renderItem={(album, index) => (
+                  <AlbumCard
+                    key={album.id}
+                    album={album}
+                    index={index}
+                    settings={settings}
+                    isList={true}
+                  />
+                )}
+              />
+            ) : (
+              <GridVirtualizer
+                items={filteredAlbums}
+                groupByYear={settings.groupByYear}
+                query={query}
+                minCardWidth={220}
+                getCardHeight={(width) =>
+                  /* thumbnail (1:1) */ width +
+                  /* title + margin */ 26 +
+                  /* release date */ 20 +
+                  /* artists */ (settings.showArtists ? 20 : 0) +
+                  /* label */ (settings.showLabel ? 20 : 0) +
+                  /* horizontal line */ (settings.showUpc ||
+                  settings.showAlbumId
+                    ? 9
+                    : 0) +
+                  /* upc */ (settings.showUpc ? 20 : 0) +
+                  /* album id */ (settings.showAlbumId ? 20 : 0)
+                }
+                renderItem={(album, index) => (
+                  <AlbumCard
+                    key={album.id}
+                    album={album}
+                    index={index}
+                    settings={settings}
+                    isList={false}
+                  />
+                )}
+              />
+            ))}
 
           {/* no results */}
           {filteredAlbums.length === 0 && (
