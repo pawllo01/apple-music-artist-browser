@@ -1,6 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 
-import { Badge } from "flowbite-react";
 import { groupBy } from "lodash-es";
 import { useResizeObserver } from "use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
@@ -8,6 +7,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { getVirtualSpacerHeights } from "../../@other/fuctions";
 import type { Album } from "../../@types/album";
 import type { Video } from "../../@types/video";
+import GroupTitle from "../../components/GroupTitle";
 import type { FetchItems } from "./useFetchItems";
 import useInfiniteScroll from "./useInfiniteScroll";
 import useRestoreScrollPosition from "./useRestoreScrollPosition";
@@ -16,14 +16,6 @@ import useRestoreScrollPosition from "./useRestoreScrollPosition";
 // https://tanstack.com/virtual/latest/docs/framework/react/examples/dynamic
 
 const GAP = 16;
-
-type Row<T extends Album | Video> = {
-  items: T[];
-  startItemIndex: number;
-  hasTitle: boolean;
-  groupTitle: string;
-  groupItemCount: number;
-};
 
 type GridVirtualizerProps<T extends Album | Video> = {
   items: T[];
@@ -73,31 +65,31 @@ export default function GridVirtualizer<T extends Album | Video>({
       : { all: items };
 
     const groupEntries = Object.entries(groupedItems);
-
     if (groupByYear.sortDescFirst) groupEntries.reverse();
 
-    const rows: Row<T>[] = [];
-
-    groupEntries.forEach(([year, items]) => {
-      for (let i = 0; i < items.length; i += columnCount) {
-        rows.push({
-          items: items.slice(i, i + columnCount),
-          startItemIndex: i,
-          hasTitle: groupByYear.enabled && i === 0,
-          groupTitle: year,
-          groupItemCount: items.length,
-        });
-      }
-    });
-
-    return rows;
+    return groupEntries.flatMap(([year, items]) =>
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#using_arrow_functions_and_array.from
+      Array.from(
+        { length: Math.ceil(items.length / columnCount) },
+        (_, index) => {
+          const startItemIndex = index * columnCount;
+          return {
+            items: items.slice(startItemIndex, startItemIndex + columnCount),
+            startItemIndex,
+            title: groupByYear.enabled && index === 0 && (
+              <GroupTitle title={year} count={items.length} className="mb-4" />
+            ),
+          };
+        },
+      ),
+    );
   }, [items, columnCount, groupByYear]);
 
   // virtualizer
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
     estimateSize: (index) =>
-      getCardHeight(cardWidth) + (rows[index].hasTitle ? 45 : 0),
+      getCardHeight(cardWidth) + (rows[index].title ? 45 : 0),
     overscan: 2,
     scrollMargin: parentOffsetRef.current,
     gap: GAP,
@@ -130,21 +122,8 @@ export default function GridVirtualizer<T extends Album | Video>({
                 data-index={virtualRow.index}
                 ref={rowVirtualizer.measureElement}
               >
-                {/* row title */}
-                {row.hasTitle && (
-                  <h3 className="mb-4 flex items-center gap-x-1.5 border-b border-b-gray-200 pb-1 dark:border-b-gray-500">
-                    <span className="text-2xl leading-none font-bold">
-                      {row.groupTitle}
-                    </span>
-                    <Badge
-                      size="sm"
-                      color="alternative"
-                      className="bg-gray-200 dark:bg-gray-600"
-                    >
-                      {row.groupItemCount}
-                    </Badge>
-                  </h3>
-                )}
+                {/* row title (optional) */}
+                {row.title}
 
                 {/* row items */}
                 <div
