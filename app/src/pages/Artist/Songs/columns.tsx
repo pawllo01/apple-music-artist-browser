@@ -98,21 +98,22 @@ export function createColumns(
       meta: { className: sizes.FULL },
       header: "Name",
       cell: ({ row, getValue }) => (
-        <span className="flex items-center gap-1">
-          <span>
-            <a
-              href={row.original.attributes.url}
-              target="_blank"
-              className="hover:underline"
-            >
-              {getValue()}
-              {showIdsInCells && ` [${row.original.id}]`}
-            </a>
+        <span>
+          <a
+            href={row.original.attributes.url}
+            target="_blank"
+            className="hover:underline"
+          >
+            {getValue()}
+            {showIdsInCells && ` [${row.original.id}]`}
+          </a>
+          &nbsp;
+          <span className="inline-flex shrink-0 gap-1 align-middle">
+            <InfoBadges
+              item={row.original}
+              showDolbyAtmos={showDolbyAtmosBadge}
+            />
           </span>
-          <InfoBadges
-            item={row.original}
-            showDolbyAtmos={showDolbyAtmosBadge}
-          />
         </span>
       ),
     }),
@@ -139,25 +140,26 @@ export function createColumns(
       cell: ({ row, getValue }) => {
         const album = row.original.relationships.albums.data[0];
         return (
-          <span className="flex items-center gap-1">
-            <span>
-              <a
-                href={album.attributes?.url}
-                target="_blank"
-                className="hover:underline"
-              >
-                {truncateAlbumNames
-                  ? getValue().replace(/ - (Single|EP)$/, "")
-                  : getValue()}
-                {showIdsInCells && ` [${album.id}]`}
-              </a>
+          <span>
+            <a
+              href={album.attributes?.url}
+              target="_blank"
+              className="hover:underline"
+            >
+              {truncateAlbumNames
+                ? getValue().replace(/ - (Single|EP)$/, "")
+                : getValue()}
+              {showIdsInCells && ` [${album.id}]`}
+            </a>
+            &nbsp;
+            <span className="inline-flex shrink-0 gap-1 align-middle">
+              {album.attributes && (
+                <InfoBadges
+                  item={{ ...album, attributes: album.attributes }}
+                  showDolbyAtmos={showDolbyAtmosBadge}
+                />
+              )}
             </span>
-            {album.attributes && (
-              <InfoBadges
-                item={{ ...album, attributes: album.attributes }}
-                showDolbyAtmos={showDolbyAtmosBadge}
-              />
-            )}
           </span>
         );
       },
