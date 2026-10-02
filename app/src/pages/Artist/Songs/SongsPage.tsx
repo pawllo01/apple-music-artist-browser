@@ -37,6 +37,8 @@ type SongTab = "main" | "mixed" | "all";
 export default function SongsPage() {
   const { height: footerHeight } = useOutletContext<FooterHeightContextType>();
 
+  const [searchBarOffset, setSearchBarOffset] = useState<number>(0);
+
   // SETTINGS
   const settings = useSongsSettings();
   const {
@@ -47,8 +49,6 @@ export default function SongsPage() {
     truncateAlbumNames,
     showIdsInCells,
   } = settings;
-
-  const [searchBarOffset, setSearchBarOffset] = useState<number>(0);
 
   // SONGS
   const query = useFetchItems("songs");

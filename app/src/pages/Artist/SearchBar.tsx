@@ -43,13 +43,11 @@ export default function SearchBar({
   const searchBarRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
-    if (setSearchBarOffset) {
-      if (pinSearchBar)
-        setSearchBarOffset(
-          searchBarRef.current?.getBoundingClientRect().height ?? 0,
-        );
-      else setSearchBarOffset(0);
-    }
+    setSearchBarOffset?.(
+      pinSearchBar
+        ? (searchBarRef.current?.getBoundingClientRect().height ?? 0)
+        : 0,
+    );
   }, [pinSearchBar, setSearchBarOffset]);
 
   return (
