@@ -55,7 +55,7 @@ export default function SearchBar({
   return (
     <div
       ref={searchBarRef}
-      className={`top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-2 dark:border-b-gray-500 dark:bg-gray-600 ${type !== "songs" ? "shadow-sm" : ""}`}
+      className={`top-0 z-40 -mx-4 border-b border-b-gray-200 bg-white p-4 pb-0 dark:border-b-gray-500 dark:bg-gray-600 ${type !== "songs" ? "shadow-sm" : ""}`}
       style={{ position: pinSearchBar ? "sticky" : "relative" }}
     >
       <div className="flex h-10.5 gap-2">
@@ -89,49 +89,51 @@ export default function SearchBar({
         <ButtonGroup id="settings-group">{children}</ButtonGroup>
       </div>
 
-      {/* tags modal */}
-      {tagsModal}
+      <div className="scrollbar-hide flex items-center gap-1.5 overflow-auto px-1 py-2">
+        <div className="flex min-w-[93px] shrink-0 items-center gap-1.5 text-sm text-gray-500 dark:text-gray-300">
+          {/* results */}
+          <Tooltip
+            placement="bottom"
+            content={`Number of ${type} matching current filters`}
+          >
+            Results: {resultsLength}
+          </Tooltip>
 
-      <div className="scrollbar-hide flex items-center gap-1.5 overflow-auto px-1 text-sm text-gray-500 *:shrink-0 dark:text-gray-300">
-        {/* results */}
-        <Tooltip
-          placement="bottom"
-          content={`Number of ${type} matching current filters`}
-        >
-          Results: {resultsLength}
-        </Tooltip>
+          {itemsLength < totalLength && (
+            <>
+              {/* divider */}
+              <div className="size-1 rounded-full bg-gray-400" />
 
-        {itemsLength < totalLength && (
-          <>
-            {/* divider */}
-            <div className="h-5 border-s border-gray-300 dark:border-gray-500" />
-
-            {/* loaded items */}
-            <Tooltip
-              placement="bottom"
-              content={`Number of ${type} loaded from Apple Music`}
-            >
-              Loaded: {itemsLength} / {totalLength} (
-              {Math.floor((itemsLength / totalLength) * 100)}%)
-            </Tooltip>
-
-            {/* divider */}
-            <div className="h-5 border-s border-gray-300 dark:border-gray-500" />
-
-            {/* load all */}
-            <Tooltip
-              placement="bottom"
-              content={`Keep scrolling to load more ${type} automatically, or load all ${type} now.`}
-            >
-              <button
-                className={`underline underline-offset-2 ${fetchAllPages ? "text-red-500 dark:text-red-400" : ""}`}
-                onClick={() => setFetchAllPages((prevState) => !prevState)}
+              {/* loaded items */}
+              <Tooltip
+                placement="bottom"
+                content={`Number of ${type} loaded from Apple Music`}
               >
-                {fetchAllPages ? "Stop loading" : "Load all"}
-              </button>
-            </Tooltip>
-          </>
-        )}
+                Loaded: {itemsLength} / {totalLength} (
+                {Math.floor((itemsLength / totalLength) * 100)}%)
+              </Tooltip>
+
+              {/* divider */}
+              <div className="size-1 rounded-full bg-gray-400" />
+
+              {/* load all */}
+              <Tooltip
+                placement="bottom"
+                content={`Keep scrolling to load more ${type} automatically, or load all ${type} now.`}
+              >
+                <button
+                  className={`underline underline-offset-2 ${fetchAllPages ? "text-red-500 dark:text-red-400" : ""}`}
+                  onClick={() => setFetchAllPages((prevState) => !prevState)}
+                >
+                  {fetchAllPages ? "Stop loading" : "Load all"}
+                </button>
+              </Tooltip>
+            </>
+          )}
+        </div>
+
+        {/* tags modal */}
+        {tagsModal}
       </div>
     </div>
   );

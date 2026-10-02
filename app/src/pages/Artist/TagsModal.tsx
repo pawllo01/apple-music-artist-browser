@@ -27,7 +27,9 @@ export default function TagsModal({
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   return (
-    <div className="scrollbar-hide flex items-center gap-1.5 overflow-auto px-1 py-2">
+    <>
+      <div className="h-7 border-s border-gray-300 dark:border-gray-500" />
+
       {/* modal button */}
       <Button
         pill
@@ -124,6 +126,6 @@ export default function TagsModal({
           )}
         </ModalFooter>
       </Modal>
-    </div>
+    </>
   );
 }
