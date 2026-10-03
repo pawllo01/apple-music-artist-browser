@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { VirtualItem } from "@tanstack/react-virtual";
 import { FetchItems } from "./useFetchItems";
 
-// https://tanstack.com/virtual/latest/docs/framework/react/examples/infinite-scroll
+// https://tanstack.com/virtual/v3/docs/framework/react/examples/infinite-scroll
 // fetch the next page when the last virtual row becomes visible
 
 export default function useInfiniteScroll(

@@ -39,8 +39,8 @@ export default function SongsTable({
   const { rows } = table.getRowModel();
 
   // VIRTUALIZATION
-  // https://tanstack.com/virtual/latest/docs/framework/react/examples/window
-  // https://tanstack.com/table/latest/docs/framework/react/examples/virtualized-rows
+  // https://tanstack.com/virtual/v3/docs/framework/react/examples/window
+  // https://tanstack.com/table/v8/docs/framework/react/examples/virtualized-rows
 
   const tbodyRef = useRef<HTMLTableSectionElement | null>(null);
   const tbodyOffsetRef = useRef(0);
@@ -86,7 +86,7 @@ export default function SongsTable({
                         key={header.id}
                         className={`song-table-cell select-none ${header.column.columnDef.meta?.className} ${header.column.getIsSorted() ? "text-primary-500" : ""}`}
                       >
-                        {/* https://tanstack.com/table/latest/docs/framework/react/examples/sorting */}
+                        {/* https://tanstack.com/table/v8/docs/framework/react/examples/sorting */}
                         <span
                           className={
                             header.column.getCanSort()

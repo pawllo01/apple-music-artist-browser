@@ -13,7 +13,7 @@ import useInfiniteScroll from "./useInfiniteScroll";
 import useRestoreScrollPosition from "./useRestoreScrollPosition";
 
 // grid virtualization example
-// https://tanstack.com/virtual/latest/docs/framework/react/examples/dynamic
+// https://tanstack.com/virtual/v3/docs/framework/react/examples/dynamic
 
 const GAP = 16;
 

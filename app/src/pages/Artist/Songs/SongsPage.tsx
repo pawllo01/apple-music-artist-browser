@@ -111,13 +111,13 @@ export default function SongsPage() {
   );
 
   // TABLE STATES
-  // https://tanstack.com/table/latest/docs/guide/global-filtering
+  // https://tanstack.com/table/v8/docs/guide/global-filtering
   const [globalFilter, setGlobalFilter] = useState<string>("");
 
-  // https://tanstack.com/table/latest/docs/guide/expanding
+  // https://tanstack.com/table/v8/docs/guide/expanding
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
-  // https://tanstack.com/table/latest/docs/guide/sorting
+  // https://tanstack.com/table/v8/docs/guide/sorting
   const [sorting, setSorting] = useState<SortingState>(() => {
     if (saveSorting) {
       const savedSorting = localStorage.getItem("songs:sorting-state");
@@ -137,13 +137,13 @@ export default function SongsPage() {
       localStorage.setItem("songs:sorting-state", JSON.stringify(sorting));
   }, [saveSorting, sorting]);
 
-  // https://tanstack.com/table/latest/docs/guide/column-ordering
+  // https://tanstack.com/table/v8/docs/guide/column-ordering
   const [columnOrder, setColumnOrder] = useLocalStorage<string[]>(
     "songs:column-order",
     columns.map((c) => c.id!),
   );
 
-  // https://tanstack.com/table/latest/docs/guide/column-visibility
+  // https://tanstack.com/table/v8/docs/guide/column-visibility
   const [columnVisibility, setColumnVisibility] =
     useLocalStorage<VisibilityState>(
       "songs:column-visibility",
@@ -181,11 +181,11 @@ export default function SongsPage() {
     onColumnOrderChange: setColumnOrder,
     onColumnVisibilityChange: setColumnVisibility,
 
-    // https://tanstack.com/table/latest/docs/guide/expanding#filtering-expanded-rows
+    // https://tanstack.com/table/v8/docs/guide/expanding#filtering-expanded-rows
     filterFromLeafRows: true, // search through the expanded rows
     maxLeafRowFilterDepth: 10, // limit the depth of the expanded rows that are searched
 
-    // https://tanstack.com/table/latest/docs/guide/grouping#grouping-state
+    // https://tanstack.com/table/v8/docs/guide/grouping#grouping-state
     groupedColumnMode: false,
   });
 

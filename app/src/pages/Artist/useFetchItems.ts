@@ -18,7 +18,7 @@ export default function useFetchItems<T extends Type>(type: T) {
   const { artistId } = useParams();
   const { market } = useContext(MarketContext)!;
 
-  // https://tanstack.com/query/latest/docs/framework/react/guides/infinite-queries
+  // https://tanstack.com/query/v5/docs/framework/react/guides/infinite-queries
   const {
     data,
     error,
@@ -67,7 +67,7 @@ export default function useFetchItems<T extends Type>(type: T) {
   }, [fetchAllPages, fetchNextPage, hasNextPage, isFetching]);
 
   // items
-  // https://tanstack.com/table/latest/docs/framework/react/examples/virtualized-infinite-scrolling
+  // https://tanstack.com/table/v8/docs/framework/react/examples/virtualized-infinite-scrolling
   const items = useMemo(
     () => data?.pages?.flatMap((page) => page.items) ?? [],
     [data],

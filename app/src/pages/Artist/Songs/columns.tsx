@@ -8,7 +8,7 @@ import { ExpandButton } from "../../../components/ExpandButton";
 import ArtistListModal from "../ArtistListModal";
 import InfoBadges from "../InfoBadges";
 
-// docs - https://tanstack.com/table/latest/docs/guide/column-defs
+// docs - https://tanstack.com/table/v8/docs/guide/column-defs
 
 const columnHelper = createColumnHelper<Song>();
 
