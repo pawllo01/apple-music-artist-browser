@@ -7,10 +7,10 @@ export function sortItemsByOption<T extends Album | Video>(
   items: T[],
   sort: Sort,
 ) {
-  const getId = (v: T) => Number(v.id);
-  const getName = (v: T) => v.attributes.name;
-  const getContentRating = (v: T) => v.attributes.contentRating;
-  const getReleaseDate = (v: T) => v.attributes.releaseDate;
+  const getId = (item: T) => Number(item.id);
+  const getName = (item: T) => item.attributes.name;
+  const getContentRating = (item: T) => item.attributes.contentRating;
+  const getReleaseDate = (item: T) => item.attributes.releaseDate;
 
   switch (sort.field) {
     default:
