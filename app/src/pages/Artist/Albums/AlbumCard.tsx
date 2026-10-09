@@ -35,7 +35,10 @@ export default function AlbumCard({ album, index, settings, isList }: Props) {
         >
           <img
             src={album.attributes.artwork.url.replace("{w}x{h}", "300x300")}
-            className={`aspect-square w-full bg-black object-contain`}
+            className={`aspect-square w-full object-contain`}
+            style={{
+              backgroundColor: `#${album.attributes.artwork.bgColor || "000000"}`,
+            }}
           />
         </a>
 

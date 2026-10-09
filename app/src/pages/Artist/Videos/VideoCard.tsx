@@ -40,7 +40,10 @@ export default function VideoCard({ video, index, settings, isList }: Props) {
         >
           <img
             src={video.attributes.artwork.url.replace("{w}x{h}mv", "640x640bb")}
-            className={`aspect-video w-full ${settings.cropThumbnails ? "object-cover" : "bg-black object-contain"}`}
+            className={`aspect-video w-full ${settings.cropThumbnails ? "object-cover" : "object-contain"}`}
+            style={{
+              backgroundColor: `#${video.attributes.artwork.bgColor || "000000"}`,
+            }}
           />
         </a>
 

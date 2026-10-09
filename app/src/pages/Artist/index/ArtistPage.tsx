@@ -122,7 +122,7 @@ export default function ArtistPage() {
 
           {/* Bio */}
           {artist.attributes.artistBio && (
-            <div className="col-span-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <div className="col-span-full cursor-pointer rounded-md p-2 transition hover:bg-gray-100 dark:hover:bg-gray-700">
               <ArtistBioModal text={artist.attributes.artistBio} />
             </div>
           )}

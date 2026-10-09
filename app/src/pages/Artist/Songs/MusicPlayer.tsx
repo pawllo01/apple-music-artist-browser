@@ -60,7 +60,7 @@ export default function MusicPlayer({
 
   return (
     currentSong && (
-      <div className="grid grid-cols-[1fr_auto] items-center gap-x-2 border-t border-t-gray-200 bg-white/90 backdrop-blur lg:grid-cols-[1fr_2fr_1fr] dark:border-t-transparent dark:bg-gray-700/90">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-x-2 border-t border-t-gray-200 bg-white/90 backdrop-blur lg:grid-cols-[1fr_2fr_1fr] dark:border-t-gray-600 dark:bg-gray-700/90">
         {/* song info */}
         <div className="flex items-center gap-2 ps-2 pt-2 lg:pt-0">
           {/* cover */}
