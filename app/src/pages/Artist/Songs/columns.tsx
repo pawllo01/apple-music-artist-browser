@@ -6,6 +6,7 @@ import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
 import type { Song } from "../../../@types/song";
 import { ExpandButton } from "../../../components/ExpandButton";
 import ArtistListModal from "../ArtistListModal";
+import ContextMenu from "../ContextMenu";
 import InfoBadges from "../InfoBadges";
 
 // docs - https://tanstack.com/table/v8/docs/guide/column-defs
@@ -24,6 +25,7 @@ const sizes = {
   upc: "w-[127px]",
   song_id: "w-[95px]",
   album_id: "w-[95px]",
+  context_menu: "w-[52px]",
 };
 
 export function createColumns(
@@ -271,5 +273,12 @@ export function createColumns(
         cell: ({ getValue }) => getValue(),
       },
     ),
+
+    // context menu
+    columnHelper.display({
+      id: "menu",
+      meta: { className: sizes.context_menu },
+      cell: ({ row }) => <ContextMenu item={row.original} />,
+    }),
   ];
 }

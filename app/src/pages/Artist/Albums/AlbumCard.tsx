@@ -1,6 +1,8 @@
 import { HR } from "flowbite-react";
+
 import { Album } from "../../../@types/album";
 import ArtistListModal from "../ArtistListModal";
+import ContextMenu from "../ContextMenu";
 import InfoBadges from "../InfoBadges";
 import { AlbumsSettingsType } from "./useAlbumsSettings";
 
@@ -36,6 +38,9 @@ export default function AlbumCard({ album, index, settings, isList }: Props) {
             className={`aspect-square w-full bg-black object-contain`}
           />
         </a>
+
+        {/* context menu */}
+        <ContextMenu item={album} />
       </div>
 
       <div className={`${isList ? "flex-1" : ""}`}>

@@ -70,7 +70,10 @@ input {
   }
 }
 
-.gradient,
+@utility gradient {
+  @apply bg-linear-to-r from-pink-500 via-red-500 to-orange-500;
+}
+
 .rhap_progress-filled {
   @apply bg-linear-to-r from-pink-500 via-red-500 to-orange-500;
 }

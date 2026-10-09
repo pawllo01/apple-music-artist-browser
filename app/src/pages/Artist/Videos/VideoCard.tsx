@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { HR } from "flowbite-react";
 import { FaPlay } from "react-icons/fa";
 
@@ -6,6 +7,7 @@ import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
 import { CurrentVideoContext } from "../../../context/CurrentVideoContext";
 import ArtistListModal from "../ArtistListModal";
+import ContextMenu from "../ContextMenu";
 import InfoBadges from "../InfoBadges";
 import { VideosSettingsType } from "./useVideosSettings";
 
@@ -44,19 +46,22 @@ export default function VideoCard({ video, index, settings, isList }: Props) {
 
         {/* preview */}
         <button
-          className="absolute bottom-2 left-2 rounded-full bg-black/50 transition hover:scale-110 lg:opacity-0 lg:group-hover:opacity-100"
+          className="hover:gradient absolute bottom-2 left-2 flex size-9 items-center justify-center rounded-full bg-black/50 transition lg:opacity-0 lg:group-hover:opacity-100"
           title="Watch Preview"
           onClick={() => setCurrentVideo(video)}
         >
-          <FaPlay className="m-3 size-3 text-white" />
+          <FaPlay className="size-3 text-white" />
         </button>
 
         {/* duration */}
         {video.attributes.durationInMillis && (
-          <span className="absolute right-2 bottom-2 rounded bg-black/50 p-1 text-xs leading-none text-white">
+          <span className="absolute right-2 bottom-2 rounded bg-black/50 p-1 text-xs leading-none text-white group-hover:hidden">
             {convertMillisecondsToMMSS(video.attributes.durationInMillis)}
           </span>
         )}
+
+        {/* context menu */}
+        <ContextMenu item={video} />
       </div>
 
       <div className={`${isList ? "flex-1" : ""}`}>
