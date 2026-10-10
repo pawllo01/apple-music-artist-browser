@@ -3,7 +3,10 @@ import { useContext } from "react";
 import { HR } from "flowbite-react";
 import { FaPlay } from "react-icons/fa";
 
-import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
+import {
+  convertMillisecondsToMMSS,
+  toLocaleDate,
+} from "../../../@other/fuctions";
 import { Video } from "../../../@types/video";
 import { CurrentVideoContext } from "../../../context/CurrentVideoContext";
 import ArtistListModal from "../ArtistListModal";
@@ -24,6 +27,8 @@ export default function VideoCard({ video, index, settings, isList }: Props) {
   const title = `${settings.showNumbering ? `${index + 1}. ` : ""}${video.attributes.name}`;
 
   const album = video.relationships.albums.data[0];
+
+  const fullReleaseDate = toLocaleDate(video.attributes.releaseDate);
 
   return (
     <div
@@ -116,9 +121,9 @@ export default function VideoCard({ video, index, settings, isList }: Props) {
         <div className="text-gray-500 dark:text-gray-300">
           <p>
             {/* release date */}
-            <span title={video.attributes.releaseDate}>
+            <span title={fullReleaseDate}>
               {settings.showFullReleaseDate
-                ? video.attributes.releaseDate
+                ? fullReleaseDate
                 : video.attributes.releaseDate?.slice(0, 4)}
             </span>
 

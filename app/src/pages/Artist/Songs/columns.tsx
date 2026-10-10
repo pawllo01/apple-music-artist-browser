@@ -2,7 +2,10 @@ import { Badge } from "flowbite-react";
 import { FaPlay } from "react-icons/fa";
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { convertMillisecondsToMMSS } from "../../../@other/fuctions";
+import {
+  convertMillisecondsToMMSS,
+  toLocaleDate,
+} from "../../../@other/fuctions";
 import type { Song } from "../../../@types/song";
 import { ExpandButton } from "../../../components/ExpandButton";
 import ArtistListModal from "../ArtistListModal";
@@ -18,8 +21,8 @@ const sizes = {
   count: "w-[48px] justify-center",
   cover: "w-[64px]",
   time: "w-[65px]",
-  date: "w-[87px]",
-  album_date: "w-[87px]",
+  date: "w-[97px]",
+  album_date: "w-[97px]",
   group: "w-[87px]",
   isrc: "w-[109px]",
   upc: "w-[127px]",
@@ -182,11 +185,7 @@ export function createColumns(
       sortDescFirst: true,
       meta: { className: sizes.date },
       header: "Date",
-      cell: ({ row }) => (
-        <span className="text-nowrap">
-          {row.original.attributes.releaseDate}
-        </span>
-      ),
+      cell: ({ getValue }) => toLocaleDate(getValue()),
     }),
 
     // album date
@@ -197,11 +196,7 @@ export function createColumns(
         sortDescFirst: true,
         meta: { className: sizes.album_date },
         header: "Album date",
-        cell: ({ row }) => (
-          <span className="text-nowrap">
-            {row.original.relationships.albums.data[0].attributes?.releaseDate}
-          </span>
-        ),
+        cell: ({ getValue }) => toLocaleDate(getValue()),
       },
     ),
 

@@ -64,9 +64,17 @@ export function getVirtualSpacerHeights(
   return { topSpacerHeight, bottomSpacerHeight };
 }
 
-export const clearSettingsByType = (type: Type) => {
+export function clearSettingsByType(type: Type) {
   Object.keys(localStorage).forEach((key) => {
     if (key.startsWith(`${type}:`)) localStorage.removeItem(key);
   });
   window.location.reload();
-};
+}
+
+export function toLocaleDate(date: string) {
+  return new Date(date).toLocaleString(undefined, {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}

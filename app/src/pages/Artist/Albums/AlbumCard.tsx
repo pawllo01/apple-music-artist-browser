@@ -1,5 +1,6 @@
 import { HR } from "flowbite-react";
 
+import { toLocaleDate } from "../../../@other/fuctions";
 import { Album } from "../../../@types/album";
 import ArtistListModal from "../ArtistListModal";
 import ContextMenu from "../ContextMenu";
@@ -19,6 +20,8 @@ export default function AlbumCard({ album, index, settings, isList }: Props) {
       ? album.attributes.name.replace(/ - (Single|EP)$/, "")
       : album.attributes.name
   }`;
+
+  const fullReleaseDate = toLocaleDate(album.attributes.releaseDate);
 
   return (
     <div
@@ -85,9 +88,9 @@ export default function AlbumCard({ album, index, settings, isList }: Props) {
         <div className="text-gray-500 dark:text-gray-300">
           <p>
             {/* release date */}
-            <span title={album.attributes.releaseDate}>
+            <span title={fullReleaseDate}>
               {settings.showFullReleaseDate
-                ? album.attributes.releaseDate
+                ? fullReleaseDate
                 : album.attributes.releaseDate?.slice(0, 4)}
             </span>
 
