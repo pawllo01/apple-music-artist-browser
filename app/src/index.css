@@ -87,6 +87,11 @@ input {
   @apply dark:text-white!;
 }
 
+.rhap_controls-section {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .dropdown {
   @apply max-h-[calc(100dvh-5rem)] max-w-60 min-w-40! overflow-auto;
 }

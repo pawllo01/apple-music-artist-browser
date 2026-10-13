@@ -1,5 +1,8 @@
-import type { Dispatch, SetStateAction } from "react";
-import AudioPlayer from "react-h5-audio-player";
+import { useMemo, useState } from "react";
+
+import { shuffle } from "lodash-es";
+import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
+import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import type { Row } from "@tanstack/react-table";
 
 import type { Song } from "../../../@types/song";
@@ -9,7 +12,7 @@ import InfoBadges from "../InfoBadges";
 
 type MusicPlayerProps = {
   currentSong: Song | null;
-  setCurrentSong: Dispatch<SetStateAction<Song | null>>;
+  setCurrentSong: React.Dispatch<React.SetStateAction<Song | null>>;
   rows: Row<Song>[];
 };
 
@@ -18,30 +21,36 @@ export default function MusicPlayer({
   setCurrentSong,
   rows,
 }: MusicPlayerProps) {
+  const [isShuffle, setIsShuffle] = useState(false);
+
+  const playableSongs = useMemo(() => {
+    return rows
+      .map((row) => row.original)
+      .filter((song) => Boolean(song.attributes.previews[0]?.url));
+  }, [rows]);
+
+  const shuffledSongs = useMemo(() => {
+    return shuffle(playableSongs);
+  }, [playableSongs]);
+
+  const songs = isShuffle ? shuffledSongs : playableSongs;
+
+  const songIndexMap = useMemo(() => {
+    return new Map(songs.map((song, index) => [song.id, index]));
+  }, [songs]);
+
+  const currentIndex = currentSong
+    ? (songIndexMap.get(currentSong.id) ?? -1)
+    : -1;
+
   const changeSong = (direction: 1 | -1) => {
-    if (!currentSong || rows.length === 0) return;
+    const total = songs.length;
+    if (total === 0) return;
 
-    const currentRowIndex = rows.findIndex(
-      (row) => row.original.id === currentSong.id,
-    );
+    const nextIndex =
+      currentIndex === -1 ? 0 : (currentIndex + direction + total) % total;
 
-    if (currentRowIndex === -1) {
-      setCurrentSong(rows[0].original);
-      return;
-    }
-
-    let rowIndex = currentRowIndex;
-
-    for (let i = 0; i < rows.length; i++) {
-      rowIndex = (rowIndex + direction + rows.length) % rows.length;
-
-      const song = rows[rowIndex].original;
-
-      if (song.attributes.previews[0]?.url) {
-        setCurrentSong(song);
-        break;
-      }
-    }
+    setCurrentSong(songs[nextIndex]);
   };
 
   const player = (
@@ -55,6 +64,19 @@ export default function MusicPlayer({
       onEnded={() => changeSong(1)}
       onClickNext={() => changeSong(1)}
       onClickPrevious={() => changeSong(-1)}
+      customIcons={{
+        loopOff: <LuRepeat1 title="Repeat" />,
+        loop: <LuRepeat1 title="Repeat" className="text-red-500" />,
+      }}
+      customAdditionalControls={[
+        RHAP_UI.LOOP,
+        <button onClick={() => setIsShuffle((prev) => !prev)}>
+          <LuShuffle
+            title="Shuffle"
+            className={`size-6.5 hover:opacity-90 ${isShuffle ? "text-red-500" : "text-[#868686]"}`}
+          />
+        </button>,
+      ]}
     />
   );
 
